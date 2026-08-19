@@ -1,0 +1,20 @@
+[
+  {
+    "key": "group_arr_subscribe_hero",
+    "title": "Subscribe Page — Hero",
+    "fields": [
+      { "key": "field_arr_sub_eyebrow", "label": "Eyebrow label", "name": "sub_eyebrow", "type": "text", "default_value": "Weekly Brief" },
+      { "key": "field_arr_sub_headline", "label": "Headline", "name": "sub_headline", "type": "text", "default_value": "A curated briefing of ideas that matter — every Saturday." },
+      { "key": "field_arr_sub_dek", "label": "Subtext", "name": "sub_dek", "type": "textarea", "rows": 3, "default_value": "Join policymakers, executives, and scholars who start their weekend with ARR's take on the analysis shaping Africa's next chapter." }
+    ],
+    "location": [ [ { "param": "page_template", "operator": "==", "value": "template-subscribe.php" } ] ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Controls the top hero text on the Subscribe page."
+  }
+]
