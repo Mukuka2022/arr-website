@@ -1,146 +1,3488 @@
 [
-  {
-    "key": "group_arr_home",
-    "title": "Homepage Content",
-    "fields": [
-      { "key": "f_hero_tab", "label": "Hero Banner", "name": "", "type": "tab" },
-      { "key": "f_hero_eyebrow", "label": "Eyebrow label", "name": "hero_eyebrow", "type": "text", "default_value": "Editor's Pick" },
-      { "key": "f_hero_headline", "label": "Headline", "name": "hero_headline", "type": "text", "default_value": "Africa's Future Will Be Built on Knowledge, Not Raw Materials" },
-      { "key": "f_hero_dek", "label": "Subtext", "name": "hero_dek", "type": "textarea", "rows": 3, "default_value": "The continent's next leap will come from innovation, skills, institutions, and ideas that solve our own problems." },
-      { "key": "f_hero_btn_text", "label": "Button text", "name": "hero_button_text", "type": "text", "default_value": "Read the Editorial" },
-      { "key": "f_hero_btn_link", "label": "Button link", "name": "hero_button_link", "type": "url" },
-      { "key": "f_hero_image", "label": "Background image", "name": "hero_image", "type": "image", "return_format": "url", "preview_size": "medium", "instructions": "Wide landscape photo, at least 1400px across." },
-
-      { "key": "f_cats_tab", "label": "Category Strip", "name": "", "type": "tab" },
-      { "key": "f_cat_items", "label": "Category cards", "name": "category_items", "type": "repeater", "layout": "block", "button_label": "Add category card", "min": 0, "max": 8, "instructions": "The six icon cards below the hero. Leave empty to auto-generate from your WordPress categories.", "sub_fields": [
-        { "key": "f_cat_icon", "label": "Icon", "name": "icon", "type": "image", "return_format": "url", "preview_size": "thumbnail", "instructions": "Upload an SVG or PNG icon. Leave blank to use the built-in line icon." },
-        { "key": "f_cat_title", "label": "Title", "name": "title", "type": "text" },
-        { "key": "f_cat_desc", "label": "Description", "name": "description", "type": "textarea", "rows": 2 },
-        { "key": "f_cat_link", "label": "Link", "name": "link", "type": "url" }
-      ]},
-
-      { "key": "f_sections_tab", "label": "Section Headings", "name": "", "type": "tab" },
-      { "key": "f_authors_heading", "label": "Featured Authors heading", "name": "authors_heading", "type": "text", "default_value": "Featured Authors" },
-      { "key": "f_longread_heading", "label": "Long Read heading", "name": "longread_heading", "type": "text", "default_value": "Long Read" },
-      { "key": "f_trending_heading", "label": "Trending Ideas heading", "name": "trending_heading", "type": "text", "default_value": "Trending Ideas" },
-
-      { "key": "f_cta_tab", "label": "Bottom CTA Band", "name": "", "type": "tab" },
-      { "key": "f_podcast_title", "label": "Podcast title", "name": "podcast_title", "type": "text", "default_value": "Listen to Our Podcast" },
-      { "key": "f_podcast_text", "label": "Podcast text", "name": "podcast_text", "type": "textarea", "rows": 2, "default_value": "Conversations with Africa's thinkers, leaders, and builders." },
-      { "key": "f_podcast_link", "label": "Podcast link", "name": "podcast_link", "type": "url" },
-      { "key": "f_brief_title", "label": "Newsletter title", "name": "brief_title", "type": "text", "default_value": "Weekly Brief" },
-      { "key": "f_brief_text", "label": "Newsletter text", "name": "brief_text", "type": "textarea", "rows": 2, "default_value": "A curated briefing of ideas that matter. Every Saturday." },
-      { "key": "f_reports_title", "label": "Reports title", "name": "reports_title", "type": "text", "default_value": "Special Reports" },
-      { "key": "f_reports_text", "label": "Reports text", "name": "reports_text", "type": "textarea", "rows": 2, "default_value": "In-depth reports on Africa's most critical issues." },
-      { "key": "f_reports_link", "label": "Reports link", "name": "reports_link", "type": "url" }
-    ],
-    "location": [[{ "param": "page_type", "operator": "==", "value": "front_page" }]],
-    "menu_order": 0, "position": "normal", "style": "default",
-    "label_placement": "top", "instruction_placement": "label",
-    "hide_on_screen": "", "active": true,
-    "description": "All editable content on the homepage."
-  },
-
-  {
-    "key": "group_arr_about",
-    "title": "About Page Content",
-    "fields": [
-      { "key": "f_ab_banner_tab", "label": "Page Banner", "name": "", "type": "tab" },
-      { "key": "f_ab_eyebrow", "label": "Eyebrow", "name": "about_eyebrow", "type": "text", "default_value": "About ARR" },
-      { "key": "f_ab_title", "label": "Banner headline", "name": "about_title", "type": "text", "default_value": "An institution built on the conviction that ideas transform civilizations" },
-      { "key": "f_ab_subtitle", "label": "Banner subtext", "name": "about_subtitle", "type": "textarea", "rows": 2, "default_value": "Ideas. Evidence. Wisdom. Africa. — the four words that discipline everything we publish." },
-
-      { "key": "f_ab_vm_tab", "label": "Vision & Mission", "name": "", "type": "tab" },
-      { "key": "f_vision_text", "label": "Vision statement", "name": "vision_text", "type": "textarea", "rows": 4, "default_value": "To become Africa's most trusted independent institution for ideas, scholarship, and public discourse — advancing an intellectual renaissance that shapes ethical leadership, resilient institutions, technological innovation, and sustainable development." },
-      { "key": "f_vision_note", "label": "Vision note", "name": "vision_note", "type": "text", "default_value": "Trust is more valuable than popularity. Influence is more enduring than visibility." },
-      { "key": "f_mission_text", "label": "Mission statement", "name": "mission_text", "type": "textarea", "rows": 4, "default_value": "To cultivate rigorous analysis, independent thought, and evidence-based dialogue that strengthens Africa's intellectual life, informs public policy, and equips society to address the defining challenges of the 21st century." },
-      { "key": "f_mission_note", "label": "Mission note", "name": "mission_note", "type": "text", "default_value": "Every article should educate. Every publication should illuminate. Every debate should elevate." },
-
-      { "key": "f_ab_story_tab", "label": "The ARR Story", "name": "", "type": "tab" },
-      { "key": "f_story_heading", "label": "Section heading", "name": "story_heading", "type": "text", "default_value": "The ARR Story" },
-      { "key": "f_story_steps", "label": "Story steps", "name": "story_steps", "type": "repeater", "layout": "block", "button_label": "Add step", "sub_fields": [
-        { "key": "f_story_title", "label": "Title", "name": "title", "type": "text" },
-        { "key": "f_story_text", "label": "Text", "name": "text", "type": "textarea", "rows": 3 }
-      ]},
-
-      { "key": "f_ab_pillars_tab", "label": "Editorial Pillars", "name": "", "type": "tab" },
-      { "key": "f_pillars_heading", "label": "Section heading", "name": "pillars_heading", "type": "text", "default_value": "Editorial Pillars" },
-      { "key": "f_pillars_sub", "label": "Section subtext", "name": "pillars_sub", "type": "text", "default_value": "Seven pillars define the intellectual identity of ARR" },
-      { "key": "f_pillars", "label": "Pillars", "name": "pillars", "type": "repeater", "layout": "table", "button_label": "Add pillar", "sub_fields": [
-        { "key": "f_pillar_title", "label": "Pillar name", "name": "title", "type": "text" }
-      ]},
-
-      { "key": "f_ab_values_tab", "label": "What We Stand For", "name": "", "type": "tab" },
-      { "key": "f_values_heading", "label": "Section heading", "name": "values_heading", "type": "text", "default_value": "What We Stand For" },
-      { "key": "f_values_sub", "label": "Section subtext", "name": "values_sub", "type": "text", "default_value": "Our Core Values" },
-      { "key": "f_values", "label": "Values", "name": "values", "type": "repeater", "layout": "block", "button_label": "Add value", "sub_fields": [
-        { "key": "f_value_title", "label": "Title", "name": "title", "type": "text" },
-        { "key": "f_value_text", "label": "Description", "name": "text", "type": "textarea", "rows": 2 }
-      ]}
-    ],
-    "location": [[{ "param": "page_template", "operator": "==", "value": "template-about.php" }]],
-    "menu_order": 0, "position": "normal", "style": "default",
-    "label_placement": "top", "instruction_placement": "label",
-    "hide_on_screen": "", "active": true,
-    "description": "All editable content on the About page."
-  },
-
-  {
-    "key": "group_arr_subscribe",
-    "title": "Subscribe Page Content",
-    "fields": [
-      { "key": "f_sub_hero_tab", "label": "Hero", "name": "", "type": "tab" },
-      { "key": "f_sub_eyebrow", "label": "Eyebrow", "name": "sub_eyebrow", "type": "text", "default_value": "Weekly Brief" },
-      { "key": "f_sub_headline", "label": "Headline", "name": "sub_headline", "type": "text", "default_value": "A curated briefing of ideas that matter — every Saturday." },
-      { "key": "f_sub_dek", "label": "Subtext", "name": "sub_dek", "type": "textarea", "rows": 3, "default_value": "Join policymakers, executives, and scholars who start their weekend with ARR's take on the analysis shaping Africa's next chapter." },
-      { "key": "f_sub_stats", "label": "Stat box rows", "name": "sub_stats", "type": "repeater", "layout": "table", "button_label": "Add stat", "sub_fields": [
-        { "key": "f_stat_label", "label": "Label", "name": "label", "type": "text" },
-        { "key": "f_stat_value", "label": "Value", "name": "value", "type": "text" }
-      ]},
-
-      { "key": "f_sub_tiers_tab", "label": "Membership", "name": "", "type": "tab" },
-      { "key": "f_mem_eyebrow", "label": "Eyebrow", "name": "mem_eyebrow", "type": "text", "default_value": "Membership" },
-      { "key": "f_mem_heading", "label": "Heading", "name": "mem_heading", "type": "text", "default_value": "Join ARR — free, always" },
-      { "key": "f_mem_sub", "label": "Subtext", "name": "mem_sub", "type": "textarea", "rows": 2, "default_value": "Create a free account to save articles, join the discussion, and get the weekly brief straight to your inbox." },
-      { "key": "f_tiers", "label": "Tier cards", "name": "tiers", "type": "repeater", "layout": "block", "button_label": "Add tier", "sub_fields": [
-        { "key": "f_tier_badge", "label": "Badge (optional)", "name": "badge", "type": "text", "instructions": "e.g. 'Recommended'. Leave blank for no badge." },
-        { "key": "f_tier_name", "label": "Tier name", "name": "name", "type": "text" },
-        { "key": "f_tier_price", "label": "Price", "name": "price", "type": "text", "default_value": "Free" },
-        { "key": "f_tier_features", "label": "Features", "name": "features", "type": "textarea", "rows": 5, "instructions": "One feature per line." },
-        { "key": "f_tier_btn", "label": "Button text", "name": "button_text", "type": "text" },
-        { "key": "f_tier_link", "label": "Button link", "name": "button_link", "type": "url" }
-      ]},
-
-      { "key": "f_sub_why_tab", "label": "Why Support ARR", "name": "", "type": "tab" },
-      { "key": "f_why_heading", "label": "Section heading", "name": "why_heading", "type": "text", "default_value": "Why Support ARR" },
-      { "key": "f_why_items", "label": "Why items", "name": "why_items", "type": "repeater", "layout": "block", "button_label": "Add item", "sub_fields": [
-        { "key": "f_why_icon", "label": "Icon", "name": "icon", "type": "image", "return_format": "url", "preview_size": "thumbnail", "instructions": "Upload an icon, or leave blank to use the built-in one." },
-        { "key": "f_why_title", "label": "Title", "name": "title", "type": "text" },
-        { "key": "f_why_text", "label": "Text", "name": "text", "type": "textarea", "rows": 2 }
-      ]}
-    ],
-    "location": [[{ "param": "page_template", "operator": "==", "value": "template-subscribe.php" }]],
-    "menu_order": 0, "position": "normal", "style": "default",
-    "label_placement": "top", "instruction_placement": "label",
-    "hide_on_screen": "", "active": true,
-    "description": "All editable content on the Subscribe page."
-  },
-
-  {
-    "key": "group_arr_contact",
-    "title": "Contact Page Content",
-    "fields": [
-      { "key": "f_ct_eyebrow", "label": "Eyebrow", "name": "contact_eyebrow", "type": "text", "default_value": "Get in Touch" },
-      { "key": "f_ct_title", "label": "Headline", "name": "contact_title", "type": "text", "default_value": "We'd love to hear from you" },
-      { "key": "f_ct_sub", "label": "Subtext", "name": "contact_subtitle", "type": "textarea", "rows": 2, "default_value": "Story ideas, partnership inquiries, corrections, or just to say hello — reach the ARR team directly." },
-      { "key": "f_ct_email", "label": "Email address", "name": "contact_email", "type": "text", "default_value": "hello@africanrenaissancereview.com" },
-      { "key": "f_ct_phone", "label": "Phone (optional)", "name": "contact_phone", "type": "text" },
-      { "key": "f_ct_location", "label": "Location (optional)", "name": "contact_location", "type": "text" }
-    ],
-    "location": [[{ "param": "page_template", "operator": "==", "value": "template-contact.php" }]],
-    "menu_order": 0, "position": "normal", "style": "default",
-    "label_placement": "top", "instruction_placement": "label",
-    "hide_on_screen": "", "active": true,
-    "description": "All editable content on the Contact page."
-  }
+    {
+        "key": "group_arr_home",
+        "title": "Homepage Content",
+        "fields": [
+            {
+                "key": "field_arr_tab_home_hero_banner",
+                "label": "Hero Banner",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "placement": "top",
+                "endpoint": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            },
+            {
+                "key": "field_arr_hero_eyebrow",
+                "label": "Eyebrow label",
+                "name": "hero_eyebrow",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Editor's Pick",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_hero_headline",
+                "label": "Headline",
+                "name": "hero_headline",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Africa's Future Will Be Built on Knowledge, Not Raw Materials",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_hero_dek",
+                "label": "Standfirst",
+                "name": "hero_dek",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "The continent's next leap will come from innovation, skills, institutions, and ideas that solve our own problems.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_hero_button_text",
+                "label": "Button label",
+                "name": "hero_button_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Read the Editorial",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_hero_button_link",
+                "label": "Button link",
+                "name": "hero_button_link",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_hero_image",
+                "label": "Background image",
+                "name": "hero_image",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
+                "key": "field_arr_hero_side_heading",
+                "label": "Sidebar heading",
+                "name": "hero_side_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Latest Opinions",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_hero_empty_text",
+                "label": "Sidebar empty-state message",
+                "name": "hero_empty_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Publish your first article and it'll appear here automatically.",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_hero_bg_color",
+                "label": "Hero background colour",
+                "name": "hero_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            },
+            {
+                "key": "field_arr_tab_home_category_strip",
+                "label": "Category Strip",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "placement": "top",
+                "endpoint": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            },
+            {
+                "key": "field_arr_cat_strip_note",
+                "label": "How this works",
+                "name": "cat_strip_note",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Fill in the six cards below to control this strip by hand. Leave every Title blank to generate it automatically from your WordPress categories instead.",
+                "new_lines": "wpautop",
+                "esc_html": 0
+            },
+            {
+                "key": "field_arr_category_1_icon",
+                "label": "Card 1 — icon",
+                "name": "category_1_icon",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
+                "key": "field_arr_category_1_title",
+                "label": "Card 1 — title",
+                "name": "category_1_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_category_1_description",
+                "label": "Card 1 — description",
+                "name": "category_1_description",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_category_1_link",
+                "label": "Card 1 — link",
+                "name": "category_1_link",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_category_2_icon",
+                "label": "Card 2 — icon",
+                "name": "category_2_icon",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
+                "key": "field_arr_category_2_title",
+                "label": "Card 2 — title",
+                "name": "category_2_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_category_2_description",
+                "label": "Card 2 — description",
+                "name": "category_2_description",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_category_2_link",
+                "label": "Card 2 — link",
+                "name": "category_2_link",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_category_3_icon",
+                "label": "Card 3 — icon",
+                "name": "category_3_icon",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
+                "key": "field_arr_category_3_title",
+                "label": "Card 3 — title",
+                "name": "category_3_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_category_3_description",
+                "label": "Card 3 — description",
+                "name": "category_3_description",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_category_3_link",
+                "label": "Card 3 — link",
+                "name": "category_3_link",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_category_4_icon",
+                "label": "Card 4 — icon",
+                "name": "category_4_icon",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
+                "key": "field_arr_category_4_title",
+                "label": "Card 4 — title",
+                "name": "category_4_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_category_4_description",
+                "label": "Card 4 — description",
+                "name": "category_4_description",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_category_4_link",
+                "label": "Card 4 — link",
+                "name": "category_4_link",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_category_5_icon",
+                "label": "Card 5 — icon",
+                "name": "category_5_icon",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
+                "key": "field_arr_category_5_title",
+                "label": "Card 5 — title",
+                "name": "category_5_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_category_5_description",
+                "label": "Card 5 — description",
+                "name": "category_5_description",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_category_5_link",
+                "label": "Card 5 — link",
+                "name": "category_5_link",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_category_6_icon",
+                "label": "Card 6 — icon",
+                "name": "category_6_icon",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
+                "key": "field_arr_category_6_title",
+                "label": "Card 6 — title",
+                "name": "category_6_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_category_6_description",
+                "label": "Card 6 — description",
+                "name": "category_6_description",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_category_6_link",
+                "label": "Card 6 — link",
+                "name": "category_6_link",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_cat_strip_empty_text",
+                "label": "Empty-state message",
+                "name": "cat_strip_empty_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Categories will appear here once created under Posts → Categories. The theme pre-creates the 7 editorial pillars on activation.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_cat_strip_bg_color",
+                "label": "Strip background colour",
+                "name": "cat_strip_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            },
+            {
+                "key": "field_arr_tab_home_section_headings",
+                "label": "Section Headings",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "placement": "top",
+                "endpoint": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            },
+            {
+                "key": "field_arr_authors_heading",
+                "label": "Authors heading",
+                "name": "authors_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Featured Authors",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_authors_view_all_text",
+                "label": "Authors link label",
+                "name": "authors_view_all_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "View All",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_authors_view_all_link",
+                "label": "Authors link URL",
+                "name": "authors_view_all_link",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_authors_empty_text",
+                "label": "Authors empty-state message",
+                "name": "authors_empty_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Author cards appear here once posts are published — set each author's bio under Users → Edit Profile.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_longread_heading",
+                "label": "Long Read heading",
+                "name": "longread_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Long Read",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_longread_empty_text",
+                "label": "Long Read empty-state message",
+                "name": "longread_empty_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Your 4th published article will surface here as the Long Read.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_trending_heading",
+                "label": "Trending heading",
+                "name": "trending_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Trending Ideas",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_trending_empty_text",
+                "label": "Trending empty-state message",
+                "name": "trending_empty_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Ranked automatically by reader comments once articles are live.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_tab_home_bottom_cta_band",
+                "label": "Bottom CTA Band",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "placement": "top",
+                "endpoint": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            },
+            {
+                "key": "field_arr_podcast_title",
+                "label": "Podcast title",
+                "name": "podcast_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Listen to Our Podcast",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_podcast_text",
+                "label": "Podcast text",
+                "name": "podcast_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Conversations with Africa's thinkers, leaders, and builders.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_podcast_button_text",
+                "label": "Podcast button label",
+                "name": "podcast_button_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Listen Now",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_podcast_link",
+                "label": "Podcast link",
+                "name": "podcast_link",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_brief_title",
+                "label": "Newsletter title",
+                "name": "brief_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Weekly Brief",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_brief_text",
+                "label": "Newsletter text",
+                "name": "brief_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "A curated briefing of ideas that matter. Every Saturday.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_brief_placeholder",
+                "label": "Newsletter field placeholder",
+                "name": "brief_placeholder",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Your email address",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_brief_button_text",
+                "label": "Newsletter button label",
+                "name": "brief_button_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Subscribe",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_reports_title",
+                "label": "Reports title",
+                "name": "reports_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Special Reports",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_reports_text",
+                "label": "Reports text",
+                "name": "reports_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "In-depth reports on Africa's most critical issues.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_reports_button_text",
+                "label": "Reports button label",
+                "name": "reports_button_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Explore Reports",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_reports_link",
+                "label": "Reports link",
+                "name": "reports_link",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_cta_band_bg_color",
+                "label": "CTA band background colour",
+                "name": "cta_band_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_type",
+                    "operator": "==",
+                    "value": "front_page"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Every text block, icon, image and background colour on the homepage. Leave a field blank to keep the approved default."
+    },
+    {
+        "key": "group_arr_about",
+        "title": "About Page Content",
+        "fields": [
+            {
+                "key": "field_arr_tab_about_page_banner",
+                "label": "Page Banner",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "placement": "top",
+                "endpoint": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            },
+            {
+                "key": "field_arr_about_eyebrow",
+                "label": "Eyebrow label",
+                "name": "about_eyebrow",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "About ARR",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_about_title",
+                "label": "Page title",
+                "name": "about_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "An institution built on the conviction that ideas transform civilizations",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_about_subtitle",
+                "label": "Subtitle",
+                "name": "about_subtitle",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Ideas. Evidence. Wisdom. Africa. — the four words that discipline everything we publish.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_about_banner_bg_color",
+                "label": "Banner background colour",
+                "name": "about_banner_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            },
+            {
+                "key": "field_arr_tab_about_intro",
+                "label": "Intro",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "placement": "top",
+                "endpoint": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            },
+            {
+                "key": "field_arr_about_intro_image",
+                "label": "Intro photo",
+                "name": "about_intro_image",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
+                "key": "field_arr_about_intro_bg_color",
+                "label": "Intro background colour",
+                "name": "about_intro_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            },
+            {
+                "key": "field_arr_tab_about_vision_mission",
+                "label": "Vision & Mission",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "placement": "top",
+                "endpoint": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            },
+            {
+                "key": "field_arr_vision_heading",
+                "label": "Vision heading",
+                "name": "vision_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Our Vision",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_vision_text",
+                "label": "Vision text",
+                "name": "vision_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "To become Africa's most trusted independent institution for ideas, scholarship, and public discourse — advancing an intellectual renaissance that shapes ethical leadership, resilient institutions, technological innovation, and sustainable development.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_vision_note",
+                "label": "Vision note",
+                "name": "vision_note",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Trust is more valuable than popularity. Influence is more enduring than visibility.",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_mission_heading",
+                "label": "Mission heading",
+                "name": "mission_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Our Mission",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_mission_text",
+                "label": "Mission text",
+                "name": "mission_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "To cultivate rigorous analysis, independent thought, and evidence-based dialogue that strengthens Africa's intellectual life, informs public policy, and equips society to address the defining challenges of the 21st century.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_mission_note",
+                "label": "Mission note",
+                "name": "mission_note",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Every article should educate. Every publication should illuminate. Every debate should elevate.",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_vm_bg_color",
+                "label": "Vision & Mission background colour",
+                "name": "vm_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            },
+            {
+                "key": "field_arr_tab_about_the_arr_story",
+                "label": "The ARR Story",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "placement": "top",
+                "endpoint": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            },
+            {
+                "key": "field_arr_story_heading",
+                "label": "Section heading",
+                "name": "story_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "The ARR Story",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_story_1_number",
+                "label": "Step 1 — number",
+                "name": "story_1_number",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "01",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_story_1_title",
+                "label": "Step 1 — title",
+                "name": "story_1_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "A Crisis of Ideas",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_story_1_text",
+                "label": "Step 1 — text",
+                "name": "story_1_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Africa's public discourse is too often dominated by immediate events rather than enduring principles — news rewards speed over reflection, opinion over evidence.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_story_2_number",
+                "label": "Step 2 — number",
+                "name": "story_2_number",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "02",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_story_2_title",
+                "label": "Step 2 — title",
+                "name": "story_2_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "A Historic Response",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_story_2_text",
+                "label": "Step 2 — text",
+                "name": "story_2_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "ARR was founded in direct response to this challenge: to cultivate thoughtful analysis and evidence-based dialogue rooted in African realities.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_story_3_number",
+                "label": "Step 3 — number",
+                "name": "story_3_number",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "03",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_story_3_title",
+                "label": "Step 3 — title",
+                "name": "story_3_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "A Different Kind of Publication",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_story_3_text",
+                "label": "Step 3 — text",
+                "name": "story_3_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Not a daily wire service, but a home for depth — long-form essays, research translation, and ideas built to outlast the headlines that inspired them.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_story_bg_color",
+                "label": "Story background colour",
+                "name": "story_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            },
+            {
+                "key": "field_arr_tab_about_editorial_pillars",
+                "label": "Editorial Pillars",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "placement": "top",
+                "endpoint": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            },
+            {
+                "key": "field_arr_pillars_heading",
+                "label": "Section heading",
+                "name": "pillars_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Editorial Pillars",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_pillars_sub",
+                "label": "Section subheading",
+                "name": "pillars_sub",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Seven pillars define the intellectual identity of ARR",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_pillar_1_number",
+                "label": "Pillar 1 — number",
+                "name": "pillar_1_number",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "01",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_pillar_1_title",
+                "label": "Pillar 1 — title",
+                "name": "pillar_1_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Governance, Leadership & Public Institutions",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_pillar_2_number",
+                "label": "Pillar 2 — number",
+                "name": "pillar_2_number",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "02",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_pillar_2_title",
+                "label": "Pillar 2 — title",
+                "name": "pillar_2_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Technology, Cybersecurity & Digital Transformation",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_pillar_3_number",
+                "label": "Pillar 3 — number",
+                "name": "pillar_3_number",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "03",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_pillar_3_title",
+                "label": "Pillar 3 — title",
+                "name": "pillar_3_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Economics, Enterprise & Sustainable Development",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_pillar_4_number",
+                "label": "Pillar 4 — number",
+                "name": "pillar_4_number",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "04",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_pillar_4_title",
+                "label": "Pillar 4 — title",
+                "name": "pillar_4_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Faith, Ethics & Society",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_pillar_5_number",
+                "label": "Pillar 5 — number",
+                "name": "pillar_5_number",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "05",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_pillar_5_title",
+                "label": "Pillar 5 — title",
+                "name": "pillar_5_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Science, Education & Knowledge",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_pillar_6_number",
+                "label": "Pillar 6 — number",
+                "name": "pillar_6_number",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "06",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_pillar_6_title",
+                "label": "Pillar 6 — title",
+                "name": "pillar_6_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Africa and the World",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_pillar_7_number",
+                "label": "Pillar 7 — number",
+                "name": "pillar_7_number",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "07",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_pillar_7_title",
+                "label": "Pillar 7 — title",
+                "name": "pillar_7_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "History, Culture & Civilisation",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_pillars_bg_color",
+                "label": "Pillars background colour",
+                "name": "pillars_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            },
+            {
+                "key": "field_arr_tab_about_what_we_stand_for",
+                "label": "What We Stand For",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "placement": "top",
+                "endpoint": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            },
+            {
+                "key": "field_arr_values_heading",
+                "label": "Section heading",
+                "name": "values_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "What We Stand For",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_values_sub",
+                "label": "Section subheading",
+                "name": "values_sub",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Our Core Values",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_value_1_title",
+                "label": "Value 1 — title",
+                "name": "value_1_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Truth",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_value_1_text",
+                "label": "Value 1 — text",
+                "name": "value_1_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "The foundation of public trust, pursued with disciplined research and honesty.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_value_2_title",
+                "label": "Value 2 — title",
+                "name": "value_2_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Independence",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_value_2_text",
+                "label": "Value 2 — text",
+                "name": "value_2_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Editorial judgment free from partisan, commercial, or ideological influence.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_value_3_title",
+                "label": "Value 3 — title",
+                "name": "value_3_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Excellence",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_value_3_text",
+                "label": "Value 3 — text",
+                "name": "value_3_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Continuous learning and work that meets the highest international standards.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_value_4_title",
+                "label": "Value 4 — title",
+                "name": "value_4_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Integrity",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_value_4_text",
+                "label": "Value 4 — text",
+                "name": "value_4_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Consistency between principle and practice across every process.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_value_5_title",
+                "label": "Value 5 — title",
+                "name": "value_5_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Intellectual Humility",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_value_5_text",
+                "label": "Value 5 — text",
+                "name": "value_5_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Openness to dialogue, recognising that reasonable people may disagree.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_value_6_title",
+                "label": "Value 6 — title",
+                "name": "value_6_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Courage",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_value_6_text",
+                "label": "Value 6 — text",
+                "name": "value_6_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Publishing what is true and necessary, even when it is uncomfortable.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_values_bg_color",
+                "label": "Values background colour",
+                "name": "values_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            },
+            {
+                "key": "field_arr_tab_about_featured_authors",
+                "label": "Featured Authors",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "placement": "top",
+                "endpoint": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            },
+            {
+                "key": "field_arr_team_heading",
+                "label": "Section heading",
+                "name": "team_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Featured Authors",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_team_view_all_text",
+                "label": "Link label",
+                "name": "team_view_all_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "View All Articles",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_team_view_all_link",
+                "label": "Link URL",
+                "name": "team_view_all_link",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_team_empty_text",
+                "label": "Empty-state message",
+                "name": "team_empty_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Authors appear here automatically once they've published at least one article.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_team_bg_color",
+                "label": "Authors background colour",
+                "name": "team_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "template-about.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Every text block, image and background colour on the About page."
+    },
+    {
+        "key": "group_arr_subscribe",
+        "title": "Subscribe Page Content",
+        "fields": [
+            {
+                "key": "field_arr_tab_sub_hero",
+                "label": "Hero",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "placement": "top",
+                "endpoint": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            },
+            {
+                "key": "field_arr_sub_eyebrow",
+                "label": "Eyebrow label",
+                "name": "sub_eyebrow",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Weekly Brief",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_sub_headline",
+                "label": "Headline",
+                "name": "sub_headline",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "A curated briefing of ideas that matter — every Saturday.",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_sub_dek",
+                "label": "Standfirst",
+                "name": "sub_dek",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Join policymakers, executives, and scholars who start their weekend with ARR's take on the analysis shaping Africa's next chapter.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_sub_placeholder",
+                "label": "Email field placeholder",
+                "name": "sub_placeholder",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Your email address",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_sub_button_text",
+                "label": "Button label",
+                "name": "sub_button_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Subscribe Free",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_sub_fine_print",
+                "label": "Fine print",
+                "name": "sub_fine_print",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "No spam. Unsubscribe anytime. One email, every Saturday.",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_sub_stat_1_label",
+                "label": "Stat 1 — label",
+                "name": "sub_stat_1_label",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Editorial Pillars Covered",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_sub_stat_1_value",
+                "label": "Stat 1 — value",
+                "name": "sub_stat_1_value",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "7",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_sub_stat_2_label",
+                "label": "Stat 2 — label",
+                "name": "sub_stat_2_label",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Avg. Read Time",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_sub_stat_2_value",
+                "label": "Stat 2 — value",
+                "name": "sub_stat_2_value",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "10 min",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_sub_stat_3_label",
+                "label": "Stat 3 — label",
+                "name": "sub_stat_3_label",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Publishing Cadence",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_sub_stat_3_value",
+                "label": "Stat 3 — value",
+                "name": "sub_stat_3_value",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Weekly",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_sub_stat_4_label",
+                "label": "Stat 4 — label",
+                "name": "sub_stat_4_label",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Contributing Voices",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_sub_stat_4_value",
+                "label": "Stat 4 — value",
+                "name": "sub_stat_4_value",
+                "type": "text",
+                "instructions": "Leave blank to show the live registered-user count automatically.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_sub_hero_bg_color",
+                "label": "Hero background colour",
+                "name": "sub_hero_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            },
+            {
+                "key": "field_arr_tab_sub_membership",
+                "label": "Membership",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "placement": "top",
+                "endpoint": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            },
+            {
+                "key": "field_arr_mem_eyebrow",
+                "label": "Eyebrow label",
+                "name": "mem_eyebrow",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Membership",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_mem_heading",
+                "label": "Heading",
+                "name": "mem_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Join ARR — free, always",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_mem_sub",
+                "label": "Subheading",
+                "name": "mem_sub",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Create a free account to save articles, join the discussion, and get the weekly brief straight to your inbox.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_tier_1_badge",
+                "label": "Tier 1 — badge",
+                "name": "tier_1_badge",
+                "type": "text",
+                "instructions": "Leave blank to hide the badge.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_tier_1_name",
+                "label": "Tier 1 — name",
+                "name": "tier_1_name",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Reader",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_tier_1_price",
+                "label": "Tier 1 — price",
+                "name": "tier_1_price",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Free",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_tier_1_features",
+                "label": "Tier 1 — features",
+                "name": "tier_1_features",
+                "type": "textarea",
+                "instructions": "One feature per line.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Full access to every article\nWeekly newsletter\nPodcast episodes",
+                "placeholder": "",
+                "rows": 5,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_tier_1_button_text",
+                "label": "Tier 1 — button label",
+                "name": "tier_1_button_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Get Started",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_tier_1_button_link",
+                "label": "Tier 1 — button link",
+                "name": "tier_1_button_link",
+                "type": "url",
+                "instructions": "Leave blank to use the WordPress registration page.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_tier_1_featured",
+                "label": "Tier 1 — highlight this card",
+                "name": "tier_1_featured",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 0,
+                "ui": 1
+            },
+            {
+                "key": "field_arr_tier_2_badge",
+                "label": "Tier 2 — badge",
+                "name": "tier_2_badge",
+                "type": "text",
+                "instructions": "Leave blank to hide the badge.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Recommended",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_tier_2_name",
+                "label": "Tier 2 — name",
+                "name": "tier_2_name",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Free Account",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_tier_2_price",
+                "label": "Tier 2 — price",
+                "name": "tier_2_price",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Free",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_tier_2_features",
+                "label": "Tier 2 — features",
+                "name": "tier_2_features",
+                "type": "textarea",
+                "instructions": "One feature per line.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Everything in Reader\nSave articles to read later\nComment & discussion access\nEarly notice of special reports",
+                "placeholder": "",
+                "rows": 5,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_tier_2_button_text",
+                "label": "Tier 2 — button label",
+                "name": "tier_2_button_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Create Free Account",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_tier_2_button_link",
+                "label": "Tier 2 — button link",
+                "name": "tier_2_button_link",
+                "type": "url",
+                "instructions": "Leave blank to use the WordPress registration page.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_tier_2_featured",
+                "label": "Tier 2 — highlight this card",
+                "name": "tier_2_featured",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 1,
+                "ui": 1
+            },
+            {
+                "key": "field_arr_membership_bg_color",
+                "label": "Membership background colour",
+                "name": "membership_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            },
+            {
+                "key": "field_arr_tab_sub_why_support_arr",
+                "label": "Why Support ARR",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "placement": "top",
+                "endpoint": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            },
+            {
+                "key": "field_arr_why_heading",
+                "label": "Section heading",
+                "name": "why_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Why Support ARR",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_why_sub",
+                "label": "Section subheading",
+                "name": "why_sub",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_why_1_icon",
+                "label": "Item 1 — icon",
+                "name": "why_1_icon",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
+                "key": "field_arr_why_1_title",
+                "label": "Item 1 — title",
+                "name": "why_1_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Independent Journalism",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_why_1_text",
+                "label": "Item 1 — text",
+                "name": "why_1_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "No proprietor, party, or advertiser sets our editorial line. Our judgment is our own.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_why_2_icon",
+                "label": "Item 2 — icon",
+                "name": "why_2_icon",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
+                "key": "field_arr_why_2_title",
+                "label": "Item 2 — title",
+                "name": "why_2_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "African Perspectives",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_why_2_text",
+                "label": "Item 2 — text",
+                "name": "why_2_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Analysis rooted in African realities, written by people who live them.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_why_3_icon",
+                "label": "Item 3 — icon",
+                "name": "why_3_icon",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
+                "key": "field_arr_why_3_title",
+                "label": "Item 3 — title",
+                "name": "why_3_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Rigorous Research",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_why_3_text",
+                "label": "Item 3 — text",
+                "name": "why_3_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Every claim is sourced. Every argument is built to withstand scrutiny.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_why_4_icon",
+                "label": "Item 4 — icon",
+                "name": "why_4_icon",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
+                "key": "field_arr_why_4_title",
+                "label": "Item 4 — title",
+                "name": "why_4_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Free & Open Access",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_why_4_text",
+                "label": "Item 4 — text",
+                "name": "why_4_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "No paywall, ever. Ideas that matter should not be rationed by ability to pay.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_why_bg_color",
+                "label": "Why Support background colour",
+                "name": "why_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "template-subscribe.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Every text block, icon and background colour on the Subscribe page."
+    },
+    {
+        "key": "group_arr_contact",
+        "title": "Contact Page Content",
+        "fields": [
+            {
+                "key": "field_arr_tab_contact_page_banner",
+                "label": "Page Banner",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "placement": "top",
+                "endpoint": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            },
+            {
+                "key": "field_arr_contact_eyebrow",
+                "label": "Eyebrow label",
+                "name": "contact_eyebrow",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Get in Touch",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contact_title",
+                "label": "Page title",
+                "name": "contact_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "We'd love to hear from you",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contact_subtitle",
+                "label": "Subtitle",
+                "name": "contact_subtitle",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Story ideas, partnership inquiries, corrections, or submissions — reach the ARR editorial team directly.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_contact_banner_bg_color",
+                "label": "Banner background colour",
+                "name": "contact_banner_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            },
+            {
+                "key": "field_arr_tab_contact_form",
+                "label": "Form",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "placement": "top",
+                "endpoint": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            },
+            {
+                "key": "field_arr_contact_form_heading",
+                "label": "Form heading",
+                "name": "contact_form_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Send us a message",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contact_name_label",
+                "label": "Name field label",
+                "name": "contact_name_label",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Your name",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contact_email_label",
+                "label": "Email field label",
+                "name": "contact_email_label",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Email address",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contact_subject_label",
+                "label": "Subject field label",
+                "name": "contact_subject_label",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Subject",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contact_message_label",
+                "label": "Message field label",
+                "name": "contact_message_label",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Message",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contact_submit_text",
+                "label": "Submit button label",
+                "name": "contact_submit_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Send Message",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_tab_contact_contact_details",
+                "label": "Contact Details",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "placement": "top",
+                "endpoint": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                }
+            },
+            {
+                "key": "field_arr_contact_details_heading",
+                "label": "Details heading",
+                "name": "contact_details_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Contact Details",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contact_email",
+                "label": "Email address",
+                "name": "contact_email",
+                "type": "text",
+                "instructions": "Leave blank to hide this row.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contact_phone",
+                "label": "Phone number",
+                "name": "contact_phone",
+                "type": "text",
+                "instructions": "Leave blank to hide this row.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contact_location",
+                "label": "Location",
+                "name": "contact_location",
+                "type": "text",
+                "instructions": "Leave blank to hide this row.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contact_hours",
+                "label": "Office hours",
+                "name": "contact_hours",
+                "type": "text",
+                "instructions": "Leave blank to hide this row.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contact_note",
+                "label": "Note below the details",
+                "name": "contact_note",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "We read every message. Expect a reply within two working days.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_contact_bg_color",
+                "label": "Section background colour",
+                "name": "contact_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "template-contact.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Contact details, form labels and background colours."
+    },
+    {
+        "key": "group_arr_articles",
+        "title": "Articles Page Content",
+        "fields": [
+            {
+                "key": "field_arr_articles_eyebrow",
+                "label": "Eyebrow label",
+                "name": "articles_eyebrow",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Archive",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_articles_title",
+                "label": "Page title",
+                "name": "articles_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Articles & Analysis",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_articles_subtitle",
+                "label": "Subtitle",
+                "name": "articles_subtitle",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Long-form essays and evidence-based commentary across ARR's seven editorial pillars.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_articles_all_pill_label",
+                "label": "\"All\" filter pill label",
+                "name": "articles_all_pill_label",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "All",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_articles_empty_text",
+                "label": "Empty-state message",
+                "name": "articles_empty_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "No articles published yet — your first post will appear here automatically.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_articles_banner_bg_color",
+                "label": "Banner background colour",
+                "name": "articles_banner_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "template-articles.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Banner copy and background colour for the Articles listing page."
+    }
 ]

@@ -59,15 +59,23 @@ When in doubt, match the prototype rather than "improving" it.
 
 ### Theme structure
 ```
-arr-theme/
+arr-theme-acf/
 ├── style.css                    # Theme header only (name/version)
-├── functions.php                # Setup, enqueues, menus, Customizer, categories
+├── functions.php                # Setup, enqueues, menus, categories, footer fallbacks
+├── acf-field-groups.json        # THE field definitions — single source of truth
+├── inc/
+│   ├── acf-fields.php           # Registers the JSON groups via acf_add_local_field_group()
+│   ├── customizer.php           # Site-wide settings (colours, social, header/footer text)
+│   ├── dynamic-css.php          # Prints colour overrides as CSS custom properties
+│   └── template-helpers.php     # arr_field(), arr_social_links(), etc.
 ├── header.php                   # Shared nav + logo
-├── footer.php                   # Shared footer (social links via Customizer)
+├── footer.php                   # Shared footer (3 menu locations + Customizer social row)
 ├── front-page.php               # Homepage
 ├── index.php                    # Generic fallback
 ├── single.php                   # Individual article
 ├── archive.php                  # Category archives
+├── search.php                   # Search results
+├── 404.php                      # Not-found page
 ├── template-about.php           # Template Name: About Page
 ├── template-articles.php        # Template Name: Articles Page
 ├── template-subscribe.php       # Template Name: Subscribe Page
@@ -84,16 +92,22 @@ arr-theme/
 - Homepage pulls real posts into Latest Opinions, Long Read, Trending, Categories, Authors
 - Articles page lists posts with category filter pills, paginated
 - Mobile responsive, including a working hamburger menu
-- Social media links editable via **Appearance → Customize → Social Media Links**
-- Featured Images control: homepage hero background, About page intro photo, article thumbnails
+- **Every text block, icon, image and background colour on every page is editable** —
+  188 ACF fields across 5 page-scoped field groups, each falling back to the approved copy
+- **Logo** editable in Appearance → Customize → Site Identity; applies to header *and* footer
+- **Primary nav** and **three footer link columns** are all managed under Appearance → Menus
+- **Social media links** editable under Appearance → Customize → ARR Theme Settings →
+  Social Media Links (X, LinkedIn, Facebook, YouTube, Instagram, email). Blank = icon hidden
+- **Colours**: a global brand palette plus optional per-section background overrides
 - 7 editorial pillars auto-created as categories on theme activation
 
 ### Known gaps / TODOs
-- [ ] Newsletter signup forms (homepage + Subscribe page) don't submit anywhere — need an email service (Mailchimp/ConvertKit) or form plugin
+- [ ] Newsletter signup forms (homepage + Subscribe page) don't submit anywhere — need an email service (ConvertKit) or form plugin
 - [ ] Contact form doesn't submit anywhere — needs WPForms/Fluent Forms or similar
-- [ ] Footer links (About Us, Editorial Charter, Careers, FAQs, Privacy Policy) are hardcoded — could be wired to a Footer Menu location (already registered in `functions.php`, just not used in `footer.php`)
-- [ ] Podcast and Special Reports CTAs on homepage link to `#`
-- [ ] Placeholder images (`picsum.photos`) throughout — replace with real licensed photography
+- [ ] Placeholder images (`picsum.photos`) remain as *fallbacks* in 5 places — real photography
+      can now be uploaded per-page without touching code
+- [ ] "Why Support ARR" copy was written during the build (no approved copy ever existed
+      for that section) — **needs client sign-off**
 - [ ] Author photos rely on Gravatar; a custom author-photo field may be wanted
 - [ ] No Podcast page or individual author-profile pages yet
 
@@ -104,7 +118,7 @@ arr-theme/
 | Question | Decision |
 |---|---|
 | Platform | **WordPress** (static version shelved) |
-| Editing model | **ACF first.** If it can't deliver full no-code editing, fall back to native Custom Fields (`arr-native`) |
+| Editing model | **ACF (free) for page content + the WordPress Customizer for site-wide settings.** Delivers full no-code editing with no Pro licence — see section 5 |
 | Who publishes articles | **The client**, so self-service editing is essential |
 | Domain + hosting | **Registered in the client's name/account**, not the developer's |
 | Newsletter provider | **ConvertKit** |
@@ -118,63 +132,79 @@ build is measured against.
 
 ## 5. Content editing model
 
-Two mechanisms, deliberately chosen to avoid plugin dependencies:
+Two layers, split by scope.
 
-**A. WordPress Custom Fields (native, no plugin)**
-Templates read via `get_post_meta()`. Enable with Editor → Preferences → Panels →
-Custom Fields. All have fallbacks to approved copy, so an empty field never breaks
-the design.
+**A. ACF field groups — per-page content**
+Defined in `acf-field-groups.json` and registered in code by `inc/acf-fields.php`
+via `acf_add_local_field_group()`. That file is the **single source of truth**: edit
+the JSON and wp-admin updates immediately. There is no Import step, no `acf-json/`
+auto-load, and no database rows — so duplicate or drifting field groups are
+impossible. Five groups, 188 fields:
 
-| Page | Meta keys |
-|---|---|
-| Home | `hero_eyebrow`, `hero_headline`, `hero_dek`, `hero_button_text`, `hero_button_link` |
-| About | `vision_text`, `vision_note`, `mission_text`, `mission_note` |
-| Subscribe | `sub_eyebrow`, `sub_headline`, `sub_dek` |
-| Contact | `contact_email`, `contact_phone`, `contact_location` |
+| Group | Shows on | Covers |
+|---|---|---|
+| Homepage Content | front page | hero, 6 category cards, section headings, CTA band |
+| About Page Content | template-about.php | banner, intro, vision/mission, 3 story steps, 7 pillars, 6 values, authors |
+| Subscribe Page Content | template-subscribe.php | hero, 4 stats, 2 membership tiers, 4 Why-Support items |
+| Contact Page Content | template-contact.php | banner, form labels, contact details |
+| Articles Page Content | template-articles.php | banner copy, filter pill label |
 
-**B. ACF variant (optional alternative)**
-A parallel theme variant exists (`arr-theme-acf`) using `get_field()` with the same
-field names. If using it, build field groups manually in ACF → Field Groups rather
-than relying on `acf-json` auto-loading, which proved unreliable in this setup.
+Templates read fields through `arr_field( $name, $fallback )` in
+`inc/template-helpers.php`, which returns the approved prototype copy whenever a
+field is empty **or ACF is deactivated entirely**.
 
-**Fixed by design (not editable):** page banners, The ARR Story, Editorial Pillars,
-What We Stand For, membership tiers, Why Support ARR. These were locked deliberately
-to guarantee fidelity to the approved design.
+**B. WordPress Customizer — site-wide settings**
+Appearance → Customize → **ARR Theme Settings**: Brand Colours, Header & Footer
+Colours, Social Media Links, Header, Footer, and Articles/Archives/Errors wording.
+Defaults live in code, so an untouched setting needs no database row.
+
+**Colours** resolve in three layers, so nothing can be permanently broken:
+`per-section override → brand palette → the hardcoded value in prototype.css`.
+Clearing a colour restores the approved brand value. Every value is passed through
+`sanitize_hex_color()`, so invalid input is discarded rather than injected into CSS.
+
+> **Nothing is fixed by design any more.** Every text block on every page is
+> editable, and every field's default is the approved prototype copy — so clearing
+> a field *restores* the approved design rather than breaking it.
+
+**No ACF Pro required.** Repeater fields are Pro-only, so all repeating content
+(category cards, story steps, pillars, values, stats, tiers, why-items) is expressed
+as fixed numbered flat fields — `pillar_3_title`, `tier_2_price`, and so on.
 
 ---
 
 ## 6. Next actions (start here)
 
-Work these in order — each unblocks the next.
+Steps ①–③ of the previous list (verify ACF, resolve Pro-vs-free, wire the templates)
+are **done**. Everything is editable with no ACF Pro licence. What remains:
 
-**① Verify ACF works at all** *(blocking everything else)*
-Import `acf-field-groups.json` via **ACF → Tools → Import Field Groups**. Then check
-ACF → Field Groups shows 4 groups, and Pages → Home → Edit shows a "Homepage Content"
-box with tabs. If this fails, abandon ACF and switch to the `arr-native` variant,
-which uses WordPress's built-in Custom Fields and needs no plugin.
+**① Fill in the Contact page**
+A "Contact" page exists at `/contact/` using `template-contact.php`. Fill in the
+Contact Page Content fields (email, phone, location) — they're currently blank so
+those rows are hidden.
 
-**② Confirm ACF Pro vs free**
-The imported groups use **repeater** fields (category cards, pillars, values, tier
-cards, why-items) which are **ACF Pro only**. On free ACF those sections will show an
-upgrade prompt. Decide: buy Pro, or restructure those as flat individual fields.
-
-**③ Wire the templates to the fields**
-Templates currently read only ~8 of the 49 imported fields. The rest need connecting:
-- `front-page.php` — category strip repeater + icon uploads, section headings, CTA band
-- `template-about.php` — banner text, story steps repeater, pillars repeater, values repeater
-- `template-subscribe.php` — stat rows, tier cards repeater, why-items repeater + icons
-- `template-contact.php` — banner text fields
-Keep every field falling back to the existing approved copy when empty.
-
-**④ Connect ConvertKit**
+**② Connect ConvertKit**
 Newsletter forms on `front-page.php` and `template-subscribe.php` are inert
 (`action="#"`). Point them at a ConvertKit form endpoint, or install the ConvertKit
 plugin and embed its form.
 
-**⑤ Connect the contact form**
-`template-contact.php` is also inert. Install WPForms or Fluent Forms.
+**③ Connect the contact form**
+The form in `template-contact.php` is also inert. Install WPForms or Fluent Forms.
 
-**⑥ Then:** real images → real articles → nav menu → testing → hosting → launch.
+**④ Sign off the "Why Support ARR" copy**
+That section had CSS but no markup and no approved copy, so four items were written
+during the build. Review them on the Subscribe page and edit or replace.
+
+**⑤ Set up menus and social links**
+Appearance → Menus: build the Primary Menu and the three Footer Column menus (until
+then, the approved default links show automatically). Then add the real social URLs
+under Appearance → Customize → ARR Theme Settings → Social Media Links.
+
+**⑥ Replace placeholder imagery**
+`picsum.photos` URLs remain as fallbacks only. Upload real photography via the
+hero, intro, category-icon and why-item image fields, plus post Featured Images.
+
+**⑦ Then:** real articles → testing → hosting → launch.
 
 ---
 
@@ -183,7 +213,7 @@ plugin and embed its form.
 ### Phase 1 — Finish the build (current)
 1. Connect newsletter forms to an email service provider
 2. Connect the contact form to a form plugin
-3. Wire footer links to the Footer Menu location
+3. ~~Wire footer links to the Footer Menu location~~ — done (three Footer Column menus)
 4. Replace all `picsum.photos` placeholders with real images
 5. Build the Podcast page
 6. Add author-profile pages
@@ -276,20 +306,23 @@ node_modules/
 *.zip
 ```
 
-**Outstanding on `arr-acf` specifically:** ACF field groups were not appearing from
-the bundled `acf-json` files (the `acf/settings/load_json` filter never took effect).
+**✅ Resolved — the ACF field-group problem.** Field groups were not appearing from
+the bundled `acf-json` files (the `acf/settings/load_json` filter never took effect),
+and a stale "Homepage Hero" group left over from that mechanism was duplicating the
+hero fields with a conflicting `return_format`. Fixed by:
 
-**Current approach:** import `acf-field-groups.json` manually via **ACF → Tools →
-Import Field Groups**. This is a different, more reliable mechanism than auto-load.
-That file defines 4 field groups (49 editable fields) covering every text block,
-icon, and image across Home, About, Subscribe, and Contact.
+1. Deleting the `acf-json/` folder and its `load_json` filter entirely.
+2. Registering the groups in code from `acf-field-groups.json` via
+   `acf_add_local_field_group()` (`inc/acf-fields.php`) — no import step, no database
+   rows, no possibility of duplicates.
+3. Moving the stale "Homepage Hero" group to **ACF → Field Groups → Trash**
+   (recoverable if ever needed; the hero *values* were untouched).
+4. Replacing all 7 repeater fields with fixed numbered flat fields, so **no ACF Pro
+   licence is needed**.
 
-**Two open items on this:**
-1. Templates currently read only a handful of those fields. Wiring up the remaining
-   ones (repeaters for category cards, pillars, values, tiers, why-items; icon
-   uploads) is the next code task — pending confirmation the import works.
-2. **Repeater fields require ACF Pro.** If staying on the free version, those
-   sections need restructuring as flat individual fields instead.
+> **Note for future sessions:** to change the fields, edit `acf-field-groups.json` and
+> reload wp-admin. Do **not** re-add an `acf-json/` folder or import the file manually
+> — either would reintroduce duplicate groups.
 
 ---
 

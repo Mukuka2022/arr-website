@@ -2,21 +2,14 @@
 
 <div class="page-banner">
   <div class="wrap">
-    <span class="eyebrow"><?php echo esc_html( get_theme_mod( 'arr_archive_eyebrow', 'Category' ) ); ?></span>
-    <h1><?php the_archive_title(); ?></h1>
-    <p><?php the_archive_description( '', '' ); ?></p>
+    <span class="eyebrow"><?php echo esc_html( get_theme_mod( 'arr_search_eyebrow', 'Search' ) ); ?></span>
+    <h1><?php printf( esc_html__( 'Results for "%s"', 'arr-theme' ), esc_html( get_search_query() ) ); ?></h1>
+    <?php get_search_form(); ?>
   </div>
 </div>
 
 <section style="padding-bottom: 90px;">
   <div class="wrap">
-    <div class="filter-row" id="filters">
-      <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" class="filter-pill"><?php echo esc_html( get_theme_mod( 'arr_archive_all_pill', 'All' ) ); ?></a>
-      <?php foreach ( get_categories( array( 'number' => 8 ) ) as $cat ) : ?>
-        <a href="<?php echo esc_url( get_category_link( $cat ) ); ?>" class="filter-pill<?php echo is_category( $cat->term_id ) ? ' active' : ''; ?>"><?php echo esc_html( $cat->name ); ?></a>
-      <?php endforeach; ?>
-    </div>
-
     <div class="article-grid">
       <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
         <article class="article-card">
@@ -38,7 +31,7 @@
           </div>
         </article>
       <?php endwhile; else : ?>
-        <p style="color:var(--muted);"><?php echo esc_html( get_theme_mod( 'arr_archive_empty_text', 'No articles here yet.' ) ); ?></p>
+        <p style="color:var(--muted);"><?php echo esc_html( get_theme_mod( 'arr_search_empty_text', 'No articles matched your search. Try a different term.' ) ); ?></p>
       <?php endif; ?>
     </div>
 

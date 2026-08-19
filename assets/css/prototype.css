@@ -75,7 +75,7 @@ p { line-height: 1.65; margin: 0; }
 
 /* ---------- Header ---------- */
 .site-header {
-  background: var(--midnight);
+  background: var(--header-bg, var(--midnight));
   position: sticky;
   top: 0;
   z-index: 100;
@@ -147,7 +147,7 @@ nav.primary-nav a:hover, nav.primary-nav a.active { color: var(--gold); }
 
 /* ---------- Page header banner (interior pages) ---------- */
 .page-banner {
-  background: var(--midnight);
+  background: var(--banner-bg, var(--midnight));
   padding: 64px 0 40px;
   border-bottom: 4px solid var(--gold);
 }
@@ -156,7 +156,7 @@ nav.primary-nav a:hover, nav.primary-nav a.active { color: var(--gold); }
 .page-banner p { color: rgba(250,250,247,0.75); max-width: 640px; margin-top: 14px; font-size: 16.5px; }
 
 /* ---------- Footer ---------- */
-footer.site-footer { background: var(--midnight); color: rgba(250,250,247,0.65); padding-top: 60px; }
+footer.site-footer { background: var(--footer-bg, var(--midnight)); color: rgba(250,250,247,0.65); padding-top: 60px; }
 .footer-top {
   display: grid;
   grid-template-columns: 1.4fr 1fr 1fr 1fr;
@@ -164,6 +164,7 @@ footer.site-footer { background: var(--midnight); color: rgba(250,250,247,0.65);
   padding-bottom: 48px;
   border-bottom: 1px solid rgba(250,250,247,0.12);
 }
+.footer-brand .brand img { height: var(--footer-logo-height, 38px); width: auto; }
 .footer-brand .brand-text .arr { color: var(--ivory); }
 .footer-brand p { margin-top: 14px; font-size: 13.5px; max-width: 260px; color: rgba(250,250,247,0.55); }
 .footer-col h4 { color: var(--ivory); font-family: var(--sans); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
@@ -179,6 +180,12 @@ footer.site-footer { background: var(--midnight); color: rgba(250,250,247,0.65);
 
 @media (max-width: 800px) {
   .footer-top { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 560px) {
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 14px; text-align: center; }
+  .page-banner h1 { font-size: 30px; }
 }
 
 /* ---------- Generic section helpers ---------- */

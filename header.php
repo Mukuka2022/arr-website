@@ -11,14 +11,19 @@
 <header class="site-header">
   <div class="wrap">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand">
-      <?php if ( has_custom_logo() ) : ?>
-        <?php the_custom_logo(); ?>
-      <?php else : ?>
+      <?php
+      // the_custom_logo() emits its own anchor, which would nest inside .brand.
+      if ( has_custom_logo() ) {
+        echo wp_get_attachment_image( get_theme_mod( 'custom_logo' ), 'full', false, array( 'alt' => get_bloginfo( 'name' ) ) );
+      } else {
+        ?>
         <img src="<?php echo esc_url( get_template_directory_uri() . '/images/logo.png' ); ?>" alt="<?php bloginfo( 'name' ); ?>" />
-      <?php endif; ?>
+        <?php
+      }
+      ?>
       <span class="brand-text">
         <span class="arr">ARR</span>
-        <span class="tag"><?php bloginfo( 'name' ); ?></span>
+        <span class="tag"><?php echo esc_html( get_theme_mod( 'arr_brand_tagline' ) ?: get_bloginfo( 'name' ) ); ?></span>
       </span>
     </a>
 
@@ -37,7 +42,9 @@
     </nav>
 
     <div class="header-actions">
-      <a href="<?php echo esc_url( home_url( '/subscribe/' ) ); ?>" class="btn btn-primary">Contribute</a>
+      <?php if ( get_theme_mod( 'arr_header_cta_show', true ) ) : ?>
+        <a href="<?php echo esc_url( get_theme_mod( 'arr_header_cta_link' ) ?: home_url( '/subscribe/' ) ); ?>" class="btn btn-primary"><?php echo esc_html( get_theme_mod( 'arr_header_cta_text', 'Contribute' ) ); ?></a>
+      <?php endif; ?>
       <button class="icon-btn menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>

@@ -16,16 +16,16 @@ $articles = new WP_Query( array(
 
 <div class="page-banner">
   <div class="wrap">
-    <span class="eyebrow">Archive</span>
-    <h1>Articles &amp; Analysis</h1>
-    <p>Long-form essays and evidence-based commentary across ARR's seven editorial pillars.</p>
+    <span class="eyebrow"><?php echo esc_html( arr_field( 'articles_eyebrow', 'Archive' ) ); ?></span>
+    <h1><?php echo esc_html( arr_field( 'articles_title', 'Articles & Analysis' ) ); ?></h1>
+    <p><?php echo esc_html( arr_field( 'articles_subtitle', "Long-form essays and evidence-based commentary across ARR's seven editorial pillars." ) ); ?></p>
   </div>
 </div>
 
 <section style="padding-bottom: 90px;">
   <div class="wrap">
     <div class="filter-row" id="filters">
-      <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" class="filter-pill active">All</a>
+      <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" class="filter-pill active"><?php echo esc_html( arr_field( 'articles_all_pill_label', 'All' ) ); ?></a>
       <?php foreach ( get_categories( array( 'number' => 8 ) ) as $cat ) : ?>
         <a href="<?php echo esc_url( get_category_link( $cat ) ); ?>" class="filter-pill"><?php echo esc_html( $cat->name ); ?></a>
       <?php endforeach; ?>
@@ -52,7 +52,7 @@ $articles = new WP_Query( array(
           </div>
         </article>
       <?php endwhile; else : ?>
-        <p style="color:var(--muted);">No articles published yet — your first post will appear here automatically.</p>
+        <p style="color:var(--muted);"><?php echo esc_html( arr_field( 'articles_empty_text', 'No articles published yet — your first post will appear here automatically.' ) ); ?></p>
       <?php endif; ?>
     </div>
 

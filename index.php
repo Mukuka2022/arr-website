@@ -8,7 +8,7 @@
         <p style="color:var(--muted);margin-top:10px;"><?php the_excerpt(); ?></p>
       </article>
     <?php endwhile; else : ?>
-      <p>Nothing found.</p>
+      <p><?php echo esc_html( get_theme_mod( 'arr_archive_empty_text', 'No articles here yet.' ) ); ?></p>
     <?php endif; ?>
   </div>
 </section>

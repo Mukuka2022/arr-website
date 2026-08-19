@@ -25,7 +25,7 @@
       <?php echo get_avatar( get_the_author_meta( 'ID' ), 60 ); ?>
       <div>
         <strong style="font-family:var(--serif);font-size:16px;color:var(--midnight);"><?php the_author(); ?></strong>
-        <p style="font-size:13.5px;color:var(--muted);margin-top:4px;"><?php echo esc_html( get_the_author_meta( 'description' ) ?: 'Contributor, African Renaissance Review' ); ?></p>
+        <p style="font-size:13.5px;color:var(--muted);margin-top:4px;"><?php echo esc_html( get_the_author_meta( 'description' ) ?: get_theme_mod( 'arr_single_author_bio', 'Contributor, African Renaissance Review' ) ); ?></p>
       </div>
     </div>
 
