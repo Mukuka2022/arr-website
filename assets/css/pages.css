@@ -3,7 +3,7 @@
   .hero { background: var(--hero-bg, var(--midnight)); padding-bottom: 0; }
   .hero-grid {
     display: grid;
-    grid-template-columns: 2fr 1px 1fr;
+    grid-template-columns: 3fr 1px 1fr;
     gap: 0;
     min-height: 560px;
   }
@@ -23,7 +23,7 @@
     padding: 56px 44px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
   }
   .hero-feature .eyebrow { color: var(--gold); }
   .hero-feature h1 { color: var(--ivory); font-size: 44px; margin-top: 14px; max-width: 560px; }
