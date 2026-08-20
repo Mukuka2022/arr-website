@@ -135,6 +135,16 @@
   @media (max-width: 480px) { .team-grid { grid-template-columns: 1fr; } }
 
 /* ===== from articles.html ===== */
+.breaking-bar { background: var(--midnight); border-bottom: 1px solid rgba(200,155,60,0.25); }
+  .breaking-bar-inner { display: flex; align-items: center; gap: 18px; padding: 12px 0; }
+  .breaking-badge { flex: 0 0 auto; background: var(--gold); color: var(--midnight); font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 12px; border-radius: 2px; }
+  .breaking-list { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 28px; overflow: hidden; }
+  .breaking-item { position: relative; font-size: 13.5px; font-weight: 500; color: rgba(250,250,247,0.9); white-space: nowrap; }
+  .breaking-item:hover { color: var(--gold); }
+  .breaking-item + .breaking-item { padding-left: 28px; }
+  .breaking-item + .breaking-item::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 4px; height: 4px; border-radius: 50%; background: rgba(250,250,247,0.35); }
+  @media (max-width: 700px) { .breaking-list { overflow-x: auto; flex-wrap: nowrap; } }
+
 .filter-row { display: flex; flex-wrap: wrap; gap: 10px; padding: 28px 0; border-bottom: 1px solid var(--hairline); }
   .filter-pill { font-size: 13px; font-weight: 600; padding: 9px 18px; border: 1px solid var(--hairline); border-radius: 20px; color: var(--midnight); cursor: pointer; background: #fff; transition: all .15s ease; }
   .filter-pill:hover { border-color: var(--gold); }

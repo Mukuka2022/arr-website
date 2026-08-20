@@ -38,6 +38,8 @@ function arr_section_color_map() {
 		'contact_bg_color'        => '--contact-bg',
 		// Articles
 		'articles_banner_bg_color' => '--banner-bg',
+		// Authors
+		'authors_banner_bg_color' => '--banner-bg',
 	);
 }
 

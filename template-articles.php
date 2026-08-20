@@ -12,7 +12,30 @@ $articles = new WP_Query( array(
 	'posts_per_page' => 9,
 	'paged'          => $paged,
 ) );
+
+// A true_false field must be read directly — arr_field() treats an
+// explicit "off" (false) the same as "not set" and would fall back to on.
+$breaking_show = function_exists( 'get_field' ) ? get_field( 'articles_breaking_show' ) : null;
+if ( null === $breaking_show ) $breaking_show = true;
+
+$breaking = null;
+if ( $breaking_show ) {
+	$breaking = new WP_Query( array( 'posts_per_page' => 3, 'ignore_sticky_posts' => true, 'paged' => 1 ) );
+}
 ?>
+
+<?php if ( $breaking && $breaking->have_posts() ) : ?>
+<div class="breaking-bar">
+  <div class="wrap breaking-bar-inner">
+    <span class="breaking-badge"><?php echo esc_html( arr_field( 'articles_breaking_label', 'Breaking' ) ); ?></span>
+    <div class="breaking-list">
+      <?php while ( $breaking->have_posts() ) : $breaking->the_post(); ?>
+        <a href="<?php the_permalink(); ?>" class="breaking-item"><?php the_title(); ?></a>
+      <?php endwhile; wp_reset_postdata(); ?>
+    </div>
+  </div>
+</div>
+<?php endif; ?>
 
 <div class="page-banner">
   <div class="wrap">

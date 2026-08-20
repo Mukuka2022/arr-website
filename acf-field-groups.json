@@ -3416,6 +3416,49 @@
                 "new_lines": ""
             },
             {
+                "key": "field_arr_articles_breaking_show",
+                "label": "Show breaking news bar",
+                "name": "articles_breaking_show",
+                "type": "true_false",
+                "instructions": "Shows a highlighted strip above the banner linking to the most recent article(s).",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 1,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_arr_articles_breaking_label",
+                "label": "Breaking news badge text",
+                "name": "articles_breaking_label",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_arr_articles_breaking_show",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Breaking",
+                "placeholder": ""
+            },
+            {
                 "key": "field_arr_articles_all_pill_label",
                 "label": "\"All\" filter pill label",
                 "name": "articles_all_pill_label",
@@ -3484,5 +3527,113 @@
         "hide_on_screen": "",
         "active": true,
         "description": "Banner copy and background colour for the Articles listing page."
+    },
+    {
+        "key": "group_arr_authors",
+        "title": "Authors Page Content",
+        "fields": [
+            {
+                "key": "field_arr_authors_eyebrow",
+                "label": "Eyebrow label",
+                "name": "authors_eyebrow",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Contributors",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_authors_title",
+                "label": "Page title",
+                "name": "authors_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Meet Our Authors",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_authors_subtitle",
+                "label": "Subtitle",
+                "name": "authors_subtitle",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "The economists, policymakers, and scholars whose analysis shapes ARR's seven editorial pillars.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_authors_empty_text",
+                "label": "Empty-state message",
+                "name": "authors_empty_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Authors appear here automatically once they've published at least one article.",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_authors_banner_bg_color",
+                "label": "Banner background colour",
+                "name": "authors_banner_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "template-authors.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Banner copy and background colour for the Authors page."
     }
 ]
