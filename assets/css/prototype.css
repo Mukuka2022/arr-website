@@ -145,6 +145,17 @@ nav.primary-nav a:hover, nav.primary-nav a.active { color: var(--gold); }
   nav.primary-nav.mobile-open a { padding: 10px 0; width: 100%; }
 }
 
+/* ---------- Header search panel ---------- */
+.header-search {
+  max-height: 0;
+  overflow: hidden;
+  background: var(--midnight-light);
+  transition: max-height 0.2s ease;
+}
+.header-search.open { max-height: 100px; }
+.header-search .wrap { padding: 20px 32px; }
+.header-search .search-form { max-width: 480px; margin: 0; }
+
 /* ---------- Page header banner (interior pages) ---------- */
 .page-banner {
   background: var(--banner-bg, var(--midnight));
