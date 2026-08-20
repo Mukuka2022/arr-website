@@ -30,7 +30,7 @@
   .hero-feature p.dek { color: rgba(250,250,247,0.75); margin-top: 18px; max-width: 480px; font-size: 16px; }
   .hero-feature .btn { margin-top: 26px; width: fit-content; }
   .hero-divider { background: rgba(250,250,247,0.1); }
-  .hero-side { background: var(--hero-side-bg, var(--midnight-light)); padding: 40px 32px; }
+  .hero-side { padding: 40px 32px; }
   .hero-side h4 { color: var(--ivory); font-family: var(--sans); font-size: 12.5px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 22px; border-bottom: 1px solid rgba(250,250,247,0.15); padding-bottom: 14px; }
   .mini-story { display: grid; grid-template-columns: 76px 1fr; align-items: stretch; gap: 14px; padding: 16px 0; border-bottom: 1px solid rgba(250,250,247,0.08); }
   .mini-story:last-child { border-bottom: none; }
