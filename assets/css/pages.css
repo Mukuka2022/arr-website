@@ -1,6 +1,6 @@
 /* ===== from index.html ===== */
 /* Home-page specific */
-  .hero { background: var(--hero-bg, var(--midnight)); padding-bottom: 0; }
+  .hero { background: var(--hero-bg, var(--midnight)); padding: 0px 0; }
   .hero-grid {
     display: grid;
     grid-template-columns: 3fr 1px 1fr;
