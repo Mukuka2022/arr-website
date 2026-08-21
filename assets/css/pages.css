@@ -46,7 +46,8 @@
   .cat-grid { display: grid; grid-template-columns: repeat(var(--cat-cols, 6), 1fr); gap: 0; }
   .cat-item { padding: 0 26px; border-right: 1px solid var(--hairline); }
   .cat-item:last-child { border-right: none; }
-  .cat-item .ic { width: 34px; height: 34px; color: var(--midnight); margin-bottom: 14px; }
+  .cat-item .cat-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .cat-item .ic { width: 34px; height: 34px; color: var(--midnight); flex-shrink: 0; margin-bottom: 0; }
   .cat-item h4 { font-family: var(--sans); font-size: 14.5px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--midnight); }
   .cat-item p { font-size: 13px; color: var(--muted); margin-top: 8px; }
   .cat-item .count { display:block; margin-top: 12px; font-size: 12px; font-weight: 700; color: var(--emerald); }

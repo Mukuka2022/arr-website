@@ -74,16 +74,18 @@ $cat_icon_svg = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="current
   <div class="wrap cat-grid" style="--cat-cols:<?php echo count( $manual_cards ); ?>;">
     <?php foreach ( $manual_cards as $card ) : ?>
       <div class="cat-item">
-        <?php if ( $card['icon'] ) : ?>
-          <img class="ic" src="<?php echo esc_url( $card['icon'] ); ?>" alt="" />
-        <?php else : echo $cat_icon_svg; endif; ?>
-        <h4>
-          <?php if ( $card['link'] ) : ?>
-            <a href="<?php echo esc_url( $card['link'] ); ?>" style="color:inherit;"><?php echo esc_html( $card['title'] ); ?></a>
-          <?php else : ?>
-            <?php echo esc_html( $card['title'] ); ?>
-          <?php endif; ?>
-        </h4>
+        <div class="cat-head">
+          <?php if ( $card['icon'] ) : ?>
+            <img class="ic" src="<?php echo esc_url( $card['icon'] ); ?>" alt="" />
+          <?php else : echo $cat_icon_svg; endif; ?>
+          <h4>
+            <?php if ( $card['link'] ) : ?>
+              <a href="<?php echo esc_url( $card['link'] ); ?>" style="color:inherit;"><?php echo esc_html( $card['title'] ); ?></a>
+            <?php else : ?>
+              <?php echo esc_html( $card['title'] ); ?>
+            <?php endif; ?>
+          </h4>
+        </div>
         <p><?php echo esc_html( $card['desc'] ? $card['desc'] : 'Analysis and commentary in this category.' ); ?></p>
       </div>
     <?php endforeach; ?>
@@ -95,8 +97,10 @@ $cat_icon_svg = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="current
     foreach ( $cats as $cat ) :
     ?>
       <div class="cat-item">
-        <?php echo $cat_icon_svg; ?>
-        <h4><a href="<?php echo esc_url( get_category_link( $cat ) ); ?>" style="color:inherit;"><?php echo esc_html( $cat->name ); ?></a></h4>
+        <div class="cat-head">
+          <?php echo $cat_icon_svg; ?>
+          <h4><a href="<?php echo esc_url( get_category_link( $cat ) ); ?>" style="color:inherit;"><?php echo esc_html( $cat->name ); ?></a></h4>
+        </div>
         <p><?php echo esc_html( $cat->description ? $cat->description : 'Analysis and commentary in this category.' ); ?></p>
         <span class="count"><?php echo intval( $cat->count ); ?> Articles</span>
       </div>
