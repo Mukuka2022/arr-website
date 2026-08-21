@@ -38,6 +38,45 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
+  var copyBtn = document.querySelector('.share-copy');
+  if (!copyBtn) return;
+
+  var timer;
+
+  function confirmCopied() {
+    copyBtn.classList.add('copied');
+    clearTimeout(timer);
+    timer = setTimeout(function () { copyBtn.classList.remove('copied'); }, 2000);
+  }
+
+  copyBtn.addEventListener('click', function () {
+    var url = copyBtn.getAttribute('data-share-url');
+    if (!url) return;
+
+    // navigator.clipboard needs a secure context — it is undefined on plain
+    // http, which is exactly how this site is served in local development.
+    // Fall back to a throwaway textarea so the button still works there.
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(url).then(confirmCopied, legacyCopy);
+    } else {
+      legacyCopy();
+    }
+
+    function legacyCopy() {
+      var field = document.createElement('textarea');
+      field.value = url;
+      field.setAttribute('readonly', '');
+      field.style.position = 'fixed';
+      field.style.opacity = '0';
+      document.body.appendChild(field);
+      field.select();
+      try { document.execCommand('copy'); confirmCopied(); } catch (e) {}
+      document.body.removeChild(field);
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('[data-slider]').forEach(function (slider) {
     var track = slider.querySelector('.slider-track');
     var dotsWrap = slider.querySelector('.slider-dots');

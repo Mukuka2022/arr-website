@@ -454,6 +454,68 @@
     .contact-form .wpforms-field-row { flex-direction: column; gap: 18px; }
   }
 
+/* ===== Article share row ===== */
+.share-row {
+  margin-top: 44px;
+  padding: 20px 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px 20px;
+}
+  .share-label {
+    font-family: var(--sans); font-size: 11.5px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+  }
+  .share-links { display: flex; align-items: center; gap: 10px; }
+  .share-btn {
+    position: relative;
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0;
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-radius: 50%;
+    color: var(--midnight);
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, color .15s ease, transform .15s ease;
+  }
+  .share-btn svg { width: 17px; height: 17px; fill: currentColor; }
+  .share-btn:hover {
+    background: var(--midnight);
+    border-color: var(--midnight);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  /* "Copied" confirmation — a tooltip above the button, so the icon doesn't
+     shift and the row doesn't reflow when it appears. */
+  .share-copied {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    padding: 4px 9px;
+    font-family: var(--sans); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--midnight); background: var(--gold);
+    border-radius: 2px; white-space: nowrap;
+    opacity: 0; pointer-events: none;
+    transition: opacity .15s ease, transform .15s ease;
+  }
+  .share-copy.copied .share-copied { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .share-copy.copied { background: var(--midnight); border-color: var(--midnight); color: var(--gold); }
+
+  @media (max-width: 480px) {
+    /* Six circles plus the label won't sit on one line — stack them and let
+       the buttons run the full width rather than wrapping mid-row. */
+    .share-row { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .share-links { flex-wrap: wrap; }
+  }
+
 /* ===== Comments (single post) ===== */
 .comments-area {
   margin-top: 64px;
