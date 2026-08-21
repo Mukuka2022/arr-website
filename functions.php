@@ -33,21 +33,34 @@ function arr_theme_setup() {
 }
 add_action( 'after_setup_theme', 'arr_theme_setup' );
 
+/**
+ * Cache-busting version for a theme asset.
+ *
+ * A fixed version string means visitors keep the stylesheet their browser
+ * cached the first time they came, so design changes silently never reach
+ * them. The file's modification time changes on every edit and on every
+ * deploy, so the URL changes exactly when the file does — and not otherwise.
+ */
+function arr_asset_version( $relative_path ) {
+	$file = get_template_directory() . $relative_path;
+	return file_exists( $file ) ? (string) filemtime( $file ) : '1.0';
+}
+
 function arr_theme_assets() {
 	// Google Fonts — matches the approved brand: Playfair Display (headings) + Inter (body)
 	wp_enqueue_style( 'arr-google-fonts', 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap', array(), null );
 
 	// Prototype stylesheet (colors, layout, components)
-	wp_enqueue_style( 'arr-prototype', get_template_directory_uri() . '/assets/css/prototype.css', array(), '1.0' );
+	wp_enqueue_style( 'arr-prototype', get_template_directory_uri() . '/assets/css/prototype.css', array(), arr_asset_version( '/assets/css/prototype.css' ) );
 
 	// Page-specific layout (hero, category grid, article grid, membership tiers, etc.)
-	wp_enqueue_style( 'arr-pages', get_template_directory_uri() . '/assets/css/pages.css', array( 'arr-prototype' ), '1.0' );
+	wp_enqueue_style( 'arr-pages', get_template_directory_uri() . '/assets/css/pages.css', array( 'arr-prototype' ), arr_asset_version( '/assets/css/pages.css' ) );
 
 	// Mobile nav toggle
-	wp_enqueue_script( 'arr-main', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0', true );
+	wp_enqueue_script( 'arr-main', get_template_directory_uri() . '/assets/js/main.js', array(), arr_asset_version( '/assets/js/main.js' ), true );
 
 	// Small theme-level overrides / dynamic bits
-	wp_enqueue_style( 'arr-theme-style', get_stylesheet_uri(), array( 'arr-prototype' ), '1.0' );
+	wp_enqueue_style( 'arr-theme-style', get_stylesheet_uri(), array( 'arr-prototype' ), arr_asset_version( '/style.css' ) );
 }
 add_action( 'wp_enqueue_scripts', 'arr_theme_assets' );
 

@@ -18,21 +18,54 @@ $articles = new WP_Query( array(
 $breaking_show = function_exists( 'get_field' ) ? get_field( 'articles_breaking_show' ) : null;
 if ( null === $breaking_show ) $breaking_show = true;
 
-$breaking = null;
-if ( $breaking_show ) {
-	$breaking = new WP_Query( array( 'posts_per_page' => 3, 'ignore_sticky_posts' => true, 'paged' => 1 ) );
-}
+// Four posts: the newest becomes the spotlight card on the right of the bar,
+// the next three rotate through the ticker on the left.
+$breaking = $breaking_show ? get_posts( array( 'numberposts' => 4, 'ignore_sticky_posts' => true ) ) : array();
+$breaking_lead = $breaking ? array_shift( $breaking ) : null;
 ?>
 
-<?php if ( $breaking && $breaking->have_posts() ) : ?>
+<?php if ( $breaking_lead ) : ?>
 <div class="breaking-bar">
   <div class="breaking-bar-inner">
-    <span class="breaking-badge"><?php echo esc_html( arr_field( 'articles_breaking_label', 'Breaking' ) ); ?></span>
-    <div class="breaking-list">
-      <?php while ( $breaking->have_posts() ) : $breaking->the_post(); ?>
-        <a href="<?php the_permalink(); ?>" class="breaking-item"><?php the_title(); ?></a>
-      <?php endwhile; wp_reset_postdata(); ?>
+    <div class="breaking-live">
+      <span class="breaking-badge"><?php echo esc_html( arr_field( 'articles_breaking_label', 'Breaking' ) ); ?></span>
+      <?php if ( $breaking ) : ?>
+        <div class="breaking-ticker" data-slider>
+          <div class="breaking-ticker-window">
+            <div class="slider-track">
+              <?php foreach ( $breaking as $arr_item ) : ?>
+                <div class="slider-slide">
+                  <a href="<?php echo esc_url( get_permalink( $arr_item ) ); ?>" class="breaking-item"><?php echo esc_html( get_the_title( $arr_item ) ); ?></a>
+                </div>
+              <?php endforeach; ?>
+            </div>
+          </div>
+          <div class="slider-dots"></div>
+        </div>
+      <?php endif; ?>
     </div>
+
+    <a class="breaking-lead" href="<?php echo esc_url( get_permalink( $breaking_lead ) ); ?>">
+      <?php if ( has_post_thumbnail( $breaking_lead ) ) : ?>
+        <?php echo get_the_post_thumbnail( $breaking_lead, 'arr-card' ); ?>
+      <?php else : ?>
+        <img src="https://picsum.photos/seed/<?php echo esc_attr( $breaking_lead->ID ); ?>/160/160" alt="" />
+      <?php endif; ?>
+      <span class="breaking-lead-copy">
+        <?php $arr_lead_cats = get_the_category( $breaking_lead->ID ); ?>
+        <span class="breaking-lead-cat">
+          <?php echo esc_html( $arr_lead_cats ? $arr_lead_cats[0]->name : arr_field( 'articles_breaking_label', 'Breaking' ) ); ?>
+        </span>
+        <span class="breaking-lead-title"><?php echo esc_html( get_the_title( $breaking_lead ) ); ?></span>
+        <span class="breaking-lead-time">
+          <?php echo esc_html( sprintf(
+            /* translators: %s: human-readable time difference, e.g. "2 hours". */
+            __( '%s ago', 'arr' ),
+            human_time_diff( get_post_time( 'U', true, $breaking_lead ), time() )
+          ) ); ?>
+        </span>
+      </span>
+    </a>
   </div>
 </div>
 <?php endif; ?>

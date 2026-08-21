@@ -202,12 +202,63 @@
   /* Full-bleed: same inset as the header and the other full-width rows. */
   .breaking-bar-inner { display: flex; align-items: center; gap: 18px; padding: 12px clamp(20px, 3vw, 48px); }
   .breaking-badge { flex: 0 0 auto; background: var(--gold); color: var(--midnight); font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 12px; border-radius: 2px; }
-  .breaking-list { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 28px; overflow: hidden; }
-  .breaking-item { position: relative; font-size: 13.5px; font-weight: 500; color: rgba(250,250,247,0.9); white-space: nowrap; }
+  /* Left half: badge + a ticker that rotates one headline at a time. Three
+     headlines side by side wrapped to two lines and still left ~800px of the
+     bar empty on a desktop; one headline reads better and leaves room for the
+     spotlight card that now fills that space. */
+  .breaking-live { display: flex; align-items: center; gap: 16px; flex: 1 1 auto; min-width: 0; }
+  .breaking-ticker { display: flex; align-items: center; gap: 14px; flex: 1 1 auto; min-width: 0; }
+  .breaking-ticker-window { flex: 1 1 auto; min-width: 0; overflow: hidden; }
+  .breaking-item { display: block; font-size: 13.5px; font-weight: 500; color: rgba(250,250,247,0.9); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .breaking-item:hover { color: var(--gold); }
-  .breaking-item + .breaking-item { padding-left: 28px; }
-  .breaking-item + .breaking-item::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 4px; height: 4px; border-radius: 50%; background: rgba(250,250,247,0.35); }
-  @media (max-width: 700px) { .breaking-list { overflow-x: auto; flex-wrap: nowrap; } }
+  .breaking-ticker .slider-dots { flex: 0 0 auto; margin: 0; }
+  .breaking-ticker .slider-dots button { width: 6px; height: 6px; background: rgba(250,250,247,0.3); }
+  .breaking-ticker .slider-dots button.active { background: var(--gold); }
+
+  /* Spotlight: the newest story, as a real article, on the edge that was blank. */
+  .breaking-lead {
+    flex: 0 0 auto;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    padding-left: 26px;
+    border-left: 1px solid rgba(250,250,247,0.14);
+  }
+  /* Matches the height of the three-line copy column beside it, so the card
+     reads as one block rather than a small square floating in a taller row. */
+  .breaking-lead img { flex: 0 0 auto; width: 68px; height: 68px; object-fit: cover; border-radius: 2px; }
+  .breaking-lead-copy { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .breaking-lead-cat { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+  .breaking-lead-title {
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.25;
+    color: var(--ivory);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .breaking-lead:hover .breaking-lead-title { color: var(--gold); }
+  .breaking-lead-time { font-size: 11px; color: rgba(250,250,247,0.45); }
+
+  /* Below ~1080px the two halves start fighting for the same room, so the
+     spotlight drops under the ticker rather than squeezing both. */
+  @media (max-width: 1080px) {
+    .breaking-bar-inner { flex-wrap: wrap; }
+    .breaking-live { flex: 1 1 100%; }
+    .breaking-lead { width: 100%; padding-left: 0; padding-top: 12px; border-left: 0; border-top: 1px solid rgba(250,250,247,0.14); }
+  }
+  @media (max-width: 560px) {
+    /* The badge and dots leave the headline barely 150px on a phone, so the
+       badge moves to its own line and the ticker takes the full width. */
+    .breaking-live { flex-wrap: wrap; gap: 8px; }
+    .breaking-ticker { flex: 1 1 100%; }
+    .breaking-lead img { width: 48px; height: 48px; }
+    .breaking-lead-title { font-size: 14px; }
+  }
 
 .filter-row { display: flex; flex-wrap: wrap; gap: 10px; padding: 28px 0; border-bottom: 1px solid var(--hairline); }
   .filter-pill { font-size: 13px; font-weight: 600; padding: 9px 18px; border: 1px solid var(--hairline); border-radius: 20px; color: var(--midnight); cursor: pointer; background: #fff; transition: all .15s ease; }
