@@ -15,6 +15,7 @@ into a few short pages by topic:
 | [Logo, hero & page text](docs/editing-content.md) | Site logo, homepage hero, and every text/image field on Home, About, Subscribe, Contact and Articles |
 | [Menus & social links](docs/editing-menus-and-links.md) | Adding/removing pages from the navigation, the three footer link columns, and the social icons |
 | [Colours](docs/editing-colors.md) | The site-wide brand palette, and overriding the background colour of individual sections |
+| [Going live](docs/going-live.md) | **Read before uploading to a real host** — migration steps that will break the site if skipped, plus the security checklist |
 
 A few things that need **no admin action** because they're built into the
 theme:
