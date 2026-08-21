@@ -454,6 +454,165 @@
     .contact-form .wpforms-field-row { flex-direction: column; gap: 18px; }
   }
 
+/* ===== Comments (single post) ===== */
+.comments-area {
+  margin-top: 64px;
+  padding-top: 44px;
+  border-top: 3px solid var(--midnight);
+}
+  .comments-head { margin-bottom: 30px; }
+  .comments-title { font-family: var(--serif); font-size: 26px; color: var(--midnight); }
+
+  .comment-list, .comment-list .children { list-style: none; margin: 0; padding: 0; }
+  .comment-list > li + li { margin-top: 26px; }
+  /* Replies step in behind a hairline rather than a second card, so a thread
+     reads as one conversation instead of a stack of unrelated boxes. */
+  .comment-list .children {
+    margin: 22px 0 0 26px;
+    padding-left: 26px;
+    border-left: 2px solid var(--hairline);
+  }
+  .comment-list .children > li + li { margin-top: 22px; }
+
+  .comment-body {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    grid-template-areas: "avatar meta" "avatar content" "avatar reply";
+    column-gap: 18px;
+    row-gap: 8px;
+  }
+  .comment-body img.avatar { grid-area: avatar; width: 52px; height: 52px; border-radius: 50%; }
+  .comment-meta { grid-area: meta; display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; margin: 0; }
+  .comment-author { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+  .comment-author .fn {
+    font-family: var(--serif); font-style: normal; font-weight: 700;
+    font-size: 16px; color: var(--midnight);
+  }
+  .comment-author .fn a { color: inherit; }
+  .comment-author .fn a:hover { color: var(--gold); }
+  /* Core prints "says:" after the name — redundant beside a timestamp. */
+  .comment-author .says { display: none; }
+  .comment-metadata { font-size: 12px; letter-spacing: 0.04em; color: var(--muted); }
+  .comment-metadata a { color: inherit; }
+  .comment-metadata a:hover { color: var(--gold); }
+  .comment-metadata .edit-link { margin-left: 10px; }
+
+  /* The post's own author, so readers can tell the newsroom from the audience. */
+  .comment.bypostauthor > .comment-body .comment-author .fn::after {
+    content: "Author";
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    font-family: var(--sans); font-size: 9.5px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--midnight); background: var(--gold); border-radius: 2px;
+    vertical-align: middle;
+  }
+
+  .comment-content { grid-area: content; font-size: 15px; line-height: 1.7; color: var(--charcoal); }
+  .comment-content p { margin-bottom: 12px; }
+  .comment-content p:last-child { margin-bottom: 0; }
+  .comment-content a { color: var(--emerald); text-decoration: underline; }
+  .comment-content blockquote {
+    margin: 14px 0; padding: 4px 0 4px 16px;
+    border-left: 2px solid var(--gold); color: var(--muted); font-style: italic;
+  }
+
+  .comment-body .reply { grid-area: reply; }
+  .comment-body .reply a {
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold);
+  }
+  .comment-body .reply a:hover { text-decoration: underline; }
+
+  /* Held for moderation. */
+  .comment-awaiting-moderation {
+    display: inline-block; margin-top: 8px; padding: 4px 10px;
+    font-size: 12px; color: var(--muted);
+    background: var(--ivory); border-left: 2px solid var(--gold);
+  }
+
+  .comments-area .comments-pagination { margin-top: 34px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .comments-area .comments-pagination .page-numbers {
+    padding: 8px 14px; font-size: 13px; font-weight: 600;
+    border: 1px solid var(--hairline); background: #fff; color: var(--midnight);
+  }
+  .comments-area .comments-pagination .page-numbers.current,
+  .comments-area .comments-pagination .page-numbers:hover { background: var(--midnight); border-color: var(--midnight); color: var(--ivory); }
+
+  .comments-closed { margin-top: 26px; font-size: 13.5px; color: var(--muted); }
+
+  /* ---- The form: same panel language as the contact page ---- */
+  .comment-respond {
+    margin-top: 44px;
+    padding: 36px;
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-top: 3px solid var(--gold);
+    border-radius: 3px;
+    box-shadow: 0 2px 18px rgba(11,31,58,0.06);
+  }
+  /* When replying, the form moves inside the thread — drop the outer margin so
+     it doesn't tear a gap in the conversation it belongs to. */
+  .comment-list .comment-respond { margin-top: 22px; padding: 26px; }
+
+  .comment-reply-title { font-family: var(--serif); font-size: 22px; color: var(--midnight); }
+  .comment-reply-title small { display: block; margin-top: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+  .comment-reply-title small a { color: var(--gold); }
+  .comment-reply-title small a:hover { text-decoration: underline; }
+
+  .comment-notes, .logged-in-as { font-size: 12.5px; color: var(--muted); margin-top: 10px; }
+  .logged-in-as a { color: var(--emerald); text-decoration: underline; }
+  .comment-form { margin-top: 22px; }
+  .comment-form p { margin-bottom: 18px; }
+  .comment-form label {
+    display: block; font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--midnight); margin-bottom: 8px;
+  }
+  .comment-form .required { color: var(--gold); }
+  .comment-form-row { display: flex; gap: 16px; }
+  .comment-form-row > p { flex: 1 1 0; min-width: 0; }
+  .comment-form input[type="text"],
+  .comment-form input[type="email"],
+  .comment-form input[type="url"],
+  .comment-form textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid var(--hairline);
+    border-radius: 3px;
+    background: #fcfbf8;
+    color: var(--charcoal);
+    font-family: var(--sans);
+    font-size: 14.5px;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .comment-form input::placeholder, .comment-form textarea::placeholder { color: #a8a294; }
+  .comment-form input:hover, .comment-form textarea:hover { border-color: #cfc6b4; }
+  .comment-form input:focus, .comment-form textarea:focus {
+    outline: none;
+    background: #fff;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(200,155,60,0.18);
+  }
+  .comment-form textarea { min-height: 150px; resize: vertical; display: block; }
+  .comment-form .comment-form-cookies-consent { display: flex; align-items: flex-start; gap: 10px; }
+  .comment-form .comment-form-cookies-consent input { width: auto; margin-top: 2px; }
+  .comment-form .comment-form-cookies-consent label {
+    font-size: 12.5px; font-weight: 500; letter-spacing: 0;
+    text-transform: none; color: var(--muted); margin: 0;
+  }
+  .comment-form .form-submit { margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--hairline); margin-bottom: 0; }
+  .comment-form .comment-submit { min-width: 200px; min-height: 50px; justify-content: center; font-weight: 700; }
+
+  @media (max-width: 620px) {
+    .comment-respond { padding: 26px 20px; }
+    .comment-form-row { flex-direction: column; gap: 0; }
+    /* An avatar column plus indentation leaves too little room for the text. */
+    .comment-body { grid-template-columns: 40px 1fr; column-gap: 14px; }
+    .comment-body img.avatar { width: 40px; height: 40px; }
+    .comment-list .children { margin-left: 0; padding-left: 16px; }
+  }
+
 /* ===== 404 / search ===== */
 .notfound { text-align: center; padding: 60px 0 90px; }
   .notfound p { color: var(--muted); max-width: 460px; margin: 0 auto 26px; }
