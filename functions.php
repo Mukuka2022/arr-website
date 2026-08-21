@@ -75,28 +75,29 @@ function arr_fallback_menu() {
 }
 
 /**
- * Footer column fallbacks — the approved link set, shown until the client
- * assigns their own menus to the three Footer Column locations.
+ * Footer column fallbacks, shown until the client assigns their own menus to
+ * the three Footer Column locations.
+ *
+ * Every entry resolves to a page that actually exists; arr_footer_link() skips
+ * anything missing. The original set carried four href="#" placeholders
+ * (Careers, Podcasts, FAQs, Privacy Policy) and pointed Our Team, Authors and
+ * Submissions at pages that were not theirs. Add the links back here — or,
+ * better, as a real menu under Appearance → Menus — once those pages exist.
  */
 function arr_footer_menu_1_fallback() {
-	echo '<a href="' . esc_url( home_url( '/about/' ) ) . '">About Us</a>';
-	echo '<a href="' . esc_url( home_url( '/about/' ) ) . '">Editorial Charter</a>';
-	echo '<a href="' . esc_url( home_url( '/about/' ) ) . '">Our Team</a>';
-	echo '<a href="#">Careers</a>';
+	arr_footer_link( 'about', 'About Us' );
+	arr_footer_link( 'authors', 'Our Team' );
 }
 
 function arr_footer_menu_2_fallback() {
-	echo '<a href="' . esc_url( home_url( '/about/' ) ) . '">Authors</a>';
-	echo '<a href="' . esc_url( home_url( '/articles/' ) ) . '">Archive</a>';
-	echo '<a href="' . esc_url( home_url( '/subscribe/' ) ) . '">Newsletter</a>';
-	echo '<a href="#">Podcasts</a>';
+	arr_footer_link( 'articles', 'Latest Articles' );
+	arr_footer_link( 'subscribe', 'Subscribe' );
 }
 
 function arr_footer_menu_3_fallback() {
-	echo '<a href="' . esc_url( home_url( '/contact/' ) ) . '">Contact Us</a>';
-	echo '<a href="' . esc_url( home_url( '/subscribe/' ) ) . '">Submissions</a>';
-	echo '<a href="#">FAQs</a>';
-	echo '<a href="#">Privacy Policy</a>';
+	arr_footer_link( 'contact', 'Contact Us' );
+	arr_footer_link( 'privacy-policy', 'Privacy Policy' );
+	arr_footer_link( 'terms-conditions', 'Terms & Conditions' );
 }
 
 /**

@@ -97,6 +97,25 @@ function arr_social_links() {
 }
 
 /**
+ * Echo a footer link to a page, looked up by slug.
+ *
+ * Resolving the page rather than hardcoding home_url('/about/') means the link
+ * survives the client renaming a slug, and — more importantly — nothing is
+ * printed at all when the page does not exist. A footer full of href="#"
+ * placeholders is worse than a shorter footer: readers click them, and search
+ * engines index them.
+ */
+function arr_footer_link( $slug, $label ) {
+	$page = get_page_by_path( $slug );
+
+	if ( ! $page || 'publish' !== $page->post_status ) {
+		return;
+	}
+
+	echo '<a href="' . esc_url( get_permalink( $page ) ) . '">' . esc_html( $label ) . '</a>';
+}
+
+/**
  * Share targets for a single article.
  *
  * These are plain links to each network's own share endpoint — deliberately
