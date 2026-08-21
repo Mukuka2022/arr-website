@@ -11,7 +11,7 @@
           <?php
         }
         ?>
-        <span class="brand-text"><span class="arr">ARR</span></span>
+        <span class="brand-text"><span class="arr"><?php echo esc_html( get_theme_mod( 'arr_brand_name', 'ARR' ) ); ?></span></span>
       </a>
       <p><?php echo wp_kses_post( get_theme_mod( 'arr_footer_tagline', "Shaping Africa's Intellectual Renaissance. Independent. Research-driven. Unapologetically African." ) ); ?></p>
     </div>

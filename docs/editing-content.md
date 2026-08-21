@@ -7,6 +7,18 @@
 **Appearance → Customize → Site Identity → Logo.** Uploading a logo here
 updates it everywhere — the header and the footer both use it automatically.
 
+## Brand name beside the logo
+
+**Appearance → Customize → ARR Theme Settings → Header.**
+
+- **Brand name beside the logo** — the large text next to the logo (e.g.
+  `ARR`). Changing it updates both the header and the footer.
+- **Small text under the brand name** — the little gold line beneath it.
+  Leave blank to fall back to the site title.
+
+Keep the brand name short. It sits on the same row as the navigation, so a
+long name squeezes the menu on smaller laptop screens.
+
 ## Homepage hero
 
 Go to **Pages → Home → Edit**. In the **Homepage Content** box, open the

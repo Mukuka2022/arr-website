@@ -160,12 +160,23 @@ function arr_customize_register( $wp_customize ) {
 		'priority' => 40,
 	) );
 
+	$wp_customize->add_setting( 'arr_brand_name', array(
+		'default'           => 'ARR',
+		'sanitize_callback' => 'arr_sanitize_text',
+	) );
+	$wp_customize->add_control( 'arr_brand_name', array(
+		'label'       => __( 'Brand name beside the logo', 'arr-theme' ),
+		'description' => __( 'The large text next to the logo, in the header and footer. Keep it short — long names crowd the navigation.', 'arr-theme' ),
+		'section'     => 'arr_header_settings',
+		'type'        => 'text',
+	) );
+
 	$wp_customize->add_setting( 'arr_brand_tagline', array(
 		'default'           => '',
 		'sanitize_callback' => 'arr_sanitize_text',
 	) );
 	$wp_customize->add_control( 'arr_brand_tagline', array(
-		'label'       => __( 'Text beside the logo', 'arr-theme' ),
+		'label'       => __( 'Small text under the brand name', 'arr-theme' ),
 		'description' => __( 'Leave blank to use the site title.', 'arr-theme' ),
 		'section'     => 'arr_header_settings',
 		'type'        => 'text',

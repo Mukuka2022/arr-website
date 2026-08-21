@@ -22,7 +22,7 @@
       }
       ?>
       <span class="brand-text">
-        <span class="arr">ARR</span>
+        <span class="arr"><?php echo esc_html( get_theme_mod( 'arr_brand_name', 'ARR' ) ); ?></span>
         <span class="tag"><?php echo esc_html( get_theme_mod( 'arr_brand_tagline' ) ?: get_bloginfo( 'name' ) ); ?></span>
       </span>
     </a>
