@@ -26,7 +26,7 @@ if ( $breaking_show ) {
 
 <?php if ( $breaking && $breaking->have_posts() ) : ?>
 <div class="breaking-bar">
-  <div class="wrap breaking-bar-inner">
+  <div class="breaking-bar-inner">
     <span class="breaking-badge"><?php echo esc_html( arr_field( 'articles_breaking_label', 'Breaking' ) ); ?></span>
     <div class="breaking-list">
       <?php while ( $breaking->have_posts() ) : $breaking->the_post(); ?>
