@@ -48,6 +48,29 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
+    var count = slides.length;
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Advancing past the last slide by wrapping the index back to 0 animates
+    // the track backwards through every slide, which reads as a rewind — very
+    // obvious on a two-slide track, where it just ping-pongs. Instead, append a
+    // copy of the first slide so "next" from the last slide keeps moving
+    // forward into an identical-looking frame, then snap silently back to the
+    // real first slide once the transition ends.
+    //
+    // Skipped entirely under prefers-reduced-motion: transitions are disabled
+    // there (see the global rule in prototype.css), so transitionend would
+    // never fire and the track would stick on the clone. With no animation
+    // there is no rewind to hide anyway.
+    if (!reduceMotion) {
+      var clone = slides[0].cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.querySelectorAll('a, button, input').forEach(function (el) {
+        el.setAttribute('tabindex', '-1');
+      });
+      track.appendChild(clone);
+    }
+
     var dots = slides.map(function (_, i) {
       var dot = document.createElement('button');
       dot.type = 'button';
@@ -60,15 +83,36 @@ document.addEventListener('DOMContentLoaded', function () {
     var index = 0;
     var timer;
 
-    function go(i) {
-      index = (i + slides.length) % slides.length;
-      track.style.transform = 'translateX(-' + (index * 100) + '%)';
-      dots.forEach(function (d, di) { d.classList.toggle('active', di === index); });
+    function paint(i, instant) {
+      track.style.transition = instant ? 'none' : '';
+      track.style.transform = 'translateX(-' + (i * 100) + '%)';
+      dots.forEach(function (d, di) { d.classList.toggle('active', di === i % count); });
     }
+
+    function go(i) {
+      index = reduceMotion ? (i + count) % count : i;
+      paint(index);
+    }
+
+    function next() {
+      // index === count lands on the clone; transitionend resets it to 0.
+      go(reduceMotion ? index + 1 : (index >= count ? 1 : index + 1));
+    }
+
+    track.addEventListener('transitionend', function (e) {
+      if (e.target !== track || e.propertyName !== 'transform') return;
+      if (index !== count) return;
+      index = 0;
+      paint(0, true);
+      // Force a reflow so the re-enabled transition applies to the *next*
+      // move rather than being coalesced into this instant jump.
+      void track.offsetWidth;
+      track.style.transition = '';
+    });
 
     function reset() {
       clearInterval(timer);
-      timer = setInterval(function () { go(index + 1); }, 5000);
+      timer = setInterval(next, 5000);
     }
 
     slider.addEventListener('mouseenter', function () { clearInterval(timer); });
