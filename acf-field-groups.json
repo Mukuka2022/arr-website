@@ -862,6 +862,23 @@
                 "placeholder": ""
             },
             {
+                "key": "field_arr_podcast_image",
+                "label": "Podcast artwork",
+                "name": "podcast_image",
+                "type": "image",
+                "instructions": "Optional decorative image shown to the right of this panel (e.g. a microphone). Leave blank to show text only.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
                 "key": "field_arr_brief_title",
                 "label": "Newsletter title",
                 "name": "brief_title",
@@ -992,6 +1009,23 @@
                 },
                 "default_value": "",
                 "placeholder": ""
+            },
+            {
+                "key": "field_arr_reports_image",
+                "label": "Reports artwork",
+                "name": "reports_image",
+                "type": "image",
+                "instructions": "Optional decorative image shown to the right of this panel (e.g. a report cover). Leave blank to show text only.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
             },
             {
                 "key": "field_arr_cta_band_bg_color",

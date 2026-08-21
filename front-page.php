@@ -206,26 +206,45 @@ $trend_eye_svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
   </div>
 </section>
 
+<?php
+$podcast_image = arr_field( 'podcast_image', '' );
+$reports_image = arr_field( 'reports_image', '' );
+?>
 <section class="cta-band">
-  <div class="wrap cta-grid">
-    <div>
-      <h4><?php echo esc_html( arr_field( 'podcast_title', 'Listen to Our Podcast' ) ); ?></h4>
-      <p><?php echo esc_html( arr_field( 'podcast_text', "Conversations with Africa's thinkers, leaders, and builders." ) ); ?></p>
-      <a href="<?php echo esc_url( arr_field( 'podcast_link', '#' ) ); ?>" class="btn btn-outline"><?php echo esc_html( arr_field( 'podcast_button_text', 'Listen Now' ) ); ?> &rarr;</a>
+  <div class="cta-grid">
+    <div class="cta-item<?php echo $podcast_image ? ' has-art' : ''; ?>">
+      <div class="cta-copy">
+        <h4><?php echo esc_html( arr_field( 'podcast_title', 'Listen to Our Podcast' ) ); ?></h4>
+        <p><?php echo esc_html( arr_field( 'podcast_text', "Conversations with Africa's thinkers, leaders, and builders." ) ); ?></p>
+        <a href="<?php echo esc_url( arr_field( 'podcast_link', '#' ) ); ?>" class="cta-link"><?php echo esc_html( arr_field( 'podcast_button_text', 'Listen Now' ) ); ?> <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <?php if ( $podcast_image ) : ?>
+        <img class="cta-art" src="<?php echo esc_url( $podcast_image ); ?>" alt="" />
+      <?php endif; ?>
     </div>
-    <div>
-      <h4><?php echo esc_html( arr_field( 'brief_title', 'Weekly Brief' ) ); ?></h4>
-      <p><?php echo esc_html( arr_field( 'brief_text', 'A curated briefing of ideas that matter. Every Saturday.' ) ); ?></p>
-      <!-- TODO: point this form at your email service provider (Mailchimp, ConvertKit, etc.) -->
-      <form class="sub-form" action="#" method="post">
-        <input type="email" name="email" placeholder="<?php echo esc_attr( arr_field( 'brief_placeholder', 'Your email address' ) ); ?>" required />
-        <button class="btn btn-primary" type="submit"><?php echo esc_html( arr_field( 'brief_button_text', 'Subscribe' ) ); ?></button>
-      </form>
+
+    <div class="cta-item">
+      <div class="cta-copy">
+        <h4><?php echo esc_html( arr_field( 'brief_title', 'Weekly Brief' ) ); ?></h4>
+        <p><?php echo esc_html( arr_field( 'brief_text', 'A curated briefing of ideas that matter. Every Saturday.' ) ); ?></p>
+        <!-- TODO: point this form at your email service provider (Mailchimp, ConvertKit, etc.) -->
+        <form class="sub-form" action="#" method="post">
+          <label class="screen-reader-text" for="brief-email"><?php echo esc_html( arr_field( 'brief_placeholder', 'Your email address' ) ); ?></label>
+          <input type="email" id="brief-email" name="email" placeholder="<?php echo esc_attr( arr_field( 'brief_placeholder', 'Your email address' ) ); ?>" required />
+          <button type="submit"><?php echo esc_html( arr_field( 'brief_button_text', 'Subscribe' ) ); ?></button>
+        </form>
+      </div>
     </div>
-    <div>
-      <h4><?php echo esc_html( arr_field( 'reports_title', 'Special Reports' ) ); ?></h4>
-      <p><?php echo esc_html( arr_field( 'reports_text', "In-depth reports on Africa's most critical issues." ) ); ?></p>
-      <a href="<?php echo esc_url( arr_field( 'reports_link', '#' ) ); ?>" class="btn btn-outline"><?php echo esc_html( arr_field( 'reports_button_text', 'Explore Reports' ) ); ?> &rarr;</a>
+
+    <div class="cta-item<?php echo $reports_image ? ' has-art' : ''; ?>">
+      <div class="cta-copy">
+        <h4><?php echo esc_html( arr_field( 'reports_title', 'Special Reports' ) ); ?></h4>
+        <p><?php echo esc_html( arr_field( 'reports_text', "In-depth reports on Africa's most critical issues." ) ); ?></p>
+        <a href="<?php echo esc_url( arr_field( 'reports_link', '#' ) ); ?>" class="cta-link"><?php echo esc_html( arr_field( 'reports_button_text', 'Explore Reports' ) ); ?> <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <?php if ( $reports_image ) : ?>
+        <img class="cta-art" src="<?php echo esc_url( $reports_image ); ?>" alt="" />
+      <?php endif; ?>
     </div>
   </div>
 </section>
