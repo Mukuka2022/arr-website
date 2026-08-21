@@ -22,7 +22,7 @@ if ( ! $hero_image && has_post_thumbnail() ) $hero_image = get_the_post_thumbnai
       <span class="eyebrow"><?php echo esc_html( $hero_eyebrow ); ?></span>
       <h1><?php echo esc_html( $hero_headline ); ?></h1>
       <p class="dek"><?php echo esc_html( $hero_dek ); ?></p>
-      <a href="<?php echo esc_url( $hero_button_link ); ?>" class="btn btn-outline"><?php echo esc_html( $hero_button_text ); ?> &rarr;</a>
+      <a href="<?php echo esc_url( $hero_button_link ); ?>" class="btn btn-primary"><?php echo esc_html( $hero_button_text ); ?> &rarr;</a>
       <?php if ( ! function_exists( 'get_field' ) && current_user_can( 'edit_pages' ) ) : ?>
         <p style="color:rgba(250,250,247,0.35);font-size:11px;margin-top:16px;">(Install ACF to make this editable — admin-only note.)</p>
       <?php endif; ?>
