@@ -81,6 +81,15 @@ p { line-height: 1.65; margin: 0; }
   z-index: 100;
   border-bottom: 1px solid rgba(200,155,60,0.25);
 }
+/* The header runs edge to edge rather than sitting in the centred 1200px
+   container. Applied to every .wrap in the header — the bar and the search
+   panel below it — so the two stay aligned with each other. Uses the same
+   inset as the other full-bleed rows (.trio, .cta-item). */
+.site-header .wrap {
+  max-width: none;
+  padding-left: clamp(20px, 3vw, 48px);
+  padding-right: clamp(20px, 3vw, 48px);
+}
 /* Direct child only — the search panel below also uses .wrap, and this flex
    row (with its fixed 76px height) would otherwise collapse the search form
    to shrink-to-fit instead of letting it fill the bar. */
@@ -156,7 +165,9 @@ nav.primary-nav a:hover, nav.primary-nav a.active { color: var(--gold); }
   transition: max-height 0.2s ease;
 }
 .header-search.open { max-height: 140px; }
-.header-search .wrap { padding: 18px 32px; }
+/* Vertical only — the horizontal inset is inherited from .site-header .wrap
+   so the search bar lines up with the brand and header icons above it. */
+.header-search .wrap { padding-top: 18px; padding-bottom: 18px; }
 /* Fills the header container so the bar lines up with the brand on the left
    and the header icons on the right, rather than sitting in a short stub. */
 .header-search .search-form { max-width: none; margin: 0; }
