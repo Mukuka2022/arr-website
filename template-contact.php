@@ -24,9 +24,11 @@ $contact_note     = arr_field( 'contact_note', 'We read every message. Expect a 
 <section class="contact-section">
   <div class="wrap contact-grid">
     <div class="contact-form-col">
-      <h2><?php echo esc_html( arr_field( 'contact_form_heading', 'Send us a message' ) ); ?></h2>
-      <div class="contact-form">
-        <?php echo do_shortcode( '[wpforms id="55"]' ); ?>
+      <div class="contact-card">
+        <h2><?php echo esc_html( arr_field( 'contact_form_heading', 'Send us a message' ) ); ?></h2>
+        <div class="contact-form">
+          <?php echo do_shortcode( '[wpforms id="55"]' ); ?>
+        </div>
       </div>
     </div>
 
@@ -58,6 +60,18 @@ $contact_note     = arr_field( 'contact_note', 'We read every message. Expect a 
         <div class="contact-detail">
           <span class="lbl"><?php esc_html_e( 'Office Hours', 'arr-theme' ); ?></span>
           <span class="val"><?php echo esc_html( $contact_hours ); ?></span>
+        </div>
+      <?php endif; ?>
+
+      <?php $contact_social = function_exists( 'arr_social_links' ) ? arr_social_links() : array(); ?>
+      <?php if ( $contact_social ) : ?>
+        <div class="contact-detail contact-social">
+          <span class="lbl"><?php esc_html_e( 'Follow', 'arr-theme' ); ?></span>
+          <div class="social-row">
+            <?php foreach ( $contact_social as $link ) : ?>
+              <a href="<?php echo esc_url( $link['url'] ); ?>" aria-label="<?php echo esc_attr( $link['label'] ); ?>"<?php echo $link['external'] ? ' target="_blank" rel="noopener"' : ''; ?>><?php echo esc_html( $link['glyph'] ); ?></a>
+            <?php endforeach; ?>
+          </div>
         </div>
       <?php endif; ?>
 

@@ -323,47 +323,136 @@
 
 /* ===== contact.html ===== */
 .contact-section { background: var(--contact-bg, var(--ivory)); }
-  .contact-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px; align-items: start; }
-  .contact-form-col h2 { font-size: 28px; margin-bottom: 22px; }
-  .contact-form .field { margin-bottom: 18px; }
-  .contact-form label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
-  .contact-form input,
-  .contact-form textarea {
-    width: 100%; padding: 14px 15px !important; border: 1px solid var(--hairline) !important;
-    border-radius: 0 !important; background: #fff; color: var(--charcoal); font-family: var(--sans); font-size: 14px;
-  }
-  .contact-form input:focus,
-  .contact-form textarea:focus { outline: 2px solid var(--gold); outline-offset: 0; border-color: var(--gold) !important; }
-  .contact-form textarea { min-height: 160px; resize: vertical; }
-  .contact-form .btn { margin-top: 6px; }
+  /* start, not stretch: the details panel only renders the fields that are
+     actually filled in, so stretching it to the form's height leaves a tall
+     block of empty navy whenever a few are blank. */
+  .contact-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 40px; align-items: start; }
 
-  /* WPForms output reuses the .contact-form input/textarea/label rules above; these
-     fill the gaps for WPForms' own wrapper markup and error/success states. */
-  .contact-form .wpforms-field { margin-bottom: 18px; padding: 0; }
-  .contact-form .wpforms-field-label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
-  .contact-form .wpforms-required-label { color: var(--gold); }
-  .contact-form .wpforms-field-row { display: flex; gap: 14px; }
-  .contact-form .wpforms-field-row-block { flex: 1; }
-  .contact-form .wpforms-submit-container { margin-top: 6px; }
-  .contact-form button[type="submit"].wpforms-submit {
-    display: inline-flex; align-items: center; gap: 8px; font-family: var(--sans); font-weight: 600;
-    font-size: 14px; letter-spacing: 0.02em; padding: 13px 26px; border-radius: 2px; cursor: pointer;
-    border: 1px solid transparent !important; background-color: var(--gold) !important; color: var(--midnight) !important;
+  /* The form sits in a raised white panel rather than floating on the ivory
+     background — the same construction as the Subscribe page's tier cards, so
+     the two pages read as one design. */
+  .contact-card {
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-top: 3px solid var(--gold);
+    border-radius: 3px;
+    padding: 40px;
+    box-shadow: 0 2px 18px rgba(11,31,58,0.06);
   }
-  .contact-form button[type="submit"].wpforms-submit:hover { background-color: var(--gold-light) !important; }
+  .contact-card h2 { font-size: 26px; margin-bottom: 6px; }
+  .contact-card > .contact-form { margin-top: 26px; }
+
+  .contact-form .field { margin-bottom: 20px; }
+  .contact-form label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+
+  /* WPForms ships its own sizing and chrome at a higher specificity than a
+     plain class selector, so these have to be forced. Without the max-width
+     reset every field renders at a different width (WPForms caps "medium" at
+     60%), which is what made the form look ragged. */
+  .contact-form input[type="text"],
+  .contact-form input[type="email"],
+  .contact-form input[type="tel"],
+  .contact-form input[type="url"],
+  .contact-form select,
+  .contact-form textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 13px 15px !important;
+    border: 1px solid var(--hairline) !important;
+    border-radius: 3px !important;
+    background: #fcfbf8 !important;
+    color: var(--charcoal);
+    font-family: var(--sans);
+    font-size: 14.5px;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder { color: #a8a294; }
+  .contact-form input:hover,
+  .contact-form textarea:hover { border-color: #cfc6b4 !important; }
+  .contact-form input:focus,
+  .contact-form textarea:focus,
+  .contact-form select:focus {
+    outline: none;
+    background: #fff !important;
+    border-color: var(--gold) !important;
+    box-shadow: 0 0 0 3px rgba(200,155,60,0.18);
+  }
+  .contact-form textarea { min-height: 170px !important; resize: vertical; }
+
+  .contact-form .wpforms-field { margin-bottom: 20px; padding: 0; }
+  .contact-form .wpforms-field-label,
+  .contact-form legend.wpforms-field-label {
+    display: block; font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--midnight); margin-bottom: 8px; padding: 0;
+  }
+  .contact-form fieldset { border: 0; margin: 0; padding: 0; }
+  .contact-form .wpforms-required-label { color: var(--gold); }
+  /* "First" / "Last" under the name halves — a quiet hint, not a second label
+     competing with the real one above the row. */
+  .contact-form .wpforms-field-sublabel {
+    font-size: 11px; font-weight: 500; letter-spacing: 0; text-transform: none;
+    color: var(--muted); margin: 6px 0 0;
+  }
+  /* stretch, not WPForms' align-items:start — once this stacks on a phone,
+     "start" is the cross axis and the halves shrink to fit their text instead
+     of matching the full-width fields above and below them. */
+  .contact-form .wpforms-field-row { display: flex; align-items: stretch !important; gap: 16px; max-width: 100% !important; padding: 0 !important; }
+  /* WPForms clearfixes this row with ::before/::after. Harmless while it was a
+     float layout, but as flex children they become real items and the row's
+     gap applies on both sides of them — 32px of dead space the name halves
+     could not grow into. */
+  .contact-form .wpforms-field-row::before,
+  .contact-form .wpforms-field-row::after { display: none !important; }
+  /* max-width has to go too — WPForms pins the halves to 48%, which left a
+     dead 31px gutter at the end of the row. */
+  .contact-form .wpforms-field-row-block { flex: 1 1 0; min-width: 0; width: auto !important; max-width: none !important; padding: 0 !important; }
+
+  .contact-form .wpforms-submit-container { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--hairline); }
+  .contact-form button[type="submit"].wpforms-submit {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: var(--sans); font-weight: 700; font-size: 14px; letter-spacing: 0.03em;
+    min-width: 200px; min-height: 50px; padding: 15px 30px; border-radius: 3px; cursor: pointer;
+    border: 1px solid transparent !important; background-color: var(--gold) !important; color: var(--midnight) !important;
+    transition: background .15s ease, transform .15s ease;
+  }
+  .contact-form button[type="submit"].wpforms-submit:hover { background-color: var(--gold-light) !important; transform: translateY(-1px); }
   .contact-form .wpforms-error { color: #b3261e; font-size: 12.5px; margin-top: 6px; }
+  .contact-form input.wpforms-error, .contact-form textarea.wpforms-error { border-color: #b3261e !important; }
   .contact-form .wpforms-confirmation-container { padding: 20px; background: #fff; border: 1px solid var(--hairline); color: var(--midnight); }
 
-  .contact-details { background: #fff; border: 1px solid var(--hairline); padding: 34px; }
-  .contact-details h4 { font-family: var(--sans); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--midnight); margin-bottom: 8px; }
-  .contact-detail { padding: 14px 0; border-bottom: 1px solid var(--hairline); }
+  /* Dark counterpart to the white form card — mirrors .signup-visual on the
+     Subscribe page, and the contrast keeps the two columns from reading as one
+     undifferentiated block of white. */
+  .contact-details {
+    background: var(--midnight);
+    border: 1px solid var(--midnight);
+    border-radius: 3px;
+    padding: 40px 34px;
+  }
+  .contact-details h4 {
+    font-family: var(--sans); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 10px;
+  }
+  .contact-detail { padding: 18px 0; border-bottom: 1px solid rgba(250,250,247,0.12); }
   .contact-detail:last-of-type { border-bottom: none; }
-  .contact-detail .lbl { display: block; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
-  .contact-detail a, .contact-detail span.val { font-size: 15px; color: var(--midnight); }
+  .contact-detail .lbl { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,250,247,0.45); margin-bottom: 6px; }
+  .contact-detail a, .contact-detail span.val { font-size: 15px; line-height: 1.5; color: var(--ivory); }
   .contact-detail a:hover { color: var(--gold); }
-  .contact-note { font-size: 12.5px; color: var(--muted); margin-top: 18px; }
-  @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
-  @media (max-width: 560px) { .contact-details { padding: 24px; } }
+  .contact-social .social-row { margin-top: 4px; }
+  .contact-note {
+    font-size: 12.5px; line-height: 1.6; color: rgba(250,250,247,0.6);
+    margin-top: 24px; padding: 16px 18px;
+    background: rgba(250,250,247,0.05); border-left: 2px solid var(--gold); border-radius: 0 3px 3px 0;
+  }
+
+  @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; gap: 28px; } }
+  @media (max-width: 560px) {
+    .contact-card { padding: 28px 22px; }
+    .contact-details { padding: 30px 24px; }
+    /* First/Last side by side leaves ~130px each on a phone — stack them. */
+    .contact-form .wpforms-field-row { flex-direction: column; gap: 18px; }
+  }
 
 /* ===== 404 / search ===== */
 .notfound { text-align: center; padding: 60px 0 90px; }
