@@ -227,12 +227,9 @@ $reports_image = arr_field( 'reports_image', '' );
       <div class="cta-copy">
         <h4><?php echo esc_html( arr_field( 'brief_title', 'Weekly Brief' ) ); ?></h4>
         <p><?php echo esc_html( arr_field( 'brief_text', 'A curated briefing of ideas that matter. Every Saturday.' ) ); ?></p>
-        <!-- TODO: point this form at your email service provider (Mailchimp, ConvertKit, etc.) -->
-        <form class="sub-form" action="#" method="post">
-          <label class="screen-reader-text" for="brief-email"><?php echo esc_html( arr_field( 'brief_placeholder', 'Your email address' ) ); ?></label>
-          <input type="email" id="brief-email" name="email" placeholder="<?php echo esc_attr( arr_field( 'brief_placeholder', 'Your email address' ) ); ?>" required />
-          <button type="submit"><?php echo esc_html( arr_field( 'brief_button_text', 'Subscribe' ) ); ?></button>
-        </form>
+        <div class="sub-form">
+          <?php echo do_shortcode( '[mailpoet_form id="1"]' ); ?>
+        </div>
       </div>
     </div>
 

@@ -48,11 +48,9 @@ $tier_defaults = array(
       <span class="eyebrow"><?php echo esc_html( $sub_eyebrow ); ?></span>
       <h1 style="margin-top:12px;"><?php echo esc_html( $sub_headline ); ?></h1>
       <p><?php echo esc_html( $sub_dek ); ?></p>
-      <!-- TODO: replace with the MailPoet form shortcode once the list is created. -->
-      <form class="signup-form" id="subscribe-form" action="#" method="post">
-        <input type="email" name="email" placeholder="<?php echo esc_attr( arr_field( 'sub_placeholder', 'Your email address' ) ); ?>" required />
-        <button class="btn btn-primary" type="submit"><?php echo esc_html( arr_field( 'sub_button_text', 'Subscribe Free' ) ); ?></button>
-      </form>
+      <div class="signup-form" id="subscribe-form">
+        <?php echo do_shortcode( '[mailpoet_form id="1"]' ); ?>
+      </div>
       <p class="fine-print"><?php echo esc_html( arr_field( 'sub_fine_print', 'No spam. Unsubscribe anytime. One email, every Saturday.' ) ); ?></p>
     </div>
     <div class="signup-visual">

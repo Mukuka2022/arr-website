@@ -125,21 +125,34 @@
      column is too narrow to carry both. */
   .cta-art { flex: 0 0 auto; max-height: 104px; width: auto; object-fit: contain; }
 
-  .sub-form { display: flex; gap: 0; max-width: 300px; }
-  .sub-form input {
-    flex: 1; min-width: 0; padding: 11px 13px; border: 1px solid rgba(250,250,247,0.25);
-    border-right: none; background: var(--ivory); color: var(--charcoal);
+  /* Holds the MailPoet form. MailPoet stacks each field in its own
+     .mailpoet_paragraph and sets width:100% inline on both the input and the
+     submit, so the row has to be rebuilt here — hence the !important on width,
+     which is the only way to beat an inline style. */
+  .sub-form { max-width: 300px; }
+  .sub-form .mailpoet_form { display: grid; grid-template-columns: 1fr auto; align-items: start; }
+  .sub-form .mailpoet_paragraph { margin: 0; min-width: 0; }
+  .sub-form .mailpoet_message { grid-column: 1 / -1; }
+  /* Both controls carry the same explicit height rather than deriving it from
+     padding — the input's border and the button's lack of one otherwise leave
+     the two a pixel apart, which shows as a step where they meet. */
+  .sub-form input.mailpoet_text {
+    width: 100% !important; height: 40px; padding: 0 13px; border: 1px solid rgba(250,250,247,0.25);
+    border-right: none; border-radius: 0; background: var(--ivory); color: var(--charcoal);
     font-family: var(--sans); font-size: 13px;
   }
-  .sub-form input::placeholder { color: var(--muted); }
-  .sub-form input:focus { outline: 2px solid var(--gold); outline-offset: -2px; }
-  .sub-form button {
-    padding: 11px 18px; border: none; cursor: pointer;
+  .sub-form input.mailpoet_text::placeholder { color: var(--muted); }
+  .sub-form input.mailpoet_text:focus { outline: 2px solid var(--gold); outline-offset: -2px; }
+  .sub-form input.mailpoet_submit {
+    width: auto !important; height: 40px; padding: 0 18px; border: none; border-radius: 0; cursor: pointer;
     background: var(--gold); color: var(--midnight);
     font-family: var(--sans); font-size: 12px; font-weight: 700;
     letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
   }
-  .sub-form button:hover { background: var(--gold-light); }
+  .sub-form input.mailpoet_submit:hover { background: var(--gold-light); }
+  .sub-form .mailpoet_validate_success { color: var(--gold); font-size: 12.5px; margin-top: 10px; }
+  .sub-form .mailpoet_validate_error,
+  .sub-form .mailpoet_error { color: #ffb4ab; font-size: 12.5px; margin-top: 8px; }
 
   @media (max-width: 1100px) { .cta-art { display: none; } }
   @media (max-width: 900px) {
@@ -284,10 +297,33 @@
   .signup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; padding: 30px 0 10px; }
   .signup-grid h1 { color: var(--ivory); font-size: 36px; }
   .signup-grid p { color: rgba(250,250,247,0.7); margin-top: 16px; font-size: 15.5px; max-width: 460px; }
-  .signup-form { margin-top: 26px; display: flex; gap: 0; max-width: 440px; }
-  .signup-form input { flex: 1; padding: 15px 16px; border: 1px solid rgba(250,250,247,0.25); background: transparent; color: var(--ivory); font-family: var(--sans); font-size: 14px; }
-  .signup-form input::placeholder { color: rgba(250,250,247,0.4); }
-  .signup-form button { padding: 15px 24px; }
+  /* Same MailPoet rebuild as .sub-form, at the larger hero scale. */
+  .signup-form { margin-top: 26px; max-width: 440px; }
+  .signup-form .mailpoet_form { display: grid; grid-template-columns: 1fr auto; align-items: start; }
+  .signup-form .mailpoet_paragraph { margin: 0; min-width: 0; }
+  .signup-form .mailpoet_message { grid-column: 1 / -1; }
+  .signup-form input.mailpoet_text {
+    width: 100% !important; height: 50px; padding: 0 16px; border: 1px solid rgba(250,250,247,0.25);
+    border-right: none; border-radius: 0; background: transparent; color: var(--ivory);
+    font-family: var(--sans); font-size: 14px;
+  }
+  .signup-form input.mailpoet_text::placeholder { color: rgba(250,250,247,0.4); }
+  .signup-form input.mailpoet_text:focus { outline: 2px solid var(--gold); outline-offset: -2px; }
+  .signup-form input.mailpoet_submit {
+    width: auto !important; height: 50px; padding: 0 24px; border: none; border-radius: 0; cursor: pointer;
+    background: var(--gold); color: var(--midnight);
+    font-family: var(--sans); font-weight: 600; font-size: 14px; letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .signup-form input.mailpoet_submit:hover { background: var(--gold-light); }
+  .signup-form .mailpoet_validate_success { color: var(--gold); font-size: 13px; margin-top: 12px; }
+  .signup-form .mailpoet_validate_error,
+  .signup-form .mailpoet_error { color: #ffb4ab; font-size: 13px; margin-top: 10px; }
+  @media (max-width: 480px) {
+    .signup-form .mailpoet_form, .sub-form .mailpoet_form { grid-template-columns: 1fr; }
+    .signup-form input.mailpoet_text, .sub-form input.mailpoet_text { border-right: 1px solid rgba(250,250,247,0.25); }
+    .signup-form input.mailpoet_submit, .sub-form input.mailpoet_submit { width: 100% !important; margin-top: 10px; }
+  }
   .fine-print { font-size: 12px; color: rgba(250,250,247,0.4); margin-top: 12px; }
   .signup-visual { background: rgba(250,250,247,0.04); border: 1px solid rgba(250,250,247,0.1); padding: 34px; }
   .signup-visual .stat { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(250,250,247,0.1); }
