@@ -25,27 +25,9 @@ $contact_note     = arr_field( 'contact_note', 'We read every message. Expect a 
   <div class="wrap contact-grid">
     <div class="contact-form-col">
       <h2><?php echo esc_html( arr_field( 'contact_form_heading', 'Send us a message' ) ); ?></h2>
-      <!-- TODO: this form does not submit anywhere yet. Install WPForms or
-           Fluent Forms and replace this block with the plugin's shortcode. -->
-      <form class="contact-form" action="#" method="post">
-        <div class="field">
-          <label for="contact-name"><?php echo esc_html( arr_field( 'contact_name_label', 'Your name' ) ); ?></label>
-          <input type="text" id="contact-name" name="name" required />
-        </div>
-        <div class="field">
-          <label for="contact-email"><?php echo esc_html( arr_field( 'contact_email_label', 'Email address' ) ); ?></label>
-          <input type="email" id="contact-email" name="email" required />
-        </div>
-        <div class="field">
-          <label for="contact-subject"><?php echo esc_html( arr_field( 'contact_subject_label', 'Subject' ) ); ?></label>
-          <input type="text" id="contact-subject" name="subject" />
-        </div>
-        <div class="field">
-          <label for="contact-message"><?php echo esc_html( arr_field( 'contact_message_label', 'Message' ) ); ?></label>
-          <textarea id="contact-message" name="message" required></textarea>
-        </div>
-        <button class="btn btn-primary" type="submit"><?php echo esc_html( arr_field( 'contact_submit_text', 'Send Message' ) ); ?></button>
-      </form>
+      <div class="contact-form">
+        <?php echo do_shortcode( '[wpforms id="55"]' ); ?>
+      </div>
     </div>
 
     <aside class="contact-details">

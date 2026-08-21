@@ -214,13 +214,30 @@
   .contact-form label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
   .contact-form input,
   .contact-form textarea {
-    width: 100%; padding: 14px 15px; border: 1px solid var(--hairline);
-    background: #fff; color: var(--charcoal); font-family: var(--sans); font-size: 14px;
+    width: 100%; padding: 14px 15px !important; border: 1px solid var(--hairline) !important;
+    border-radius: 0 !important; background: #fff; color: var(--charcoal); font-family: var(--sans); font-size: 14px;
   }
   .contact-form input:focus,
-  .contact-form textarea:focus { outline: 2px solid var(--gold); outline-offset: 0; border-color: var(--gold); }
+  .contact-form textarea:focus { outline: 2px solid var(--gold); outline-offset: 0; border-color: var(--gold) !important; }
   .contact-form textarea { min-height: 160px; resize: vertical; }
   .contact-form .btn { margin-top: 6px; }
+
+  /* WPForms output reuses the .contact-form input/textarea/label rules above; these
+     fill the gaps for WPForms' own wrapper markup and error/success states. */
+  .contact-form .wpforms-field { margin-bottom: 18px; padding: 0; }
+  .contact-form .wpforms-field-label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
+  .contact-form .wpforms-required-label { color: var(--gold); }
+  .contact-form .wpforms-field-row { display: flex; gap: 14px; }
+  .contact-form .wpforms-field-row-block { flex: 1; }
+  .contact-form .wpforms-submit-container { margin-top: 6px; }
+  .contact-form button[type="submit"].wpforms-submit {
+    display: inline-flex; align-items: center; gap: 8px; font-family: var(--sans); font-weight: 600;
+    font-size: 14px; letter-spacing: 0.02em; padding: 13px 26px; border-radius: 2px; cursor: pointer;
+    border: 1px solid transparent !important; background-color: var(--gold) !important; color: var(--midnight) !important;
+  }
+  .contact-form button[type="submit"].wpforms-submit:hover { background-color: var(--gold-light) !important; }
+  .contact-form .wpforms-error { color: #b3261e; font-size: 12.5px; margin-top: 6px; }
+  .contact-form .wpforms-confirmation-container { padding: 20px; background: #fff; border: 1px solid var(--hairline); color: var(--midnight); }
 
   .contact-details { background: #fff; border: 1px solid var(--hairline); padding: 34px; }
   .contact-details h4 { font-family: var(--sans); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--midnight); margin-bottom: 8px; }
