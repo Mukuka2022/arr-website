@@ -112,43 +112,55 @@ $cat_icon_svg = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="current
   <?php endif; ?>
 </section>
 
+<?php
+$trend_eye_svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>';
+?>
 <section>
   <div class="trio">
     <div>
       <div class="section-head">
-        <h2 style="font-size:22px;"><?php echo esc_html( arr_field( 'authors_heading', 'Featured Authors' ) ); ?></h2>
-        <a href="<?php echo esc_url( arr_field( 'authors_view_all_link', home_url( '/about/' ) ) ); ?>" class="view-all"><?php echo esc_html( arr_field( 'authors_view_all_text', 'View All' ) ); ?> &rarr;</a>
+        <h2><?php echo esc_html( arr_field( 'authors_heading', 'Featured Authors' ) ); ?></h2>
+        <a href="<?php echo esc_url( arr_field( 'authors_view_all_link', home_url( '/authors/' ) ) ); ?>" class="view-all"><?php echo esc_html( arr_field( 'authors_view_all_text', 'View All' ) ); ?> &rarr;</a>
       </div>
-      <div class="author-grid">
-        <?php
-        $authors = get_users( array( 'capability' => array( 'edit_posts' ), 'number' => 4, 'has_published_posts' => array( 'post' ) ) );
-        if ( $authors ) :
-          foreach ( $authors as $author ) :
-        ?>
-          <div class="author">
-            <?php echo get_avatar( $author->ID, 200 ); ?>
-            <h5><?php echo esc_html( $author->display_name ); ?></h5>
-            <p><?php echo esc_html( get_the_author_meta( 'description', $author->ID ) ?: 'Contributor' ); ?></p>
+      <?php
+      $authors = get_users( array( 'capability' => array( 'edit_posts' ), 'has_published_posts' => array( 'post' ) ) );
+      if ( $authors ) :
+        $author_slides = array_chunk( $authors, 4 );
+      ?>
+        <div class="author-slider" data-slider>
+          <div class="slider-track">
+            <?php foreach ( $author_slides as $slide ) : ?>
+              <div class="slider-slide author-grid">
+                <?php foreach ( $slide as $author ) : ?>
+                  <div class="author">
+                    <img src="https://picsum.photos/seed/author<?php echo esc_attr( $author->ID ); ?>/300/300" alt="" />
+                    <h5><?php echo esc_html( $author->display_name ); ?></h5>
+                    <p><?php echo esc_html( get_the_author_meta( 'description', $author->ID ) ?: 'Contributor' ); ?></p>
+                  </div>
+                <?php endforeach; ?>
+              </div>
+            <?php endforeach; ?>
           </div>
-        <?php
-          endforeach;
-        else :
-        ?>
-          <p style="color:var(--muted);font-size:13px;"><?php echo esc_html( arr_field( 'authors_empty_text', "Author cards appear here once posts are published — set each author's bio under Users → Edit Profile." ) ); ?></p>
-        <?php endif; ?>
-      </div>
+          <div class="slider-dots"></div>
+        </div>
+      <?php else : ?>
+        <p style="color:var(--muted);font-size:13px;"><?php echo esc_html( arr_field( 'authors_empty_text', "Author cards appear here once posts are published — set each author's bio under Users → Edit Profile." ) ); ?></p>
+      <?php endif; ?>
     </div>
 
     <?php
     $longread = new WP_Query( array( 'posts_per_page' => 5, 'offset' => 3, 'ignore_sticky_posts' => true ) );
     ?>
     <div class="longread">
-      <div class="section-head"><h2 style="font-size:22px;"><?php echo esc_html( arr_field( 'longread_heading', 'Long Read' ) ); ?></h2></div>
+      <div class="section-head">
+        <h2><?php echo esc_html( arr_field( 'longread_heading', 'Long Reads' ) ); ?></h2>
+        <a href="<?php echo esc_url( arr_field( 'longread_view_all_link', home_url( '/articles/' ) ) ); ?>" class="view-all"><?php echo esc_html( arr_field( 'longread_view_all_text', 'View All' ) ); ?> &rarr;</a>
+      </div>
       <?php if ( $longread->have_posts() ) : ?>
-        <div class="longread-slider" data-longread-slider>
-          <div class="longread-track">
+        <div class="longread-slider" data-slider>
+          <div class="slider-track">
             <?php while ( $longread->have_posts() ) : $longread->the_post(); ?>
-              <div class="longread-slide">
+              <div class="slider-slide longread-slide">
                 <a href="<?php the_permalink(); ?>" class="longread-media">
                   <?php if ( has_post_thumbnail() ) : the_post_thumbnail( 'arr-card' ); else : ?>
                     <img src="https://picsum.photos/seed/<?php echo esc_attr( get_the_ID() ); ?>/500/400" alt="" />
@@ -162,8 +174,6 @@ $cat_icon_svg = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="current
               </div>
             <?php endwhile; wp_reset_postdata(); ?>
           </div>
-          <button type="button" class="slider-arrow prev" aria-label="Previous article">&larr;</button>
-          <button type="button" class="slider-arrow next" aria-label="Next article">&rarr;</button>
           <div class="slider-dots"></div>
         </div>
       <?php else : ?>
@@ -175,17 +185,20 @@ $cat_icon_svg = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="current
     $trending = new WP_Query( array( 'posts_per_page' => 3, 'orderby' => 'comment_count', 'order' => 'DESC', 'ignore_sticky_posts' => true ) );
     ?>
     <div>
-      <div class="section-head"><h2 style="font-size:22px;"><?php echo esc_html( arr_field( 'trending_heading', 'Trending Ideas' ) ); ?></h2></div>
+      <div class="section-head"><h2><?php echo esc_html( arr_field( 'trending_heading', 'Trending Ideas' ) ); ?></h2></div>
       <div class="trend-list">
         <?php if ( $trending->have_posts() ) :
           $n = 1;
           while ( $trending->have_posts() ) : $trending->the_post();
         ?>
-          <a href="<?php the_permalink(); ?>" class="trend-item" style="text-decoration:none;">
+          <a href="<?php the_permalink(); ?>" class="trend-item">
             <span class="trend-num"><?php echo str_pad( $n, 2, '0', STR_PAD_LEFT ); ?></span>
-            <div><h5><?php the_title(); ?></h5><span class="by">By <?php the_author(); ?></span></div>
+            <div class="trend-text"><h5><?php the_title(); ?></h5><span class="by">By <?php the_author(); ?></span></div>
+            <span class="trend-views"><?php echo $trend_eye_svg; ?><?php echo esc_html( arr_placeholder_view_count( get_the_ID() ) ); ?></span>
           </a>
-        <?php $n++; endwhile; wp_reset_postdata(); else : ?>
+        <?php $n++; endwhile; wp_reset_postdata(); ?>
+        <a href="<?php echo esc_url( arr_field( 'trending_view_all_link', home_url( '/articles/' ) ) ); ?>" class="view-all trend-view-all"><?php echo esc_html( arr_field( 'trending_view_all_text', 'View All' ) ); ?> &rarr;</a>
+        <?php else : ?>
           <p style="color:var(--muted);font-size:13px;"><?php echo esc_html( arr_field( 'trending_empty_text', 'Ranked automatically by reader comments once articles are live.' ) ); ?></p>
         <?php endif; ?>
       </div>

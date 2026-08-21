@@ -715,7 +715,7 @@
             },
             {
                 "key": "field_arr_longread_heading",
-                "label": "Long Read heading",
+                "label": "Long Reads heading",
                 "name": "longread_heading",
                 "type": "text",
                 "instructions": "",
@@ -726,7 +726,7 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "Long Read",
+                "default_value": "Long Reads",
                 "placeholder": ""
             },
             {

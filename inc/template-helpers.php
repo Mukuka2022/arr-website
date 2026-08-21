@@ -95,3 +95,22 @@ function arr_social_links() {
 
 	return $links;
 }
+
+/**
+ * Deterministic placeholder "view count" for the Trending Ideas list, in the
+ * same 1-15K range and "12.4K" formatting as the approved design. This is
+ * NOT real analytics — no page-view tracking is installed yet — it just
+ * gives each post a stable-looking number instead of a random one that
+ * changes on every page load. Swap for a real view-count source (e.g. an
+ * analytics plugin's post meta) once one is in place.
+ */
+function arr_placeholder_view_count( $post_id ) {
+	$seed  = crc32( 'arr-views-' . $post_id );
+	$count = 800 + ( $seed % 14200 );
+
+	if ( $count >= 1000 ) {
+		return number_format( $count / 1000, 1 ) . 'K';
+	}
+
+	return (string) $count;
+}
