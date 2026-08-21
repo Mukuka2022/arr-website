@@ -27,12 +27,16 @@ $tier_defaults = array(
     'button_text' => 'Get Started',
     'featured'    => false,
   ),
+  // Reader accounts are not enabled on the site, so this tier is the
+  // newsletter rather than an account. Its old copy ("Save articles to read
+  // later", "Comment & discussion access") promised features that require
+  // registration and could not be delivered.
   array(
     'badge'       => 'Recommended',
-    'name'        => 'Free Account',
+    'name'        => 'Weekly Brief',
     'price'       => 'Free',
-    'features'    => "Everything in Reader\nSave articles to read later\nComment & discussion access\nEarly notice of special reports",
-    'button_text' => 'Create Free Account',
+    'features'    => "Everything in Reader\nThe Saturday briefing by email\nEarly notice of special reports\nUnsubscribe anytime",
+    'button_text' => 'Subscribe Free',
     'featured'    => true,
   ),
 );
@@ -44,8 +48,8 @@ $tier_defaults = array(
       <span class="eyebrow"><?php echo esc_html( $sub_eyebrow ); ?></span>
       <h1 style="margin-top:12px;"><?php echo esc_html( $sub_headline ); ?></h1>
       <p><?php echo esc_html( $sub_dek ); ?></p>
-      <!-- TODO: point this form at your email service provider -->
-      <form class="signup-form" action="#" method="post">
+      <!-- TODO: replace with the MailPoet form shortcode once the list is created. -->
+      <form class="signup-form" id="subscribe-form" action="#" method="post">
         <input type="email" name="email" placeholder="<?php echo esc_attr( arr_field( 'sub_placeholder', 'Your email address' ) ); ?>" required />
         <button class="btn btn-primary" type="submit"><?php echo esc_html( arr_field( 'sub_button_text', 'Subscribe Free' ) ); ?></button>
       </form>
@@ -57,7 +61,13 @@ $tier_defaults = array(
         $label = arr_field( "sub_stat_{$n}_label", $default[0] );
         $value = arr_field( "sub_stat_{$n}_value", $default[1] );
         if ( ! $value ) {
-          $value = intval( count_users()['total_users'] ) . '+';
+          // Writers who have actually published, not every registered account.
+          // count_users() counted admins and any spam signup as a "voice".
+          $value = count( get_users( array(
+            'capability' => array( 'edit_posts' ),
+            'has_published_posts' => array( 'post' ),
+            'fields' => 'ID',
+          ) ) ) . '+';
         }
         if ( ! $label ) continue;
       ?>
@@ -83,7 +93,9 @@ $tier_defaults = array(
         $price    = arr_field( "tier_{$n}_price", $default['price'] );
         $features = arr_lines_to_list( arr_field( "tier_{$n}_features", $default['features'] ) );
         $btn_text = arr_field( "tier_{$n}_button_text", $default['button_text'] );
-        $btn_link = arr_field( "tier_{$n}_button_link", wp_registration_url() );
+        // Points at the signup form above rather than wp_registration_url():
+        // reader accounts are switched off, so registration was a dead end.
+        $btn_link = arr_field( "tier_{$n}_button_link", '#subscribe-form' );
         $featured = function_exists( 'get_field' ) && null !== get_field( "tier_{$n}_featured" )
           ? (bool) get_field( "tier_{$n}_featured" )
           : $default['featured'];
@@ -101,7 +113,10 @@ $tier_defaults = array(
         </div>
       <?php endforeach; ?>
     </div>
-    <!-- NOTE: wp_registration_url() only works once Settings → General → "Anyone can register" is turned on. -->
+    <!-- NOTE: to sell reader accounts instead, turn on Settings → General →
+         "Anyone can register" and set each tier's Button Link back to the
+         registration URL. Open registration attracts spam signups, so check
+         the Akismet and All-In-One Security registration rules first. -->
   </div>
 </section>
 

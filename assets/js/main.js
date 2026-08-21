@@ -38,6 +38,22 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
+  // The membership tier buttons jump up to the signup form. Scrolling there
+  // and leaving the visitor to find the field again is a poor handoff, so put
+  // the cursor in it — after the smooth scroll, or focus cancels it.
+  var signup = document.getElementById('subscribe-form');
+  if (!signup) return;
+
+  document.querySelectorAll('a[href="#subscribe-form"]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      var field = signup.querySelector('input[type="email"]');
+      if (!field) return;
+      setTimeout(function () { field.focus({ preventScroll: true }); }, 600);
+    });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
   var copyBtn = document.querySelector('.share-copy');
   if (!copyBtn) return;
 
