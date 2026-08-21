@@ -113,7 +113,7 @@ $cat_icon_svg = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="current
 </section>
 
 <section>
-  <div class="wrap trio">
+  <div class="trio">
     <div>
       <div class="section-head">
         <h2 style="font-size:22px;"><?php echo esc_html( arr_field( 'authors_heading', 'Featured Authors' ) ); ?></h2>
@@ -140,21 +140,34 @@ $cat_icon_svg = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="current
     </div>
 
     <?php
-    $longread = new WP_Query( array( 'posts_per_page' => 1, 'offset' => 3, 'ignore_sticky_posts' => true ) );
+    $longread = new WP_Query( array( 'posts_per_page' => 5, 'offset' => 3, 'ignore_sticky_posts' => true ) );
     ?>
     <div class="longread">
       <div class="section-head"><h2 style="font-size:22px;"><?php echo esc_html( arr_field( 'longread_heading', 'Long Read' ) ); ?></h2></div>
-      <?php if ( $longread->have_posts() ) : while ( $longread->have_posts() ) : $longread->the_post(); ?>
-        <a href="<?php the_permalink(); ?>">
-          <?php if ( has_post_thumbnail() ) : the_post_thumbnail( 'arr-card' ); else : ?>
-            <img src="https://picsum.photos/seed/<?php echo esc_attr( get_the_ID() ); ?>/500/300" alt="" />
-          <?php endif; ?>
-          <h3><?php the_title(); ?></h3>
-        </a>
-        <p style="font-size:14px;color:var(--muted);">By <?php the_author(); ?></p>
-        <p class="meta"><?php echo esc_html( arr_reading_time() ); ?> min read</p>
-      <?php endwhile; wp_reset_postdata(); else : ?>
-        <p style="color:var(--muted);font-size:13px;"><?php echo esc_html( arr_field( 'longread_empty_text', 'Your 4th published article will surface here as the Long Read.' ) ); ?></p>
+      <?php if ( $longread->have_posts() ) : ?>
+        <div class="longread-slider" data-longread-slider>
+          <div class="longread-track">
+            <?php while ( $longread->have_posts() ) : $longread->the_post(); ?>
+              <div class="longread-slide">
+                <a href="<?php the_permalink(); ?>" class="longread-media">
+                  <?php if ( has_post_thumbnail() ) : the_post_thumbnail( 'arr-card' ); else : ?>
+                    <img src="https://picsum.photos/seed/<?php echo esc_attr( get_the_ID() ); ?>/500/400" alt="" />
+                  <?php endif; ?>
+                </a>
+                <div class="longread-body">
+                  <a href="<?php the_permalink(); ?>"><h3><?php the_title(); ?></h3></a>
+                  <p style="font-size:14px;color:var(--muted);">By <?php the_author(); ?></p>
+                  <p class="meta"><?php echo esc_html( arr_reading_time() ); ?> min read</p>
+                </div>
+              </div>
+            <?php endwhile; wp_reset_postdata(); ?>
+          </div>
+          <button type="button" class="slider-arrow prev" aria-label="Previous article">&larr;</button>
+          <button type="button" class="slider-arrow next" aria-label="Next article">&rarr;</button>
+          <div class="slider-dots"></div>
+        </div>
+      <?php else : ?>
+        <p style="color:var(--muted);font-size:13px;"><?php echo esc_html( arr_field( 'longread_empty_text', 'Your published articles will surface here as the Long Read once there are enough of them.' ) ); ?></p>
       <?php endif; ?>
     </div>
 
