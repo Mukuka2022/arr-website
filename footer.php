@@ -23,13 +23,26 @@
     <?php endforeach; ?>
   </div>
   <div class="wrap footer-bottom">
-    <span><?php
-      echo wp_kses_post( str_replace(
-        array( '{year}', '{site}' ),
-        array( date_i18n( 'Y' ), get_bloginfo( 'name' ) ),
-        get_theme_mod( 'arr_footer_copyright', '&copy; {year} {site}. All rights reserved.' )
-      ) );
-    ?></span>
+    <div class="footer-legal">
+      <span><?php
+        echo wp_kses_post( str_replace(
+          array( '{year}', '{site}' ),
+          array( date_i18n( 'Y' ), get_bloginfo( 'name' ) ),
+          get_theme_mod( 'arr_footer_copyright', '&copy; {year} {site}. All rights reserved.' )
+        ) );
+      ?></span>
+
+      <?php
+      // wp_login_url()/wp_logout_url() rather than a hardcoded /wp-login.php:
+      // if the login page is ever renamed for security, these follow it.
+      if ( is_user_logged_in() ) :
+        ?>
+        <a class="staff-link" href="<?php echo esc_url( admin_url() ); ?>"><?php esc_html_e( 'Dashboard', 'arr-theme' ); ?></a>
+        <a class="staff-link" href="<?php echo esc_url( wp_logout_url( home_url( '/' ) ) ); ?>"><?php esc_html_e( 'Log out', 'arr-theme' ); ?></a>
+      <?php else : ?>
+        <a class="staff-link" href="<?php echo esc_url( wp_login_url( home_url( '/' ) ) ); ?>"><?php esc_html_e( 'Contributor Login', 'arr-theme' ); ?></a>
+      <?php endif; ?>
+    </div>
     <?php $arr_social = arr_social_links(); ?>
     <?php if ( $arr_social ) : ?>
       <div class="social-row">

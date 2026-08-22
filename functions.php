@@ -10,6 +10,7 @@ require get_template_directory() . '/inc/acf-fields.php';
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/dynamic-css.php';
 require get_template_directory() . '/inc/view-counter.php';
+require get_template_directory() . '/inc/login-branding.php';
 
 function arr_theme_setup() {
 	add_theme_support( 'title-tag' );
