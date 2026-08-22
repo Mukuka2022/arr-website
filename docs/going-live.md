@@ -138,13 +138,21 @@ headshots.
 
 Author photos: **Users → edit each user → profile picture.**
 
-### 14. The Trending Ideas view counts are fake
+### 14. Trending Ideas view counts
 
-They come from `arr_placeholder_view_count()` in
-`inc/template-helpers.php`, which derives a stable-looking number from the post
-ID. They are **not** real traffic. Once analytics is connected, either wire that
-helper to real data or remove the counts — publishing invented traffic figures
-next to real articles is misleading to readers.
+These are real, recorded by `inc/view-counter.php`. Each article view is
+reported from the reader's browser to a small REST endpoint, which stores one
+integer per post in the `arr_view_count` post meta. Nothing about the reader is
+stored — the repeat-view guard hashes the address into a transient key that
+expires after six hours and is never written to the database.
+
+Counting happens in the browser on purpose: WP Super Cache serves most article
+views as static HTML without running PHP, so a counter that incremented while
+the page rendered would miss almost every real view.
+
+A count only appears once an article has at least one view, so the figures start
+empty rather than showing a row of zeros. Views from logged-in editors and from
+obvious crawlers are ignored.
 
 ### 15. Keep everything updated
 

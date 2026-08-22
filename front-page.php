@@ -182,7 +182,15 @@ $trend_eye_svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
     </div>
 
     <?php
-    $trending = new WP_Query( array( 'posts_per_page' => 3, 'orderby' => 'comment_count', 'order' => 'DESC', 'ignore_sticky_posts' => true ) );
+    // Ranked by recorded views (see inc/view-counter.php). Every published post
+    // carries the meta initialised to zero, so a new article still appears here
+    // — ordering by meta_value_num would drop any post with no row at all.
+    $trending = new WP_Query( array(
+      'posts_per_page'      => 3,
+      'meta_key'            => ARR_VIEWS_META,
+      'orderby'             => array( 'meta_value_num' => 'DESC', 'date' => 'DESC' ),
+      'ignore_sticky_posts' => true,
+    ) );
     ?>
     <div>
       <div class="section-head"><h2><?php echo esc_html( arr_field( 'trending_heading', 'Trending Ideas' ) ); ?></h2></div>
@@ -194,12 +202,15 @@ $trend_eye_svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
           <a href="<?php the_permalink(); ?>" class="trend-item">
             <span class="trend-num"><?php echo str_pad( $n, 2, '0', STR_PAD_LEFT ); ?></span>
             <div class="trend-text"><h5><?php the_title(); ?></h5><span class="by">By <?php the_author(); ?></span></div>
-            <span class="trend-views"><?php echo $trend_eye_svg; ?><?php echo esc_html( arr_placeholder_view_count( get_the_ID() ) ); ?></span>
+            <?php $trend_views = arr_get_view_count( get_the_ID() ); ?>
+            <?php if ( $trend_views > 0 ) : ?>
+              <span class="trend-views"><?php echo $trend_eye_svg; ?><?php echo esc_html( arr_format_view_count( $trend_views ) ); ?></span>
+            <?php endif; ?>
           </a>
         <?php $n++; endwhile; wp_reset_postdata(); ?>
         <a href="<?php echo esc_url( arr_field( 'trending_view_all_link', home_url( '/articles/' ) ) ); ?>" class="view-all trend-view-all"><?php echo esc_html( arr_field( 'trending_view_all_text', 'View All' ) ); ?> &rarr;</a>
         <?php else : ?>
-          <p style="color:var(--muted);font-size:13px;"><?php echo esc_html( arr_field( 'trending_empty_text', 'Ranked automatically by reader comments once articles are live.' ) ); ?></p>
+          <p style="color:var(--muted);font-size:13px;"><?php echo esc_html( arr_field( 'trending_empty_text', 'Ranked automatically by reader views once articles are live.' ) ); ?></p>
         <?php endif; ?>
       </div>
     </div>
