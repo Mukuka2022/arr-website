@@ -14,32 +14,10 @@ $stat_defaults = array(
   array( 'Editorial Pillars Covered', '7' ),
   array( 'Avg. Read Time', '10 min' ),
   array( 'Publishing Cadence', 'Weekly' ),
-  // Value left blank on purpose: falls back to the live registered-user count.
+  // Value left blank on purpose: falls back to the count of published authors.
   array( 'Contributing Voices', '' ),
 );
 
-$tier_defaults = array(
-  array(
-    'badge'       => '',
-    'name'        => 'Reader',
-    'price'       => 'Free',
-    'features'    => "Full access to every article\nWeekly newsletter\nPodcast episodes",
-    'button_text' => 'Get Started',
-    'featured'    => false,
-  ),
-  // Reader accounts are not enabled on the site, so this tier is the
-  // newsletter rather than an account. Its old copy ("Save articles to read
-  // later", "Comment & discussion access") promised features that require
-  // registration and could not be delivered.
-  array(
-    'badge'       => 'Recommended',
-    'name'        => 'Weekly Brief',
-    'price'       => 'Free',
-    'features'    => "Everything in Reader\nThe Saturday briefing by email\nEarly notice of special reports\nUnsubscribe anytime",
-    'button_text' => 'Subscribe Free',
-    'featured'    => true,
-  ),
-);
 ?>
 
 <section class="signup-band" style="padding-bottom:70px;">
@@ -72,49 +50,6 @@ $tier_defaults = array(
         <div class="stat"><span><?php echo esc_html( $label ); ?></span><b><?php echo esc_html( $value ); ?></b></div>
       <?php endforeach; ?>
     </div>
-  </div>
-</section>
-
-<section class="membership-band">
-  <div class="wrap">
-    <div class="section-head" style="justify-content:center;flex-direction:column;text-align:center;align-items:center;">
-      <span class="eyebrow"><?php echo esc_html( arr_field( 'mem_eyebrow', 'Membership' ) ); ?></span>
-      <h2 style="margin-top:10px;"><?php echo esc_html( arr_field( 'mem_heading', 'Join ARR — free, always' ) ); ?></h2>
-      <p style="color:var(--muted);max-width:520px;margin-top:12px;"><?php echo esc_html( arr_field( 'mem_sub', 'Create a free account to save articles, join the discussion, and get the weekly brief straight to your inbox.' ) ); ?></p>
-    </div>
-    <div class="tier-grid" style="margin-top:40px;">
-      <?php foreach ( $tier_defaults as $i => $default ) :
-        $n     = $i + 1;
-        $name  = arr_field( "tier_{$n}_name", $default['name'] );
-        if ( ! $name ) continue;
-        $badge    = arr_field( "tier_{$n}_badge", $default['badge'] );
-        $price    = arr_field( "tier_{$n}_price", $default['price'] );
-        $features = arr_lines_to_list( arr_field( "tier_{$n}_features", $default['features'] ) );
-        $btn_text = arr_field( "tier_{$n}_button_text", $default['button_text'] );
-        // Points at the signup form above rather than wp_registration_url():
-        // reader accounts are switched off, so registration was a dead end.
-        $btn_link = arr_field( "tier_{$n}_button_link", '#subscribe-form' );
-        $featured = function_exists( 'get_field' ) && null !== get_field( "tier_{$n}_featured" )
-          ? (bool) get_field( "tier_{$n}_featured" )
-          : $default['featured'];
-      ?>
-        <div class="tier-card<?php echo $featured ? ' featured' : ''; ?>">
-          <?php if ( $badge ) : ?><span class="tier-badge"><?php echo esc_html( $badge ); ?></span><?php endif; ?>
-          <h3><?php echo esc_html( $name ); ?></h3>
-          <div class="tier-price"><?php echo esc_html( $price ); ?></div>
-          <ul>
-            <?php foreach ( $features as $feature ) : ?>
-              <li><?php echo esc_html( $feature ); ?></li>
-            <?php endforeach; ?>
-          </ul>
-          <a href="<?php echo esc_url( $btn_link ); ?>" class="btn <?php echo $featured ? 'btn-primary' : 'btn-outline'; ?>"<?php echo $featured ? '' : ' style="color:var(--midnight);border-color:var(--hairline);"'; ?>><?php echo esc_html( $btn_text ); ?></a>
-        </div>
-      <?php endforeach; ?>
-    </div>
-    <!-- NOTE: to sell reader accounts instead, turn on Settings → General →
-         "Anyone can register" and set each tier's Button Link back to the
-         registration URL. Open registration attracts spam signups, so check
-         the Akismet and All-In-One Security registration rules first. -->
   </div>
 </section>
 
