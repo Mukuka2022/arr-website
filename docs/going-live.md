@@ -10,26 +10,37 @@ break or ship with protection silently switched off.
 
 ## Blockers — do these or the site breaks / is unprotected
 
-### 1. Remove the AIOS firewall block from `wp-config.php` before migrating
+### 1. The AIOS firewall path — fixed, but check it after any AIOS change
 
-The security plugin wrote this into the top of `wp-config.php`:
+The security plugin had written an absolute Windows path into the top of
+`wp-config.php`:
 
 ```php
-// Begin AIOWPSEC Firewall
 if (file_exists('C:/Users/HC COMPUTER STORE/Local Sites/arr-acf/app/public/aios-bootstrap.php')) {
-	include_once('C:/Users/HC COMPUTER STORE/Local Sites/arr-acf/app/public/aios-bootstrap.php');
-}
-// End AIOWPSEC Firewall
 ```
 
-That path only exists on this Windows machine. On a Linux host `file_exists()`
-returns `false`, so the include is skipped **silently** — no error, no warning,
-and the firewall simply never loads. The site looks fine while being
-unprotected, which is the worst possible failure mode.
+On a Linux host `file_exists()` returns `false`, so the include is skipped
+**silently** — no error, no warning, and the firewall simply never loads. The
+site looks protected while being wide open, which is the worst possible
+failure mode.
 
-**Fix:** delete those five lines before uploading. After the site is live, go to
-**WP Security → Firewall** and re-enable it; AIOS rewrites the block with the
-correct server path.
+It now reads:
+
+```php
+if (file_exists(__DIR__ . '/aios-bootstrap.php')) {
+	include_once(__DIR__ . '/aios-bootstrap.php');
+}
+```
+
+`__DIR__` resolves relative to `wp-config.php` itself, so it is correct on any
+server, on any OS, with no edit needed at migration.
+
+**Watch for this:** AIOS rewrites that block whenever its firewall settings are
+changed, and it will put the absolute path back. After changing anything under
+**WP Security → Firewall** on the live site, re-open `wp-config.php` and confirm
+the line still says `__DIR__`. If it has reverted to an absolute path, that is
+harmless as long as the path matches the live server — but restore `__DIR__` if
+you ever move host again.
 
 ### 2. Do not copy the local database credentials
 
@@ -93,14 +104,16 @@ a long unique password. This matters more than every plugin setting combined.
 AIOS supports it. On a media site where a defacement is a reputational event,
 2FA on the admin account is worth the small daily friction.
 
-### 9. Connect off-site backups
+### 9. Test that a backup actually restores
 
-UpdraftPlus is scheduled (files weekly / database daily) but is writing to the
-**same server**. If that server is compromised, ransomed, or lost, the backups
-go with it. Connect Google Drive, Dropbox, or S3 in
-**Settings → UpdraftPlus → Settings → Remote Storage**.
+UpdraftPlus is scheduled — database daily, files weekly — and is writing to
+**Google Drive**, so the backups no longer live on the same disk as the site.
+That part is done.
 
-A backup on the same disk is not a backup.
+What has not been proven is that they *restore*. An untested backup is not a
+backup. Before launch, restore one into a staging site and confirm the result
+is a working copy. Re-check after migrating, because the remote-storage
+authorisation does not always survive a move.
 
 ### 10. Set correct file permissions
 
@@ -158,7 +171,9 @@ obvious crawlers are ignored.
 
 Out-of-date plugins are the most common way WordPress sites get compromised —
 far more common than weak passwords or clever exploits. Core and all plugins are
-current today. Turn on auto-updates for plugins, and check in monthly.
+current today. Plugin auto-updates are on and core minor updates are automatic,
+so this mostly takes care of itself — but check in monthly, and apply major core
+releases deliberately after a backup.
 
 ---
 
@@ -173,5 +188,45 @@ current today. Turn on auto-updates for plugins, and check in monthly.
 | Caching | WP Super Cache on |
 | Image optimisation | ShortPixel, optimise-on-upload enabled |
 | SEO | Rank Math configured; sitemap live; meta descriptions on all 8 pages |
-| Backups | Scheduled — **but local-only, see item 9** |
+| Backups | UpdraftPlus → Google Drive; database daily, files weekly |
 | Secrets in git | None; `wp-config.php` is outside the theme repo |
+
+---
+
+## Security posture — what is already in place
+
+Applied during the build, so no action needed unless noted:
+
+| Measure | Where |
+|---|---|
+| `?author=N` enumeration blocked | `inc/security.php` |
+| REST `/wp/v2/users` closed to anonymous callers | `inc/security.php` |
+| Login errors no longer reveal whether a username exists | `inc/security.php` |
+| WordPress version removed from source and asset URLs | `inc/security.php` |
+| Theme/plugin file editing disabled in wp-admin | `DISALLOW_FILE_EDIT` in `wp-config.php` |
+| Login lockdown after 3 failed attempts | AIOS |
+| Plugin auto-updates enabled | Plugins screen (per-plugin, toggleable) |
+| Core **minor** auto-updates enabled | Updates screen |
+| Core **major** auto-updates disabled — deliberate | see below |
+| Off-site backups, daily database + weekly files | UpdraftPlus → Google Drive |
+
+**On major core updates:** WordPress ships security fixes in *minor* releases,
+which stay automatic. Major releases are feature releases and can break a custom
+theme unattended, so those are a deliberate click under **Dashboard → Updates**.
+This is WordPress's own default and costs nothing in security terms.
+
+## Still to do at launch
+
+1. **`FORCE_SSL_ADMIN`** — add `define('FORCE_SSL_ADMIN', true);` to
+   `wp-config.php` once SSL is active, so logins can never travel unencrypted.
+   Do **not** set it before SSL works or you will lock yourself out of wp-admin.
+2. **Two-factor authentication** on every administrator — AIOS includes it.
+   Single biggest win after keeping things updated.
+3. **Rename the login page** — **WP Security → Brute Force**. Currently off.
+   Stops most automated bot traffic before it reaches the login form. The
+   footer's "Contributor Login" link follows the rename automatically, because
+   it resolves through `wp_login_url()`.
+4. **Delete the demo author accounts** once real writers have their own.
+5. **Remove Google Site Kit** until it is actually connected — an unused plugin
+   is attack surface, and it costs ~300 PHP files on every request.
+6. **Confirm a backup actually restores.** An untested backup is not a backup.
