@@ -230,3 +230,83 @@ This is WordPress's own default and costs nothing in security terms.
 5. **Remove Google Site Kit** until it is actually connected — an unused plugin
    is attack surface, and it costs ~300 PHP files on every request.
 6. **Confirm a backup actually restores.** An untested backup is not a backup.
+
+---
+
+# Migrating to Kinsta
+
+## Already done on the local site
+
+- **WP Super Cache fully removed** — plugin, `advanced-cache.php`,
+  `wp-cache-config.php`, the `cache/` directory, and the `WP_CACHE` /
+  `WPCACHEHOME` defines. Kinsta caches at server level and disallows caching
+  plugins; two caching layers fight each other.
+- **`WPCACHEHOME` was a second hardcoded Windows path**, the same failure mode
+  as the AIOS firewall line. Both are now gone or portable.
+- The AIOS firewall line resolves through `__DIR__`, so it needs no edit.
+
+## Two temporary lines to remove after migrating
+
+`wp-config.php` currently contains:
+
+```php
+define('AUTOMATIC_UPDATER_DISABLED', true);
+define('DISABLE_WP_CRON', true);
+```
+
+Both were added to stop this slow local machine thrashing. On Kinsta:
+
+- **Remove `AUTOMATIC_UPDATER_DISABLED`** — auto-updates should run in
+  production, and Kinsta's filesystem is fast enough to complete them.
+- **`DISABLE_WP_CRON`** — keep it *only* if Kinsta sets a real system cron for
+  the site (ask their support; it is a standard request). If they do not,
+  remove it, or scheduled jobs — MailPoet sending included — will never run.
+
+## Migration steps
+
+Kinsta's free migration service needs a **live** source site, and this one only
+exists on localhost, so it cannot be used. Migrate manually — the site is small
+(~27 MB of uploads and a small database), so this is quick.
+
+1. **Take a fresh backup locally, after the cleanup above.** UpdraftPlus →
+   Backup Now → include database *and* files. It goes to Google Drive. Taking it
+   now matters: a backup from before the cleanup would carry WP Super Cache
+   back onto Kinsta.
+2. **In MyKinsta:** Add site → Install WordPress (blank). Choose the
+   **Johannesburg** datacentre and the newest PHP version offered.
+3. Log into the new site at its temporary `*.kinsta.cloud` URL.
+4. Install **UpdraftPlus**, connect the **same Google Drive**, then
+   *Rescan remote storage* so it finds the backup from step 1.
+5. **Restore everything** — database, plugins, themes, uploads, others.
+   UpdraftPlus performs the URL search-replace when the site URL differs;
+   confirm when it prompts.
+6. Log in again (the restore brings your local credentials with it).
+7. **Check the plugin list.** Confirm no caching plugin came across, and check
+   AIOS and UpdraftPlus against Kinsta's disallowed-plugins list — Kinsta
+   provides its own firewall and backups, so parts of both may be redundant.
+8. **Add the real domain** in MyKinsta, point DNS at Kinsta, then issue the free
+   Let's Encrypt certificate and turn on **Force HTTPS**.
+9. Add `define('FORCE_SSL_ADMIN', true);` to `wp-config.php` — **only after**
+   HTTPS is confirmed working, or you will lock yourself out of wp-admin.
+10. Confirm the AIOS line in `wp-config.php` still reads `__DIR__`.
+
+## Test after migrating
+
+- Every page loads: home, articles, a single post, about, subscribe, contact,
+  authors, privacy, terms
+- **Contact form** sends, and the **newsletter form** subscribes (check the
+  subscriber appears in MailPoet as *unconfirmed*)
+- **MailPoet**: re-authorise the sender address, and confirm the sending
+  service key survived the move
+- Comments post and appear for moderation
+- Share links produce correct URLs; the copy-link button works (it will use the
+  modern clipboard API now that the site is on HTTPS)
+- The **view counter** increments — open an article in a private window and
+  confirm `arr_view_count` rises
+- Login page still shows ARR branding
+
+## Then finish the launch items
+
+Rank Math sitemap resubmission, Site Kit / GA4 / Search Console (all need the
+public domain), deleting the demo posts and author accounts, and the security
+items listed earlier in this document.
