@@ -52,7 +52,7 @@ gives you. Never `root`, never a password of `root`.
 
 `siteurl` and `home` are both `http://arr-acf.local`. After migrating they must
 point at the real domain over **https**, or images, CSS, and links break. Most
-migration plugins (including UpdraftPlus's restore) offer a search-replace step
+hosts provide a search-replace tool (Kinsta: Tools → Search and Replace)
 — use it, and make sure it covers `http://arr-acf.local` → `https://yourdomain`.
 
 ### 4. HTTPS with a forced redirect
@@ -106,9 +106,9 @@ AIOS supports it. On a media site where a defacement is a reputational event,
 
 ### 9. Test that a backup actually restores
 
-UpdraftPlus is scheduled — database daily, files weekly — and is writing to
-**Google Drive**, so the backups no longer live on the same disk as the site.
-That part is done.
+UpdraftPlus is scheduled locally — database daily, files weekly, to **Google
+Drive**. Note that UpdraftPlus is **banned on Kinsta**, so this arrangement does
+not survive the move; Kinsta takes daily backups of its own instead.
 
 What has not been proven is that they *restore*. An untested backup is not a
 backup. Before launch, restore one into a staging site and confirm the result
@@ -188,7 +188,7 @@ releases deliberately after a backup.
 | Caching | Removed — Kinsta caches at server level (see the Kinsta section) |
 | Image optimisation | ShortPixel, optimise-on-upload enabled |
 | SEO | Rank Math configured; sitemap live; meta descriptions on all 8 pages |
-| Backups | UpdraftPlus → Google Drive; database daily, files weekly |
+| Backups | UpdraftPlus → Google Drive (local only — **banned on Kinsta**, replaced by Kinsta’s daily backups) |
 | Secrets in git | None; `wp-config.php` is outside the theme repo |
 
 ---
@@ -208,7 +208,7 @@ Applied during the build, so no action needed unless noted:
 | Plugin auto-updates enabled | Plugins screen (per-plugin, toggleable) |
 | Core **minor** auto-updates enabled | Updates screen |
 | Core **major** auto-updates disabled — deliberate | see below |
-| Off-site backups, daily database + weekly files | UpdraftPlus → Google Drive |
+| Off-site backups | UpdraftPlus → Google Drive (local only; Kinsta backs up daily itself) |
 
 **On major core updates:** WordPress ships security fixes in *minor* releases,
 which stay automatic. Major releases are feature releases and can break a custom
@@ -264,31 +264,79 @@ Both were added to stop this slow local machine thrashing. On Kinsta:
 
 ## Migration steps
 
-Kinsta's free migration service needs a **live** source site, and this one only
-exists on localhost, so it cannot be used. Migrate manually — the site is small
-(~27 MB of uploads and a small database), so this is quick.
+### Plugins, checked against Kinsta's banned list
 
-1. **Take a fresh backup locally, after the cleanup above.** UpdraftPlus →
-   Backup Now → include database *and* files. It goes to Google Drive. Taking it
-   now matters: a backup from before the cleanup would carry WP Super Cache
-   back onto Kinsta.
-2. **In MyKinsta:** Add site → Install WordPress (blank). Choose the
-   **Johannesburg** datacentre and the newest PHP version offered.
-3. Log into the new site at its temporary `*.kinsta.cloud` URL.
-4. Install **UpdraftPlus**, connect the **same Google Drive**, then
-   *Rescan remote storage* so it finds the backup from step 1.
-5. **Restore everything** — database, plugins, themes, uploads, others.
-   UpdraftPlus performs the URL search-replace when the site URL differs;
-   confirm when it prompts.
-6. Log in again (the restore brings your local credentials with it).
-7. **Check the plugin list.** Confirm no caching plugin came across, and check
-   AIOS and UpdraftPlus against Kinsta's disallowed-plugins list — Kinsta
-   provides its own firewall and backups, so parts of both may be redundant.
-8. **Add the real domain** in MyKinsta, point DNS at Kinsta, then issue the free
-   Let's Encrypt certificate and turn on **Force HTTPS**.
-9. Add `define('FORCE_SSL_ADMIN', true);` to `wp-config.php` — **only after**
-   HTTPS is confirmed working, or you will lock yourself out of wp-admin.
-10. Confirm the AIOS line in `wp-config.php` still reads `__DIR__`.
+Source: <https://kinsta.com/docs/wordpress-hosting/wordpress-plugins-themes/wordpress-banned-incompatible-plugins/>
+
+| Plugin | Verdict |
+|---|---|
+| ACF, Akismet, MailPoet, Rank Math, WPForms, Site Kit | Fine |
+| ShortPixel | Fine — it is **cloud**-based. Only *server*-based optimisers are banned |
+| WP Super Cache | Banned — already removed |
+| **UpdraftPlus** | **Banned.** "Updraft" is named explicitly |
+| **All-In-One Security (AIOS)** | **Discouraged.** Kinsta supports only Wordfence, and provides its own security |
+
+**UpdraftPlus must not be installed on Kinsta**, which rules out restoring from
+its Google Drive backup — that was the obvious migration route and it is not
+available. Migrate manually instead; the site is small (~27 MB of uploads and a
+small database), so this is not onerous.
+
+Kinsta's own free migration service needs a **live** source site, and this one
+only exists on localhost, so that is not an option either.
+
+### Migration steps (manual)
+
+1. **In MyKinsta:** Add site → Install WordPress (blank). Choose the
+   **Johannesburg** datacentre and the newest PHP offered. Note the temporary
+   `*.kinsta.cloud` URL.
+2. **Export the database from Local.** Local → the site → *Database* tab →
+   **Open Adminer** → Export → SQL. Save the `.sql` file.
+3. **Install the plugins fresh on Kinsta** from the WordPress repository rather
+   than copying them up: ACF, Akismet, MailPoet, Rank Math, ShortPixel,
+   WPForms. That avoids shipping ~12,000 plugin files over SFTP, and guarantees
+   current versions. **Do not** install UpdraftPlus. Decide on AIOS (see below).
+4. **Upload two folders over SFTP** (credentials in MyKinsta → Sites → Info):
+   - `wp-content/themes/arr-theme-acf`
+   - `wp-content/uploads`
+5. **Import the database** — MyKinsta → Info → **Open phpMyAdmin**. Drop the
+   existing tables, then import the `.sql` file.
+6. **Match the table prefix.** Kinsta's fresh installs use a *random* table
+   prefix, but this database uses `wp_`. After importing, edit Kinsta's
+   `wp-config.php` so it reads `$table_prefix = 'wp_';` or the site will show a
+   fresh install screen. This step is easy to miss and looks alarming.
+7. **Search and replace the URLs** — MyKinsta → Tools → **Search and Replace**.
+   Replace `http://arr-acf.local` with the new URL. Run it against the temporary
+   `*.kinsta.cloud` URL first, then again with the real domain once DNS is live.
+8. **Add the real domain**, point DNS at Kinsta, issue the free Let's Encrypt
+   certificate, and turn on **Force HTTPS**.
+9. Add `define('FORCE_SSL_ADMIN', true);` — **only after** HTTPS is confirmed
+   working, or you will lock yourself out of wp-admin.
+
+### Backups after migrating
+
+Kinsta takes **daily automatic backups** and they can be downloaded, so the
+UpdraftPlus schedule is replaced rather than lost. Cancel the Google Drive
+schedule once you are satisfied Kinsta's backups are running, and keep an
+occasional manual download somewhere outside Kinsta.
+
+### What to do about AIOS
+
+Kinsta discourages security plugins because the scanning is I/O-heavy, and
+covers that ground itself with Cloudflare (WAF, DDoS, rate limiting) plus IP
+blocking in MyKinsta. AIOS was also the source of the `wp-config.php` path bug
+documented at the top of this file.
+
+Recommended: **do not install AIOS on Kinsta.** Replace the two features worth
+keeping with lighter equivalents:
+
+- **Two-factor authentication** — a dedicated 2FA plugin such as *Two-Factor* or
+  *WP 2FA*.
+- **Login rate limiting** — handled by Cloudflare at the edge; configure it in
+  MyKinsta rather than in PHP.
+
+If AIOS is dropped, the `// Begin AIOWPSEC Firewall` block at the top of
+`wp-config.php` should be deleted too. The theme's own hardening in
+`inc/security.php` is independent of AIOS and keeps working either way.
 
 ## Test after migrating
 
