@@ -185,7 +185,7 @@ releases deliberately after a backup.
 | In-admin file editing | Disabled via `DISALLOW_FILE_EDIT` |
 | `WP_DEBUG` | `false` — errors not shown to visitors |
 | Spam protection | Akismet active, wired into the contact form |
-| Caching | WP Super Cache on |
+| Caching | Removed — Kinsta caches at server level (see the Kinsta section) |
 | Image optimisation | ShortPixel, optimise-on-upload enabled |
 | SEO | Rank Math configured; sitemap live; meta descriptions on all 8 pages |
 | Backups | UpdraftPlus → Google Drive; database daily, files weekly |
