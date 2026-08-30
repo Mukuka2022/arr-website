@@ -854,3 +854,56 @@
     .search-form { flex-direction: column; }
     .search-form .search-field { border-right: 1px solid var(--hairline); }
   }
+
+/* ===== Media inside article and page content ===== */
+/* Nothing in the content area may exceed its column. Applies to what an editor
+   pastes in as well as to blocks, which is why bare <iframe> and <video> are
+   covered and not just the block wrappers. */
+.single-article-body img,
+.single-article-body video,
+.single-article-body iframe,
+.single-article-body embed,
+.single-article-body object,
+.prose img,
+.prose video,
+.prose iframe { max-width: 100%; }
+
+.single-article-body img,
+.prose img { height: auto; }
+
+.single-article-body figure,
+.prose figure { margin: 32px 0; }
+
+.single-article-body figcaption,
+.prose figcaption {
+  margin-top: 10px;
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* Video embeds get a 16:9 box and the iframe fills it. Scoped to video
+   providers on purpose — a Twitter or Instagram embed is not 16:9 and would be
+   cropped or stretched by a blanket ratio. */
+.single-article-body .wp-block-embed.is-type-video .wp-block-embed__wrapper,
+.prose .wp-block-embed.is-type-video .wp-block-embed__wrapper {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--midnight);
+}
+.single-article-body .wp-block-embed.is-type-video .wp-block-embed__wrapper iframe,
+.prose .wp-block-embed.is-type-video .wp-block-embed__wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Self-hosted video via the core Video block. */
+.single-article-body .wp-block-video video,
+.prose .wp-block-video video { width: 100%; height: auto; display: block; }
+
+.single-article-body .wp-block-embed,
+.prose .wp-block-embed { margin: 32px 0; }

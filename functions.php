@@ -25,6 +25,10 @@ function arr_theme_setup() {
 	) );
 	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
 
+	// Lets WordPress scale YouTube/Vimeo embeds to the column width. Without
+	// this an embed renders at its own fixed size and overflows on a phone.
+	add_theme_support( 'responsive-embeds' );
+
 	register_nav_menus( array(
 		'primary'  => __( 'Primary Menu', 'arr-theme' ),
 		'footer_1' => __( 'Footer Column 1', 'arr-theme' ),
