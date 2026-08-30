@@ -200,6 +200,15 @@ nav.primary-nav a:hover, nav.primary-nav a.active { color: var(--gold); }
 
 /* ---------- Footer ---------- */
 footer.site-footer { background: var(--footer-bg, var(--midnight)); color: rgba(250,250,247,0.65); padding-top: 60px; }
+/* The homepage ends on the CTA band, which is the same navy as the footer — so
+   without a rule the two merge into one indistinguishable block. Every other
+   page ends on a light section, where the colour change already separates
+   them. Scoped to the homepage rather than applied to every page so it reads
+   as a join, not as decoration.
+
+   A border on the footer itself spans the full width at every breakpoint, so
+   this needs no responsive handling. */
+body.home footer.site-footer { border-top: 3px solid var(--gold); }
 .footer-top {
   display: grid;
   grid-template-columns: 1.4fr 1fr 1fr 1fr;
