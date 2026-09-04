@@ -14,6 +14,7 @@ require get_template_directory() . '/inc/login-branding.php';
 require get_template_directory() . '/inc/admin-branding.php';
 require get_template_directory() . '/inc/security.php';
 require get_template_directory() . '/inc/contribute-form.php';
+require get_template_directory() . '/inc/mail.php';
 
 function arr_theme_setup() {
 	add_theme_support( 'title-tag' );

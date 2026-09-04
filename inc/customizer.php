@@ -224,6 +224,28 @@ function arr_customize_register( $wp_customize ) {
 		'type'        => 'text',
 	) );
 
+	$wp_customize->add_setting( 'arr_mail_from', array(
+		'default'           => ARR_CONTACT_EMAIL,
+		'sanitize_callback' => 'arr_sanitize_email',
+	) );
+	$wp_customize->add_control( 'arr_mail_from', array(
+		'label'       => __( 'Send site emails from', 'arr-theme' ),
+		'description' => __( 'The From address on everything the site sends. It must be on your own domain — mail sent from a gmail.com or outlook.com address is rejected by the receiving server.', 'arr-theme' ),
+		'section'     => 'arr_header_settings',
+		'type'        => 'email',
+	) );
+
+	$wp_customize->add_setting( 'arr_mail_from_name', array(
+		'default'           => get_bloginfo( 'name' ),
+		'sanitize_callback' => 'arr_sanitize_text',
+	) );
+	$wp_customize->add_control( 'arr_mail_from_name', array(
+		'label'       => __( 'Sender name on site emails', 'arr-theme' ),
+		'description' => __( 'The name recipients see in their inbox.', 'arr-theme' ),
+		'section'     => 'arr_header_settings',
+		'type'        => 'text',
+	) );
+
 	$wp_customize->add_setting( 'arr_contribute_email', array(
 		'default'           => ARR_CONTACT_EMAIL,
 		'sanitize_callback' => 'arr_sanitize_email',
