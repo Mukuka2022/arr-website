@@ -113,7 +113,57 @@ $cat_icon_svg = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="current
 </section>
 
 <?php
-$trend_eye_svg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>';
+/* ---------- Advertising ----------
+ *
+ * Two ways to fill this, checked in order: pasted ad-network code wins, then
+ * banners uploaded slot by slot. With neither set the section renders nothing
+ * at all — no empty box, no "advertise here" placeholder — so the homepage
+ * looks finished from the day it launches, before any advertiser is signed.
+ *
+ * The label above the adverts is not decoration: readers have to be able to
+ * tell paid placement from editorial, which is why it sits outside the
+ * per-advert loop and shows whenever the section does.
+ */
+$ads_code = arr_field( 'ads_code', '' );
+$ads      = $ads_code ? array() : arr_home_ads();
+?>
+<?php if ( $ads_code || $ads ) : ?>
+<section class="ad-band">
+  <div class="wrap">
+    <?php $ads_label = arr_field( 'ads_label', 'Advertisement' ); ?>
+    <?php if ( $ads_label ) : ?>
+      <span class="ad-label"><?php echo esc_html( $ads_label ); ?></span>
+    <?php endif; ?>
+
+    <?php if ( $ads_code ) : ?>
+      <?php
+      /* Printed unescaped because an ad network's tag is markup and a script —
+       * escaping it would render the tag as visible text instead of an advert.
+       * Only users who can edit the homepage can set this, which on this site
+       * means Editors and Administrators. */
+      echo $ads_code; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+      ?>
+    <?php else : ?>
+      <div class="ad-grid" data-count="<?php echo esc_attr( count( $ads ) ); ?>">
+        <?php foreach ( $ads as $ad ) : ?>
+          <?php if ( $ad['link'] ) : ?>
+            <a class="ad-slot" href="<?php echo esc_url( $ad['link'] ); ?>" target="_blank" rel="noopener sponsored">
+              <img src="<?php echo esc_url( $ad['image'] ); ?>" alt="<?php echo esc_attr( $ad['alt'] ); ?>" loading="lazy" />
+            </a>
+          <?php else : ?>
+            <div class="ad-slot">
+              <img src="<?php echo esc_url( $ad['image'] ); ?>" alt="<?php echo esc_attr( $ad['alt'] ); ?>" loading="lazy" />
+            </div>
+          <?php endif; ?>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
+  </div>
+</section>
+<?php endif; ?>
+
+<?php
+$trend_eye_svg ='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>';
 ?>
 <section>
   <div class="trio">
@@ -256,5 +306,51 @@ $reports_image = arr_field( 'reports_image', '' );
     </div>
   </div>
 </section>
+
+<?php
+/* ---------- Caricature ----------
+ *
+ * The cartoon is the point, so it gets the width and the commentary sits
+ * beside it rather than on top of it. Hidden entirely until an image is
+ * uploaded — a cartoon slot with no cartoon is worse than no slot.
+ */
+$caricature_image = arr_field( 'caricature_image', '' );
+?>
+<?php if ( $caricature_image ) : ?>
+<?php
+$caricature_caption   = arr_field( 'caricature_caption', '' );
+$caricature_artist    = arr_field( 'caricature_artist', '' );
+$caricature_link      = arr_field( 'caricature_link', '' );
+$caricature_title     = arr_field( 'caricature_title', 'Drawn from the Week' );
+$caricature_alt       = $caricature_artist
+	/* translators: %s: cartoonist's name. */
+	? sprintf( __( 'Editorial cartoon by %s', 'arr-theme' ), $caricature_artist )
+	: __( 'Editorial cartoon', 'arr-theme' );
+?>
+<section class="caricature-band">
+  <div class="wrap">
+    <figure class="caricature">
+      <div class="caricature-media">
+        <img src="<?php echo esc_url( $caricature_image ); ?>" alt="<?php echo esc_attr( $caricature_alt ); ?>" loading="lazy" />
+      </div>
+      <figcaption class="caricature-body">
+        <span class="eyebrow"><?php echo esc_html( arr_field( 'caricature_eyebrow', 'Cartoon of the Week' ) ); ?></span>
+        <?php if ( $caricature_title ) : ?>
+          <h2><?php echo esc_html( $caricature_title ); ?></h2>
+        <?php endif; ?>
+        <?php if ( $caricature_caption ) : ?>
+          <p><?php echo esc_html( $caricature_caption ); ?></p>
+        <?php endif; ?>
+        <?php if ( $caricature_artist ) : ?>
+          <p class="caricature-artist"><?php echo esc_html( $caricature_artist ); ?></p>
+        <?php endif; ?>
+        <?php if ( $caricature_link ) : ?>
+          <a class="view-all" href="<?php echo esc_url( $caricature_link ); ?>"><?php echo esc_html( arr_field( 'caricature_link_text', 'See more cartoons' ) ); ?> <span aria-hidden="true">&rarr;</span></a>
+        <?php endif; ?>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+<?php endif; ?>
 
 <?php get_footer(); ?>

@@ -43,7 +43,7 @@
 
     <div class="header-actions">
       <?php if ( get_theme_mod( 'arr_header_cta_show', true ) ) : ?>
-        <a href="<?php echo esc_url( get_theme_mod( 'arr_header_cta_link' ) ?: home_url( '/subscribe/' ) ); ?>" class="btn btn-primary"><?php echo esc_html( get_theme_mod( 'arr_header_cta_text', 'Contribute' ) ); ?></a>
+        <a href="<?php echo esc_url( get_theme_mod( 'arr_header_cta_link' ) ?: home_url( '/contribute/' ) ); ?>" class="btn btn-primary"><?php echo esc_html( get_theme_mod( 'arr_header_cta_text', 'Contribute' ) ); ?></a>
       <?php endif; ?>
       <button class="icon-btn search-toggle" type="button" aria-label="Search" aria-expanded="false" aria-controls="header-search">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>

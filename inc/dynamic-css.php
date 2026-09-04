@@ -21,6 +21,8 @@ function arr_section_color_map() {
 		'hero_bg_color'           => '--hero-bg',
 		'cat_strip_bg_color'      => '--cat-strip-bg',
 		'cta_band_bg_color'       => '--cta-band-bg',
+		'ads_bg_color'            => '--ad-band-bg',
+		'caricature_bg_color'     => '--caricature-bg',
 		// About
 		'about_banner_bg_color'   => '--banner-bg',
 		'about_intro_bg_color'    => '--about-intro-bg',
@@ -38,6 +40,11 @@ function arr_section_color_map() {
 		'contact_bg_color'        => '--contact-bg',
 		// Articles
 		'articles_banner_bg_color' => '--banner-bg',
+		// Editor's Notes
+		'notes_banner_bg_color'   => '--banner-bg',
+		// Contribute
+		'contribute_banner_bg_color' => '--banner-bg',
+		'contribute_bg_color'     => '--contribute-bg',
 		// Authors
 		'authors_banner_bg_color' => '--banner-bg',
 	);

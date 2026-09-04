@@ -6,6 +6,37 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
+ * The publication's real contact details.
+ *
+ * Held as constants because three separate places need the same value — the
+ * contact page, the footer email icon and the Customizer default. Anything the
+ * client enters in wp-admin overrides these; they exist so the details are
+ * never blank and never disagree with each other.
+ *
+ * The phone number is stored in international E.164 form for the tel: link and
+ * formatted separately for display.
+ */
+define( 'ARR_CONTACT_EMAIL', 'editor@arreview.africa' );
+define( 'ARR_CONTACT_PHONE', '+260 96 584 5592' );
+
+/**
+ * Slug of the category that drives the Editor's Notes page. The category's
+ * display name is the client's to change; this slug is not.
+ */
+define( 'ARR_NOTES_CATEGORY', 'editors-notes' );
+
+/**
+ * Strip a phone number down to what a tel: href accepts.
+ *
+ * Keeps a leading "+" and digits, drops the spaces and brackets people type.
+ * Without this, "+260 96 584 5592" produces a link some Android dialers refuse.
+ */
+function arr_tel_href( $number ) {
+	$digits = preg_replace( '/[^0-9]/', '', $number );
+	return 'tel:' . ( strpos( trim( $number ), '+' ) === 0 ? '+' : '' ) . $digits;
+}
+
+/**
  * Read an ACF field, falling back to the approved prototype copy.
  *
  * The function_exists guard means every page still renders the approved
@@ -57,22 +88,173 @@ function arr_lines_to_list( $text ) {
 }
 
 /**
+ * The category that holds Editor's Notes, created on first use.
+ *
+ * The slug is what identifies it, so the client can rename the category in
+ * wp-admin ("Letter from the Editor", say) and the page keeps working. Only the
+ * slug must stay as it is.
+ *
+ * Created lazily rather than on theme activation because the theme was already
+ * active on the live site when this feature was added — an activation hook
+ * would never have fired there. The option flag keeps this to one term lookup
+ * for the life of the install rather than one per request.
+ *
+ * @return WP_Term|null
+ */
+function arr_editors_notes_category() {
+	$category = get_category_by_slug( ARR_NOTES_CATEGORY );
+	if ( $category ) {
+		return $category;
+	}
+
+	if ( get_option( 'arr_notes_category_created' ) ) {
+		return null; // Created once and since deleted on purpose — don't recreate it.
+	}
+
+	$created = wp_insert_term( "Editor's Notes", 'category', array(
+		'slug'        => ARR_NOTES_CATEGORY,
+		'description' => __( 'Short reflections from the editorial desk. Posts in this category appear on the Editor\'s Notes page.', 'arr-theme' ),
+	) );
+
+	update_option( 'arr_notes_category_created', 1 );
+
+	if ( is_wp_error( $created ) ) {
+		return null;
+	}
+
+	return get_term( $created['term_id'], 'category' );
+}
+
+/**
+ * Posts related to $post_id, best match first.
+ *
+ * Relatedness is "shares a category", which on this site means shares an
+ * editorial pillar — the most meaningful signal available without a tagging
+ * discipline the client has not been asked to maintain.
+ *
+ * If that turns up fewer than $count posts (common early on, when a pillar has
+ * only one or two articles), the remainder is topped up with the most recent
+ * posts so the section is never half-empty or ragged. Returns an empty array
+ * on a site with no other published posts, and the template hides itself.
+ *
+ * @return WP_Post[]
+ */
+function arr_related_posts( $post_id, $count = 3 ) {
+	$categories = wp_get_post_categories( $post_id );
+
+	$args = array(
+		'post__not_in'        => array( $post_id ),
+		'posts_per_page'      => $count,
+		'post_status'         => 'publish',
+		'ignore_sticky_posts' => true,
+		'no_found_rows'       => true,
+	);
+
+	$related = $categories
+		? get_posts( array_merge( $args, array( 'category__in' => $categories ) ) )
+		: array();
+
+	if ( count( $related ) < $count ) {
+		$exclude = array_merge( array( $post_id ), wp_list_pluck( $related, 'ID' ) );
+
+		$filler = get_posts( array_merge( $args, array(
+			'post__not_in'   => $exclude,
+			'posts_per_page' => $count - count( $related ),
+		) ) );
+
+		$related = array_merge( $related, $filler );
+	}
+
+	return $related;
+}
+
+/**
+ * The homepage advert slots that actually have a banner uploaded.
+ *
+ * Returned in slot order with the blanks removed, so an empty slot 2 doesn't
+ * leave a hole between adverts 1 and 3 — and so the template can hide the whole
+ * section by checking one thing.
+ */
+function arr_home_ads( $slots = 3 ) {
+	$ads = array();
+
+	for ( $i = 1; $i <= $slots; $i++ ) {
+		$image = arr_field( "ad_{$i}_image", '' );
+		if ( ! $image ) {
+			continue;
+		}
+
+		$ads[] = array(
+			'image' => $image,
+			'link'  => arr_field( "ad_{$i}_link", '' ),
+			'alt'   => arr_field( "ad_{$i}_alt", '' ),
+		);
+	}
+
+	return $ads;
+}
+
+/**
+ * The social platforms the footer can show, in display order.
+ *
+ * Single source of truth: the Customizer builds its controls from this list and
+ * arr_social_links() reads it back, so adding a platform is a one-line change
+ * here rather than two lists that quietly drift apart.
+ *
+ * The client's real accounts are the defaults, so the icons render correctly on
+ * a fresh install with nothing entered. A URL set in the Customizer still wins;
+ * clearing a field to blank hides that icon.
+ */
+function arr_social_platforms() {
+	return array(
+		'linkedin' => array(
+			'label'   => __( 'LinkedIn', 'arr-theme' ),
+			'glyph'   => 'in',
+			'mod'     => 'arr_social_linkedin',
+			'default' => 'https://www.linkedin.com/company/144824906',
+		),
+		'facebook' => array(
+			'label'   => __( 'Facebook', 'arr-theme' ),
+			'glyph'   => 'f',
+			'mod'     => 'arr_social_facebook',
+			'default' => 'https://web.facebook.com/profile.php?id=61593932194249',
+		),
+		'whatsapp' => array(
+			'label'   => __( 'WhatsApp Channel', 'arr-theme' ),
+			'glyph'   => '✆',
+			'mod'     => 'arr_social_whatsapp',
+			'default' => 'https://whatsapp.com/channel/0029VbD6O366xCSYhdbKGk3D',
+		),
+		'x' => array(
+			'label'   => __( 'X (Twitter)', 'arr-theme' ),
+			'glyph'   => '𝕏',
+			'mod'     => 'arr_social_x',
+			'default' => '',
+		),
+		'youtube' => array(
+			'label'   => __( 'YouTube', 'arr-theme' ),
+			'glyph'   => '▶',
+			'mod'     => 'arr_social_youtube',
+			'default' => '',
+		),
+		'instagram' => array(
+			'label'   => __( 'Instagram', 'arr-theme' ),
+			'glyph'   => 'ig',
+			'mod'     => 'arr_social_instagram',
+			'default' => '',
+		),
+	);
+}
+
+/**
  * Social links that the client has actually filled in. Anything left blank
  * is omitted rather than rendered as a dead "#" link.
  */
 function arr_social_links() {
-	$platforms = array(
-		'x'         => array( 'label' => 'X',         'glyph' => '𝕏',  'mod' => 'arr_social_x' ),
-		'linkedin'  => array( 'label' => 'LinkedIn',  'glyph' => 'in', 'mod' => 'arr_social_linkedin' ),
-		'facebook'  => array( 'label' => 'Facebook',  'glyph' => 'f',  'mod' => 'arr_social_facebook' ),
-		'youtube'   => array( 'label' => 'YouTube',   'glyph' => '▶',  'mod' => 'arr_social_youtube' ),
-		'instagram' => array( 'label' => 'Instagram', 'glyph' => 'ig', 'mod' => 'arr_social_instagram' ),
-	);
-
 	$links = array();
 
-	foreach ( $platforms as $key => $platform ) {
-		$url = get_theme_mod( $platform['mod'], '' );
+	foreach ( arr_social_platforms() as $platform ) {
+		$url = get_theme_mod( $platform['mod'], $platform['default'] );
 		if ( $url ) {
 			$links[] = array(
 				'url'      => $url,
@@ -83,7 +265,7 @@ function arr_social_links() {
 		}
 	}
 
-	$email = get_theme_mod( 'arr_social_email', '' );
+	$email = get_theme_mod( 'arr_social_email', ARR_CONTACT_EMAIL );
 	if ( $email ) {
 		$links[] = array(
 			'url'      => 'mailto:' . $email,

@@ -6,8 +6,8 @@
  */
 get_header();
 
-$contact_email    = arr_field( 'contact_email', '' );
-$contact_phone    = arr_field( 'contact_phone', '' );
+$contact_email    = arr_field( 'contact_email', ARR_CONTACT_EMAIL );
+$contact_phone    = arr_field( 'contact_phone', ARR_CONTACT_PHONE );
 $contact_location = arr_field( 'contact_location', '' );
 $contact_hours    = arr_field( 'contact_hours', '' );
 $contact_note     = arr_field( 'contact_note', 'We read every message. Expect a reply within two working days.' );
@@ -45,7 +45,7 @@ $contact_note     = arr_field( 'contact_note', 'We read every message. Expect a 
       <?php if ( $contact_phone ) : ?>
         <div class="contact-detail">
           <span class="lbl"><?php esc_html_e( 'Phone', 'arr-theme' ); ?></span>
-          <a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $contact_phone ) ); ?>"><?php echo esc_html( $contact_phone ); ?></a>
+          <a href="<?php echo esc_attr( arr_tel_href( $contact_phone ) ); ?>"><?php echo esc_html( $contact_phone ); ?></a>
         </div>
       <?php endif; ?>
 

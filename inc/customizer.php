@@ -122,27 +122,25 @@ function arr_customize_register( $wp_customize ) {
 		'priority'    => 30,
 	) );
 
-	foreach ( array(
-		'arr_social_x'         => __( 'X (Twitter) URL', 'arr-theme' ),
-		'arr_social_linkedin'  => __( 'LinkedIn URL', 'arr-theme' ),
-		'arr_social_facebook'  => __( 'Facebook URL', 'arr-theme' ),
-		'arr_social_youtube'   => __( 'YouTube URL', 'arr-theme' ),
-		'arr_social_instagram' => __( 'Instagram URL', 'arr-theme' ),
-	) as $id => $label ) {
-		$wp_customize->add_setting( $id, array(
-			'default'           => '',
+	// Built from arr_social_platforms() so a platform added there gets its
+	// Customizer control automatically, and the default shown in the control
+	// is the same one the footer actually renders.
+	foreach ( arr_social_platforms() as $platform ) {
+		$wp_customize->add_setting( $platform['mod'], array(
+			'default'           => $platform['default'],
 			'sanitize_callback' => 'arr_sanitize_url',
 		) );
 
-		$wp_customize->add_control( $id, array(
-			'label'   => $label,
+		$wp_customize->add_control( $platform['mod'], array(
+			/* translators: %s: social network name. */
+			'label'   => sprintf( __( '%s URL', 'arr-theme' ), $platform['label'] ),
 			'section' => 'arr_social',
 			'type'    => 'url',
 		) );
 	}
 
 	$wp_customize->add_setting( 'arr_social_email', array(
-		'default'           => '',
+		'default'           => ARR_CONTACT_EMAIL,
 		'sanitize_callback' => 'arr_sanitize_email',
 	) );
 
@@ -208,9 +206,33 @@ function arr_customize_register( $wp_customize ) {
 	) );
 	$wp_customize->add_control( 'arr_header_cta_link', array(
 		'label'       => __( 'Header button link', 'arr-theme' ),
-		'description' => __( 'Leave blank to link to the Subscribe page.', 'arr-theme' ),
+		'description' => __( 'Leave blank to link to the Contribute page.', 'arr-theme' ),
 		'section'     => 'arr_header_settings',
 		'type'        => 'url',
+	) );
+
+	/* ---------- Articles ---------- */
+
+	$wp_customize->add_setting( 'arr_related_heading', array(
+		'default'           => __( 'Related Articles', 'arr-theme' ),
+		'sanitize_callback' => 'arr_sanitize_text',
+	) );
+	$wp_customize->add_control( 'arr_related_heading', array(
+		'label'       => __( 'Related articles heading', 'arr-theme' ),
+		'description' => __( 'Shown below every article, above the suggested reading.', 'arr-theme' ),
+		'section'     => 'arr_header_settings',
+		'type'        => 'text',
+	) );
+
+	$wp_customize->add_setting( 'arr_contribute_email', array(
+		'default'           => ARR_CONTACT_EMAIL,
+		'sanitize_callback' => 'arr_sanitize_email',
+	) );
+	$wp_customize->add_control( 'arr_contribute_email', array(
+		'label'       => __( 'Contributor applications go to', 'arr-theme' ),
+		'description' => __( 'The inbox that receives applications sent from the Contribute page.', 'arr-theme' ),
+		'section'     => 'arr_header_settings',
+		'type'        => 'email',
 	) );
 
 	/* ---------- Footer ---------- */

@@ -1043,6 +1043,336 @@
                 "default_value": "",
                 "enable_opacity": 0,
                 "return_format": "string"
+            },
+            {
+                "key": "field_arr_ads_label",
+                "label": "Advertising — section label",
+                "name": "ads_label",
+                "type": "text",
+                "instructions": "The small heading above the adverts. Publishing standards require advertising to be clearly marked as such, so avoid removing this.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Advertisement",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_ad_1_image",
+                "label": "Advert 1 — banner image",
+                "name": "ad_1_image",
+                "type": "image",
+                "instructions": "Recommended 800 × 450px or wider. Leave every advert blank to hide the whole section.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
+                "key": "field_arr_ad_1_link",
+                "label": "Advert 1 — destination link",
+                "name": "ad_1_link",
+                "type": "url",
+                "instructions": "Where the advert sends the reader. Leave blank to show the banner without a link.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_ad_1_alt",
+                "label": "Advert 1 — advertiser name",
+                "name": "ad_1_alt",
+                "type": "text",
+                "instructions": "Used as the image description for screen readers and search engines.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_ad_2_image",
+                "label": "Advert 2 — banner image",
+                "name": "ad_2_image",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
+                "key": "field_arr_ad_2_link",
+                "label": "Advert 2 — destination link",
+                "name": "ad_2_link",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_ad_2_alt",
+                "label": "Advert 2 — advertiser name",
+                "name": "ad_2_alt",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_ad_3_image",
+                "label": "Advert 3 — banner image",
+                "name": "ad_3_image",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
+                "key": "field_arr_ad_3_link",
+                "label": "Advert 3 — destination link",
+                "name": "ad_3_link",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_ad_3_alt",
+                "label": "Advert 3 — advertiser name",
+                "name": "ad_3_alt",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_ads_code",
+                "label": "Advertising — ad network code",
+                "name": "ads_code",
+                "type": "textarea",
+                "instructions": "Only for adverts served by a network such as Google AdSense. Paste the code the network gives you. It is used instead of the banners above, so leave this blank while you are selling adverts yourself. Only site Administrators should paste code here.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "rows": 5,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_ads_bg_color",
+                "label": "Advertising background colour",
+                "name": "ads_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            },
+            {
+                "key": "field_arr_caricature_eyebrow",
+                "label": "Caricature — small heading",
+                "name": "caricature_eyebrow",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Cartoon of the Week",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_caricature_title",
+                "label": "Caricature — title",
+                "name": "caricature_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Drawn from the Week",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_caricature_image",
+                "label": "Caricature — image",
+                "name": "caricature_image",
+                "type": "image",
+                "instructions": "The cartoon itself. Leave blank to hide the whole section.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all"
+            },
+            {
+                "key": "field_arr_caricature_caption",
+                "label": "Caricature — caption",
+                "name": "caricature_caption",
+                "type": "textarea",
+                "instructions": "A sentence or two explaining what the cartoon is commenting on.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_caricature_artist",
+                "label": "Caricature — artist credit",
+                "name": "caricature_artist",
+                "type": "text",
+                "instructions": "The cartoonist's name. Always credit the artist.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_caricature_link",
+                "label": "Caricature — link",
+                "name": "caricature_link",
+                "type": "url",
+                "instructions": "Optional. Links the cartoon to a related article or an archive of past cartoons.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_caricature_link_text",
+                "label": "Caricature — link text",
+                "name": "caricature_link_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "See more cartoons",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_caricature_bg_color",
+                "label": "Caricature background colour",
+                "name": "caricature_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
             }
         ],
         "location": [
@@ -3561,6 +3891,343 @@
         "hide_on_screen": "",
         "active": true,
         "description": "Banner copy and background colour for the Articles listing page."
+    },
+    {
+        "key": "group_arr_notes",
+        "title": "Editor's Notes Page Content",
+        "fields": [
+            {
+                "key": "field_arr_notes_eyebrow",
+                "label": "Eyebrow label",
+                "name": "notes_eyebrow",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "From the Desk",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_notes_title",
+                "label": "Page title",
+                "name": "notes_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Editor's Notes",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_notes_subtitle",
+                "label": "Page subtitle",
+                "name": "notes_subtitle",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Short reflections from the ARR editorial desk — on the stories we chose, the ones we did not, and why.",
+                "placeholder": "",
+                "rows": 2,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_notes_empty_text",
+                "label": "Empty-state text",
+                "name": "notes_empty_text",
+                "type": "text",
+                "instructions": "Shown before the first note is published.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "No editor's notes yet. Write a post, tick the “Editor's Notes” category, and it will appear here.",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_notes_banner_bg_color",
+                "label": "Banner background colour",
+                "name": "notes_banner_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "template-editors-notes.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Banner copy for the Editor's Notes page. The notes themselves are ordinary posts filed under the Editor's Notes category."
+    },
+    {
+        "key": "group_arr_contribute",
+        "title": "Contribute Page Content",
+        "fields": [
+            {
+                "key": "field_arr_contribute_eyebrow",
+                "label": "Eyebrow label",
+                "name": "contribute_eyebrow",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "Write for ARR",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contribute_title",
+                "label": "Page title",
+                "name": "contribute_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "Become a Contributor",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contribute_subtitle",
+                "label": "Page subtitle",
+                "name": "contribute_subtitle",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "ARR publishes rigorous, evidence-based writing on the questions shaping Africa. If that is the work you want to do, tell us about it.",
+                "placeholder": "",
+                "rows": 2,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_contribute_form_heading",
+                "label": "Form heading",
+                "name": "contribute_form_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "Tell us about your work",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contribute_form_intro",
+                "label": "Form intro line",
+                "name": "contribute_form_intro",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "Every application is read by an editor. There is no form letter and no automated rejection.",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contribute_submit_text",
+                "label": "Submit button text",
+                "name": "contribute_submit_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "Send application",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contribute_fineprint",
+                "label": "Fine print below the button",
+                "name": "contribute_fineprint",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "We use your details only to reply to this application. They are not stored on the website and never shared.",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contribute_aside_heading",
+                "label": "Side panel heading",
+                "name": "contribute_aside_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "How it works",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contribute_step_1_title",
+                "label": "Step 1 — title",
+                "name": "contribute_step_1_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "40", "class": "", "id": "" },
+                "default_value": "You apply",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contribute_step_1_text",
+                "label": "Step 1 — text",
+                "name": "contribute_step_1_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "60", "class": "", "id": "" },
+                "default_value": "Send the form with a short note on the subjects you follow and how you would approach them.",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contribute_step_2_title",
+                "label": "Step 2 — title",
+                "name": "contribute_step_2_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "40", "class": "", "id": "" },
+                "default_value": "An editor reads it",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contribute_step_2_text",
+                "label": "Step 2 — text",
+                "name": "contribute_step_2_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "60", "class": "", "id": "" },
+                "default_value": "We look for command of the subject and a clear argument, not a long list of credits.",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contribute_step_3_title",
+                "label": "Step 3 — title",
+                "name": "contribute_step_3_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "40", "class": "", "id": "" },
+                "default_value": "We set up your account",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contribute_step_3_text",
+                "label": "Step 3 — text",
+                "name": "contribute_step_3_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "60", "class": "", "id": "" },
+                "default_value": "Accepted contributors get a login and can draft directly on the site. An editor reviews each piece before it publishes.",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contribute_note",
+                "label": "Side panel closing note",
+                "name": "contribute_note",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "Already write for ARR? Sign in to start a new draft.",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_contribute_banner_bg_color",
+                "label": "Banner background colour",
+                "name": "contribute_banner_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            },
+            {
+                "key": "field_arr_contribute_bg_color",
+                "label": "Page background colour",
+                "name": "contribute_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "template-contribute.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Copy for the Contribute page. Where applications are emailed is set under Appearance → Customize → ARR Theme Settings → Header."
     },
     {
         "key": "group_arr_authors",

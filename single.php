@@ -53,9 +53,54 @@
       </div>
     </div>
 
-    <?php if ( comments_open() || get_comments_number() ) : comments_template(); endif; ?>
   </div>
 </section>
+
+<?php
+/* Related articles sit between the piece and the comments: the reader has
+   finished reading and is deciding what to do next, and "read another" is the
+   thing we want to make easy. Full width rather than inside the 760px reading
+   column, so three cards get room to breathe. */
+$related = arr_related_posts( get_the_ID(), 3 );
+?>
+<?php if ( $related ) : ?>
+<section class="related-band">
+  <div class="wrap">
+    <div class="section-head">
+      <h2><?php echo esc_html( get_theme_mod( 'arr_related_heading', __( 'Related Articles', 'arr-theme' ) ) ); ?></h2>
+      <a class="view-all" href="<?php echo esc_url( home_url( '/articles/' ) ); ?>"><?php esc_html_e( 'All articles', 'arr-theme' ); ?> <span aria-hidden="true">&rarr;</span></a>
+    </div>
+    <div class="related-grid">
+      <?php foreach ( $related as $related_post ) : ?>
+        <?php
+        $related_cats  = get_the_category( $related_post->ID );
+        $related_thumb = get_the_post_thumbnail_url( $related_post->ID, 'arr-card' );
+        ?>
+        <a class="related-card" href="<?php echo esc_url( get_permalink( $related_post ) ); ?>">
+          <?php if ( $related_thumb ) : ?>
+            <div class="related-media"><img src="<?php echo esc_url( $related_thumb ); ?>" alt="" loading="lazy" /></div>
+          <?php endif; ?>
+          <div class="related-body">
+            <?php if ( $related_cats ) : ?>
+              <span class="cat"><?php echo esc_html( $related_cats[0]->name ); ?></span>
+            <?php endif; ?>
+            <h3><?php echo esc_html( get_the_title( $related_post ) ); ?></h3>
+            <span class="meta"><?php echo esc_html( get_the_date( '', $related_post ) ); ?></span>
+          </div>
+        </a>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+
+<?php if ( comments_open() || get_comments_number() ) : ?>
+<section class="comments-section">
+  <div class="wrap" style="max-width:760px;">
+    <?php comments_template(); ?>
+  </div>
+</section>
+<?php endif; ?>
 
 <?php endwhile; ?>
 
