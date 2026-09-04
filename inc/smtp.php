@@ -165,6 +165,17 @@ function arr_render_mail_test_page() {
 					<th><?php esc_html_e( 'Sent from', 'arr-theme' ); ?></th>
 					<td>
 						<code><?php echo esc_html( arr_mail_from() ); ?></code>
+						<?php if ( arr_mail_from_is_substituted() ) : ?>
+							<p class="description">
+								<?php
+								printf(
+									/* translators: %s: the configured From address. */
+									esc_html__( 'Using the site\'s own hostname for now. %s will be used automatically once an SMTP relay is configured — until then, nothing authorises this server to send for that domain, and mail claiming to would fail its SPF check. Replies still go to that address.', 'arr-theme' ),
+									'<code>' . esc_html( get_theme_mod( 'arr_mail_from', ARR_CONTACT_EMAIL ) ) . '</code>'
+								);
+								?>
+							</p>
+						<?php endif; ?>
 						<?php
 						$from_domain = substr( strrchr( arr_mail_from(), '@' ), 1 );
 						$site_domain = wp_parse_url( home_url(), PHP_URL_HOST );

@@ -97,10 +97,12 @@ function arr_handle_contribute_form() {
 		sprintf( __( 'Sent from the %s contributor form.', 'arr-theme' ), get_bloginfo( 'name' ) ),
 	), 'strlen' ) );
 
-	// From the site's own domain so the message passes SPF/DKIM; the applicant
-	// goes in Reply-To, so hitting reply in the inbox answers them directly.
+	// From an address the sending server is actually authorised for — see
+	// arr_mail_from(), which falls back to the site's own hostname until a
+	// relay is configured. The applicant goes in Reply-To, so hitting reply in
+	// the inbox answers them directly.
 	$headers = array(
-		'From: ' . get_bloginfo( 'name' ) . ' <' . $to . '>',
+		'From: ' . get_bloginfo( 'name' ) . ' <' . arr_mail_from() . '>',
 		'Reply-To: ' . $name . ' <' . $email . '>',
 	);
 
