@@ -93,7 +93,7 @@ $cat_icon_svg = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="current
   <?php else : ?>
   <div class="wrap cat-grid">
     <?php
-    $cats = get_categories( array( 'number' => 6, 'orderby' => 'name' ) );
+    $cats = arr_pillar_categories( 6 );
     foreach ( $cats as $cat ) :
     ?>
       <div class="cat-item">

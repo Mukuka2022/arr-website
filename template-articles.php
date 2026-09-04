@@ -82,7 +82,7 @@ $breaking_lead = $breaking ? array_shift( $breaking ) : null;
   <div class="wrap">
     <div class="filter-row" id="filters">
       <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" class="filter-pill active"><?php echo esc_html( arr_field( 'articles_all_pill_label', 'All' ) ); ?></a>
-      <?php foreach ( get_categories( array( 'number' => 8 ) ) as $cat ) : ?>
+      <?php foreach ( arr_pillar_categories( 8 ) as $cat ) : ?>
         <a href="<?php echo esc_url( get_category_link( $cat ) ); ?>" class="filter-pill"><?php echo esc_html( $cat->name ); ?></a>
       <?php endforeach; ?>
     </div>

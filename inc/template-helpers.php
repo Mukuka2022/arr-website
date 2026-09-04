@@ -126,6 +126,26 @@ function arr_editors_notes_category() {
 }
 
 /**
+ * The editorial pillars, for the homepage strip and the Articles filter pills.
+ *
+ * Plain get_categories() would include Editor's Notes, which is a publishing
+ * mechanism rather than a subject area: it has its own page, and listing it
+ * beside the pillars both misrepresents what the pillars are and pushes a real
+ * pillar out of a strip that only has six places.
+ *
+ * @return WP_Term[]
+ */
+function arr_pillar_categories( $number = 6 ) {
+	$notes = get_category_by_slug( ARR_NOTES_CATEGORY );
+
+	return get_categories( array(
+		'number'  => $number,
+		'orderby' => 'name',
+		'exclude' => $notes ? array( $notes->term_id ) : array(),
+	) );
+}
+
+/**
  * Posts related to $post_id, best match first.
  *
  * Relatedness is "shares a category", which on this site means shares an
