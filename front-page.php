@@ -346,11 +346,13 @@ $reports_image = arr_field( 'reports_image', '' );
  * beside it rather than on top of it. Hidden entirely until an image is
  * uploaded — a cartoon slot with no cartoon is worse than no slot.
  */
-$caricatures = arr_caricatures();
+$caricatures = arr_get_caricatures( 2 );
 ?>
 <?php if ( $caricatures ) : ?>
 <?php
-$caricature_link  = arr_field( 'caricature_link', '' );
+// Links to the archive page when it exists, so the section keeps itself
+// current without anyone editing the homepage.
+$caricature_link  = arr_page_url( 'caricatures' );
 $caricature_title = arr_field( 'caricature_title', 'Drawn from the Week' );
 ?>
 <section class="caricature-band">
@@ -370,21 +372,23 @@ $caricature_title = arr_field( 'caricature_title', 'Drawn from the Week' );
     <div class="caricature-grid" data-count="<?php echo esc_attr( count( $caricatures ) ); ?>">
       <?php foreach ( $caricatures as $cartoon ) : ?>
         <?php
-        $cartoon_alt = $cartoon['artist']
-          /* translators: %s: cartoonist's name. */
-          ? sprintf( __( 'Editorial cartoon by %s', 'arr-theme' ), $cartoon['artist'] )
-          : __( 'Editorial cartoon', 'arr-theme' );
+        $cartoon_image  = get_the_post_thumbnail_url( $cartoon->ID, 'large' );
+        $cartoon_artist = arr_field( 'caricature_artist', '', $cartoon->ID );
         ?>
         <figure class="caricature">
-          <div class="caricature-media">
-            <img src="<?php echo esc_url( $cartoon['image'] ); ?>" alt="<?php echo esc_attr( $cartoon_alt ); ?>" loading="lazy" />
-          </div>
+          <?php if ( $cartoon_image ) : ?>
+            <a class="caricature-media" href="<?php echo esc_url( get_permalink( $cartoon ) ); ?>">
+              <img src="<?php echo esc_url( $cartoon_image ); ?>" alt="<?php echo esc_attr( arr_caricature_alt( $cartoon->ID ) ); ?>" loading="lazy" />
+            </a>
+          <?php endif; ?>
           <figcaption class="caricature-body">
-            <?php if ( $cartoon['caption'] ) : ?>
-              <p><?php echo esc_html( $cartoon['caption'] ); ?></p>
+            <h3><a href="<?php echo esc_url( get_permalink( $cartoon ) ); ?>"><?php echo esc_html( get_the_title( $cartoon ) ); ?></a></h3>
+            <?php $cartoon_caption = get_the_excerpt( $cartoon ); ?>
+            <?php if ( $cartoon_caption ) : ?>
+              <p><?php echo esc_html( wp_trim_words( $cartoon_caption, 26 ) ); ?></p>
             <?php endif; ?>
-            <?php if ( $cartoon['artist'] ) : ?>
-              <p class="caricature-artist"><?php echo esc_html( $cartoon['artist'] ); ?></p>
+            <?php if ( $cartoon_artist ) : ?>
+              <p class="caricature-artist"><?php echo esc_html( $cartoon_artist ); ?></p>
             <?php endif; ?>
           </figcaption>
         </figure>

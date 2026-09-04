@@ -1379,3 +1379,76 @@ a.ad-slot:hover { border-color: var(--gold); }
 @media (max-width: 600px) {
   .category-index { grid-template-columns: 1fr; }
 }
+
+/* ===== Caricatures ===== */
+/* Homepage figures are now links, so the media block needs the anchor reset. */
+a.caricature-media { display: block; }
+.caricature-body h3 { margin-bottom: 8px; }
+.caricature-body h3 a { color: var(--ivory); font-family: var(--serif); font-size: 20px; line-height: 1.25; }
+.caricature-body h3 a:hover { color: var(--gold); }
+
+/* Listing grid, used on the Caricatures page and under a single cartoon. */
+.cartoon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.cartoon-card { margin: 0; }
+/* White mount, as on the homepage: cartoons are drawn on white and need a
+   ground of their own rather than sitting straight on the page. */
+.cartoon-media {
+  display: block;
+  background: #fff;
+  border: 1px solid var(--hairline);
+  padding: 10px;
+  transition: border-color .15s ease, transform .15s ease;
+}
+.cartoon-media:hover { border-color: var(--gold); transform: translateY(-2px); }
+/* contain, not cover: a cartoon must never be cropped — the joke is usually in
+   the corner. A fixed box keeps the captions on one line across the row. */
+.cartoon-media img { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; }
+.cartoon-body { padding-top: 14px; }
+.cartoon-body h2 { font-family: var(--serif); font-size: 18px; line-height: 1.3; }
+.cartoon-body h2 a:hover { color: var(--emerald); }
+.cartoon-meta {
+  display: block;
+  margin-top: 7px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ---- Single caricature ---- */
+.cartoon-single { padding-top: 56px; }
+.cartoon-single-head { max-width: 720px; margin-bottom: 28px; }
+.cartoon-single-head h1 { font-size: clamp(26px, 4vw, 38px); margin-top: 10px; text-wrap: balance; }
+.cartoon-single-head .cartoon-meta { margin-top: 12px; font-size: 13.5px; }
+.cartoon-single-media {
+  margin: 0;
+  background: #fff;
+  border: 1px solid var(--hairline);
+  padding: 18px;
+}
+/* No fixed ratio here — this is the page the cartoon exists on, so it is shown
+   at whatever shape it was drawn, capped so a tall one still fits a screen. */
+.cartoon-single-media img { width: 100%; height: auto; max-height: 78vh; object-fit: contain; margin: 0 auto; }
+.cartoon-single-body {
+  max-width: 680px;
+  margin: 30px 0 0;
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: var(--charcoal);
+}
+.cartoon-single-body p + p { margin-top: 16px; }
+.cartoon-single .share-row { margin-top: 34px; }
+.cartoon-more {
+  margin-top: 64px;
+  padding-top: 34px;
+  border-top: 1px solid var(--hairline);
+}
+.cartoon-more .section-head { margin-bottom: 24px; }
+.cartoon-more .section-head h2 { font-size: 22px; }
+
+@media (max-width: 860px) {
+  .cartoon-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .cartoon-grid { grid-template-columns: 1fr; }
+  .cartoon-single { padding-top: 36px; }
+  .cartoon-single-media { padding: 10px; }
+}

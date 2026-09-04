@@ -1386,100 +1386,6 @@
                 "placeholder": ""
             },
             {
-                "key": "field_arr_caricature_1_image",
-                "label": "Caricature 1 — image",
-                "name": "caricature_1_image",
-                "type": "image",
-                "instructions": "The cartoon itself. Leave both caricatures blank to hide the whole section.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": { "width": "", "class": "", "id": "" },
-                "return_format": "url",
-                "preview_size": "medium",
-                "library": "all"
-            },
-            {
-                "key": "field_arr_caricature_1_caption",
-                "label": "Caricature 1 — caption",
-                "name": "caricature_1_caption",
-                "type": "textarea",
-                "instructions": "A sentence or two explaining what the cartoon is commenting on.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": { "width": "", "class": "", "id": "" },
-                "default_value": "",
-                "placeholder": "",
-                "rows": 3,
-                "new_lines": ""
-            },
-            {
-                "key": "field_arr_caricature_1_artist",
-                "label": "Caricature 1 — artist credit",
-                "name": "caricature_1_artist",
-                "type": "text",
-                "instructions": "The cartoonist's name. Always credit the artist.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": { "width": "", "class": "", "id": "" },
-                "default_value": "",
-                "placeholder": ""
-            },
-            {
-                "key": "field_arr_caricature_2_image",
-                "label": "Caricature 2 — image",
-                "name": "caricature_2_image",
-                "type": "image",
-                "instructions": "The second cartoon. Leave blank to show caricature 1 on its own.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": { "width": "", "class": "", "id": "" },
-                "return_format": "url",
-                "preview_size": "medium",
-                "library": "all"
-            },
-            {
-                "key": "field_arr_caricature_2_caption",
-                "label": "Caricature 2 — caption",
-                "name": "caricature_2_caption",
-                "type": "textarea",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": { "width": "", "class": "", "id": "" },
-                "default_value": "",
-                "placeholder": "",
-                "rows": 3,
-                "new_lines": ""
-            },
-            {
-                "key": "field_arr_caricature_2_artist",
-                "label": "Caricature 2 — artist credit",
-                "name": "caricature_2_artist",
-                "type": "text",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": { "width": "", "class": "", "id": "" },
-                "default_value": "",
-                "placeholder": ""
-            },
-            {
-                "key": "field_arr_caricature_link",
-                "label": "Caricature — link",
-                "name": "caricature_link",
-                "type": "url",
-                "instructions": "Optional. Links the cartoon to a related article or an archive of past cartoons.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": ""
-            },
-            {
                 "key": "field_arr_caricature_link_text",
                 "label": "Caricature — link text",
                 "name": "caricature_link_text",
@@ -4135,6 +4041,127 @@
         "hide_on_screen": "",
         "active": true,
         "description": "Banner copy for the Editor's Notes page. The notes themselves are ordinary posts filed under the Editor's Notes category."
+    },
+    {
+        "key": "group_arr_caricature_item",
+        "title": "Caricature Details",
+        "fields": [
+            {
+                "key": "field_arr_caricature_artist",
+                "label": "Artist",
+                "name": "caricature_artist",
+                "type": "text",
+                "instructions": "The cartoonist's name. Always credit the artist — it is shown under the cartoon and used as the image description.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "",
+                "placeholder": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "arr_caricature"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "side",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Shown when adding or editing a caricature. The cartoon itself is the featured image; the caption goes in the main editor."
+    },
+    {
+        "key": "group_arr_caricatures_page",
+        "title": "Caricatures Page Content",
+        "fields": [
+            {
+                "key": "field_arr_caricatures_eyebrow",
+                "label": "Eyebrow label",
+                "name": "caricatures_eyebrow",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "Drawn",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_caricatures_title",
+                "label": "Page title",
+                "name": "caricatures_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "Caricatures",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_caricatures_subtitle",
+                "label": "Page subtitle",
+                "name": "caricatures_subtitle",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "Editorial cartoons from the African Renaissance Review — the week in a single drawing.",
+                "placeholder": "",
+                "rows": 2,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_caricatures_empty_text",
+                "label": "Empty-state text",
+                "name": "caricatures_empty_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "No caricatures published yet. Add one under Caricatures → Add New and it will appear here and on the homepage.",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_caricatures_banner_bg_color",
+                "label": "Banner background colour",
+                "name": "caricatures_banner_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "template-caricatures.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Banner copy for the Caricatures listing page. The cartoons themselves are added under Caricatures."
     },
     {
         "key": "group_arr_categories",
