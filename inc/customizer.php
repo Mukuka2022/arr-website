@@ -257,6 +257,17 @@ function arr_customize_register( $wp_customize ) {
 		'type'        => 'email',
 	) );
 
+	$wp_customize->add_setting( 'arr_advertise_email', array(
+		'default'           => '',
+		'sanitize_callback' => 'arr_sanitize_email',
+	) );
+	$wp_customize->add_control( 'arr_advertise_email', array(
+		'label'       => __( 'Advertising enquiries go to', 'arr-theme' ),
+		'description' => __( 'Leave blank to use the same inbox as contributor applications.', 'arr-theme' ),
+		'section'     => 'arr_header_settings',
+		'type'        => 'email',
+	) );
+
 	/* ---------- Footer ---------- */
 
 	$wp_customize->add_section( 'arr_footer_settings', array(

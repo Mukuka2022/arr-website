@@ -1452,3 +1452,50 @@ a.caricature-media { display: block; }
   .cartoon-single { padding-top: 36px; }
   .cartoon-single-media { padding: 10px; }
 }
+
+/* ===== Advertise page — placements ===== */
+.rates-section { padding-bottom: 0; }
+.rate-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.rate-grid[data-count="1"] { grid-template-columns: minmax(0, 420px); }
+.rate-grid[data-count="2"] { grid-template-columns: repeat(2, 1fr); }
+.rate-card {
+  background: #fff;
+  border: 1px solid var(--hairline);
+  border-top: 3px solid var(--gold);
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+}
+.rate-card h3 { font-family: var(--serif); font-size: 19px; }
+.rate-price {
+  font-family: var(--serif);
+  font-size: 26px;
+  color: var(--emerald);
+  margin-top: 10px;
+}
+.rate-card p { font-size: 14px; color: var(--muted); margin-top: 12px; }
+.rate-note { margin-top: 20px; font-size: 13.5px; color: var(--muted); }
+
+.advertise-points { list-style: none; margin: 0; padding: 0; }
+.advertise-points li {
+  position: relative;
+  padding-left: 22px;
+  padding-bottom: 16px;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+/* A rule rather than a bullet: these are commitments to the reader, and a
+   tick would read as a feature list. */
+.advertise-points li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 9px;
+  width: 10px; height: 1px;
+  background: var(--gold);
+}
+
+@media (max-width: 860px) {
+  .rate-grid,
+  .rate-grid[data-count="2"] { grid-template-columns: 1fr; }
+  .rate-grid[data-count="1"] { grid-template-columns: 1fr; }
+}

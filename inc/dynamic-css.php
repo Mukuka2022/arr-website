@@ -46,6 +46,8 @@ function arr_section_color_map() {
 		'categories_banner_bg_color' => '--banner-bg',
 		// Caricatures
 		'caricatures_banner_bg_color' => '--banner-bg',
+		// Advertise
+		'advertise_banner_bg_color' => '--banner-bg',
 		// Contribute
 		'contribute_banner_bg_color' => '--banner-bg',
 		'contribute_bg_color'     => '--contribute-bg',
