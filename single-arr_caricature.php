@@ -53,7 +53,7 @@ $image_url = get_the_post_thumbnail_url( get_the_ID(), 'full' );
       <div class="cartoon-more">
         <div class="section-head">
           <h2><?php esc_html_e( 'More caricatures', 'arr-theme' ); ?></h2>
-          <?php $archive = arr_page_url( 'caricatures' ); ?>
+          <?php $archive = arr_page_url_by_template( 'template-caricatures.php' ); ?>
           <?php if ( $archive ) : ?>
             <a class="view-all" href="<?php echo esc_url( $archive ); ?>"><?php esc_html_e( 'See all', 'arr-theme' ); ?> <span aria-hidden="true">&rarr;</span></a>
           <?php endif; ?>

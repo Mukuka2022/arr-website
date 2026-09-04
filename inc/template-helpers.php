@@ -126,10 +126,45 @@ function arr_editors_notes_category() {
 }
 
 /**
+ * Permalink of the published page using a given template — '' if there is none.
+ *
+ * Looking the page up by template rather than by slug is what makes these links
+ * reliable. A slug is the client's to choose and easy to get slightly wrong —
+ * "caricature" instead of "caricatures" — and when a slug lookup misses, the
+ * link silently does not render, which presents as a missing feature rather
+ * than as a naming mistake. The template is set from a fixed dropdown and
+ * cannot be mistyped.
+ *
+ * Cached per request: several templates ask for the same page.
+ */
+function arr_page_url_by_template( $template ) {
+	static $cache = array();
+
+	if ( isset( $cache[ $template ] ) ) {
+		return $cache[ $template ];
+	}
+
+	$pages = get_posts( array(
+		'post_type'      => 'page',
+		'post_status'    => 'publish',
+		'posts_per_page' => 1,
+		'meta_key'       => '_wp_page_template',
+		'meta_value'     => $template,
+		'no_found_rows'  => true,
+		'orderby'        => 'ID',
+		'order'          => 'ASC',
+	) );
+
+	$cache[ $template ] = $pages ? get_permalink( $pages[0] ) : '';
+
+	return $cache[ $template ];
+}
+
+/**
  * Permalink of a published page, looked up by slug — '' when it does not exist.
  *
- * Templates use this to decide whether to render a link at all, so a page the
- * client has not created yet is simply absent rather than a link into a 404.
+ * Kept for pages that have no template of their own. Prefer
+ * arr_page_url_by_template() wherever a template exists.
  */
 function arr_page_url( $slug ) {
 	$page = get_page_by_path( $slug );

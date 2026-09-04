@@ -115,7 +115,7 @@ $cat_icon_svg = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="current
   /* The strip shows six categories; there are more than six. Rendered only
      when the Categories page actually exists, so this is never a link into a
      404 on a site where that page has not been created yet. */
-  $categories_url = arr_page_url( 'categories' );
+  $categories_url = arr_page_url_by_template( 'template-categories.php' );
   ?>
   <?php if ( $categories_url ) : ?>
     <div class="wrap cat-strip-more">
@@ -352,7 +352,7 @@ $caricatures = arr_get_caricatures( 2 );
 <?php
 // Links to the archive page when it exists, so the section keeps itself
 // current without anyone editing the homepage.
-$caricature_link  = arr_page_url( 'caricatures' );
+$caricature_link  = arr_page_url_by_template( 'template-caricatures.php' );
 $caricature_title = arr_field( 'caricature_title', 'Drawn from the Week' );
 ?>
 <section class="caricature-band">
