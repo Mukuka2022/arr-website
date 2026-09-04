@@ -80,7 +80,9 @@ add_action( 'wp_enqueue_scripts', 'arr_theme_assets' );
  * Appearance → Menus, so the site never looks broken out of the box.
  */
 function arr_fallback_menu() {
+	echo '<a href="' . esc_url( home_url( '/' ) ) . '">Home</a>';
 	echo '<a href="' . esc_url( home_url( '/articles/' ) ) . '">Latest</a>';
+	echo '<a href="' . esc_url( home_url( '/categories/' ) ) . '">Categories</a>';
 	echo '<a href="' . esc_url( home_url( '/about/' ) ) . '">About</a>';
 	echo '<a href="' . esc_url( home_url( '/subscribe/' ) ) . '">Subscribe</a>';
 }
@@ -134,11 +136,17 @@ function arr_reading_time() {
 }
 
 /**
- * Register the 7 editorial pillars as default categories on theme activation.
- * Safe to run more than once — wp_insert_category will just skip existing ones.
+ * Bumped whenever a category is added to arr_default_categories(). The stored
+ * value is compared against this on load, so the terms are created exactly
+ * once per change and never re-created afterwards.
  */
-function arr_register_default_categories() {
-	$pillars = array(
+const ARR_CATEGORY_SET_VERSION = 2;
+
+/**
+ * The categories the site ships with: the 7 editorial pillars, plus Sports.
+ */
+function arr_default_categories() {
+	return array(
 		'Governance, Leadership & Public Institutions',
 		'Technology, Cybersecurity & Digital Transformation',
 		'Economics, Enterprise & Sustainable Development',
@@ -146,11 +154,36 @@ function arr_register_default_categories() {
 		'Science, Education & Knowledge',
 		'Africa and the World',
 		'History, Culture & Civilisation',
+		'Sports',
 	);
-	foreach ( $pillars as $pillar ) {
-		if ( ! term_exists( $pillar, 'category' ) ) {
-			wp_insert_term( $pillar, 'category' );
+}
+
+function arr_register_default_categories() {
+	foreach ( arr_default_categories() as $name ) {
+		if ( ! term_exists( $name, 'category' ) ) {
+			wp_insert_term( $name, 'category' );
 		}
 	}
 }
 add_action( 'after_switch_theme', 'arr_register_default_categories' );
+
+/**
+ * Create any categories added since the last run.
+ *
+ * The activation hook above only fires when the theme is switched on, and this
+ * theme has been live since before Sports existed — so on the real site that
+ * hook will never run again and the category would simply never appear.
+ *
+ * Guarded by a version number rather than a per-term check: one autoloaded
+ * option comparison per request, no term lookups, and a category the client
+ * deliberately deletes stays deleted until the shipped set actually changes.
+ */
+function arr_ensure_default_categories() {
+	if ( (int) get_option( 'arr_category_set_version' ) === ARR_CATEGORY_SET_VERSION ) {
+		return;
+	}
+
+	arr_register_default_categories();
+	update_option( 'arr_category_set_version', ARR_CATEGORY_SET_VERSION );
+}
+add_action( 'init', 'arr_ensure_default_categories' );

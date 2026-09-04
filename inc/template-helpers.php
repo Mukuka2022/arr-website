@@ -126,6 +126,22 @@ function arr_editors_notes_category() {
 }
 
 /**
+ * Permalink of a published page, looked up by slug — '' when it does not exist.
+ *
+ * Templates use this to decide whether to render a link at all, so a page the
+ * client has not created yet is simply absent rather than a link into a 404.
+ */
+function arr_page_url( $slug ) {
+	$page = get_page_by_path( $slug );
+
+	if ( ! $page || 'publish' !== $page->post_status ) {
+		return '';
+	}
+
+	return get_permalink( $page );
+}
+
+/**
  * The editorial pillars, for the homepage strip and the Articles filter pills.
  *
  * Plain get_categories() would include Editor's Notes, which is a publishing
@@ -135,13 +151,29 @@ function arr_editors_notes_category() {
  *
  * @return WP_Term[]
  */
-function arr_pillar_categories( $number = 6 ) {
-	$notes = get_category_by_slug( ARR_NOTES_CATEGORY );
+function arr_pillar_categories( $number = 6, $hide_empty = true ) {
+	$notes   = get_category_by_slug( ARR_NOTES_CATEGORY );
+	$exclude = $notes ? array( $notes->term_id ) : array();
+
+	// WordPress's default catch-all category. Excluded by ID rather than by the
+	// name "Uncategorized", so it stays excluded if the client renames it —
+	// which is the usual advice, and would otherwise silently let it back in.
+	// It only shows up once hide_empty is off, which is why this surfaced on
+	// the Categories page and not on the homepage strip.
+	$default = (int) get_option( 'default_category' );
+	if ( $default ) {
+		$exclude[] = $default;
+	}
 
 	return get_categories( array(
-		'number'  => $number,
-		'orderby' => 'name',
-		'exclude' => $notes ? array( $notes->term_id ) : array(),
+		'number'     => $number,
+		'orderby'    => 'name',
+		'exclude'    => $exclude,
+		// The strip and the filter pills hide empty categories, because a
+		// subject with nothing to read behind it is a dead end there. The
+		// Categories page passes false: it is a statement of what the
+		// publication covers, and a new subject belongs on it from day one.
+		'hide_empty' => $hide_empty,
 	) );
 }
 

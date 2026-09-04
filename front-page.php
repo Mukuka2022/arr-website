@@ -106,9 +106,24 @@ $cat_icon_svg = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="current
       </div>
     <?php endforeach; ?>
     <?php if ( empty( $cats ) ) : ?>
-      <p style="color:var(--muted);"><?php echo esc_html( arr_field( 'cat_strip_empty_text', 'Categories will appear here once created under Posts → Categories. The theme pre-creates the 7 editorial pillars on activation.' ) ); ?></p>
+      <p style="color:var(--muted);"><?php echo esc_html( arr_field( 'cat_strip_empty_text', 'Categories will appear here once created under Posts → Categories. The theme pre-creates the editorial pillars on activation.' ) ); ?></p>
     <?php endif; ?>
   </div>
+  <?php endif; ?>
+
+  <?php
+  /* The strip shows six categories; there are more than six. Rendered only
+     when the Categories page actually exists, so this is never a link into a
+     404 on a site where that page has not been created yet. */
+  $categories_url = arr_page_url( 'categories' );
+  ?>
+  <?php if ( $categories_url ) : ?>
+    <div class="wrap cat-strip-more">
+      <a class="view-all" href="<?php echo esc_url( $categories_url ); ?>">
+        <?php echo esc_html( arr_field( 'cat_strip_more_text', 'See more categories' ) ); ?>
+        <span aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
   <?php endif; ?>
 </section>
 

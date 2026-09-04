@@ -4137,6 +4137,92 @@
         "description": "Banner copy for the Editor's Notes page. The notes themselves are ordinary posts filed under the Editor's Notes category."
     },
     {
+        "key": "group_arr_categories",
+        "title": "Categories Page Content",
+        "fields": [
+            {
+                "key": "field_arr_categories_eyebrow",
+                "label": "Eyebrow label",
+                "name": "categories_eyebrow",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "Browse",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_categories_title",
+                "label": "Page title",
+                "name": "categories_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "Categories",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_categories_subtitle",
+                "label": "Page subtitle",
+                "name": "categories_subtitle",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "Every subject the African Renaissance Review covers, from governance and technology to faith, history and sport.",
+                "placeholder": "",
+                "rows": 2,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_categories_empty_text",
+                "label": "Empty-state text",
+                "name": "categories_empty_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "Categories will appear here once they are created under Posts → Categories.",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_categories_banner_bg_color",
+                "label": "Banner background colour",
+                "name": "categories_banner_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "template-categories.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Banner copy for the Categories page. The categories themselves are managed under Posts → Categories."
+    },
+    {
         "key": "group_arr_contribute",
         "title": "Contribute Page Content",
         "fields": [
