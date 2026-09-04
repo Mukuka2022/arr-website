@@ -144,18 +144,35 @@ $ads      = $ads_code ? array() : arr_home_ads();
       echo $ads_code; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
       ?>
     <?php else : ?>
-      <div class="ad-grid" data-count="<?php echo esc_attr( count( $ads ) ); ?>">
-        <?php foreach ( $ads as $ad ) : ?>
-          <?php if ( $ad['link'] ) : ?>
-            <a class="ad-slot" href="<?php echo esc_url( $ad['link'] ); ?>" target="_blank" rel="noopener sponsored">
-              <img src="<?php echo esc_url( $ad['image'] ); ?>" alt="<?php echo esc_attr( $ad['alt'] ); ?>" loading="lazy" />
-            </a>
-          <?php else : ?>
-            <div class="ad-slot">
-              <img src="<?php echo esc_url( $ad['image'] ); ?>" alt="<?php echo esc_attr( $ad['alt'] ); ?>" loading="lazy" />
-            </div>
-          <?php endif; ?>
-        <?php endforeach; ?>
+      <?php
+      /* The strip scrolls continuously, so the adverts are printed twice: the
+       * track is animated to exactly half its width and snaps back, and with a
+       * second identical copy following the first that reset is invisible. The
+       * copy is aria-hidden and its links removed from the tab order, so a
+       * screen reader and the keyboard each meet every advert once.
+       *
+       * Under two adverts there is nothing to scroll past, so the strip is
+       * rendered still and centred instead — a two-item loop reads as a
+       * twitch, not as movement. */
+      $ad_scroll = count( $ads ) > 2;
+      ?>
+      <div class="ad-marquee<?php echo $ad_scroll ? ' is-scrolling' : ''; ?>">
+        <div class="ad-track" style="--ad-duration: <?php echo esc_attr( max( 30, count( $ads ) * 9 ) ); ?>s;">
+          <?php for ( $pass = 1; $pass <= ( $ad_scroll ? 2 : 1 ); $pass++ ) : ?>
+            <?php $is_clone = ( 2 === $pass ); ?>
+            <?php foreach ( $ads as $ad ) : ?>
+              <?php if ( $ad['link'] ) : ?>
+                <a class="ad-slot" href="<?php echo esc_url( $ad['link'] ); ?>" target="_blank" rel="noopener sponsored"<?php echo $is_clone ? ' aria-hidden="true" tabindex="-1"' : ''; ?>>
+                  <img src="<?php echo esc_url( $ad['image'] ); ?>" alt="<?php echo $is_clone ? '' : esc_attr( $ad['alt'] ); ?>" loading="lazy" />
+                </a>
+              <?php else : ?>
+                <div class="ad-slot"<?php echo $is_clone ? ' aria-hidden="true"' : ''; ?>>
+                  <img src="<?php echo esc_url( $ad['image'] ); ?>" alt="<?php echo $is_clone ? '' : esc_attr( $ad['alt'] ); ?>" loading="lazy" />
+                </div>
+              <?php endif; ?>
+            <?php endforeach; ?>
+          <?php endfor; ?>
+        </div>
       </div>
     <?php endif; ?>
   </div>
@@ -314,41 +331,50 @@ $reports_image = arr_field( 'reports_image', '' );
  * beside it rather than on top of it. Hidden entirely until an image is
  * uploaded — a cartoon slot with no cartoon is worse than no slot.
  */
-$caricature_image = arr_field( 'caricature_image', '' );
+$caricatures = arr_caricatures();
 ?>
-<?php if ( $caricature_image ) : ?>
+<?php if ( $caricatures ) : ?>
 <?php
-$caricature_caption   = arr_field( 'caricature_caption', '' );
-$caricature_artist    = arr_field( 'caricature_artist', '' );
-$caricature_link      = arr_field( 'caricature_link', '' );
-$caricature_title     = arr_field( 'caricature_title', 'Drawn from the Week' );
-$caricature_alt       = $caricature_artist
-	/* translators: %s: cartoonist's name. */
-	? sprintf( __( 'Editorial cartoon by %s', 'arr-theme' ), $caricature_artist )
-	: __( 'Editorial cartoon', 'arr-theme' );
+$caricature_link  = arr_field( 'caricature_link', '' );
+$caricature_title = arr_field( 'caricature_title', 'Drawn from the Week' );
 ?>
 <section class="caricature-band">
   <div class="wrap">
-    <figure class="caricature">
-      <div class="caricature-media">
-        <img src="<?php echo esc_url( $caricature_image ); ?>" alt="<?php echo esc_attr( $caricature_alt ); ?>" loading="lazy" />
-      </div>
-      <figcaption class="caricature-body">
+    <div class="section-head caricature-head">
+      <div>
         <span class="eyebrow"><?php echo esc_html( arr_field( 'caricature_eyebrow', 'Cartoon of the Week' ) ); ?></span>
         <?php if ( $caricature_title ) : ?>
           <h2><?php echo esc_html( $caricature_title ); ?></h2>
         <?php endif; ?>
-        <?php if ( $caricature_caption ) : ?>
-          <p><?php echo esc_html( $caricature_caption ); ?></p>
-        <?php endif; ?>
-        <?php if ( $caricature_artist ) : ?>
-          <p class="caricature-artist"><?php echo esc_html( $caricature_artist ); ?></p>
-        <?php endif; ?>
-        <?php if ( $caricature_link ) : ?>
-          <a class="view-all" href="<?php echo esc_url( $caricature_link ); ?>"><?php echo esc_html( arr_field( 'caricature_link_text', 'See more cartoons' ) ); ?> <span aria-hidden="true">&rarr;</span></a>
-        <?php endif; ?>
-      </figcaption>
-    </figure>
+      </div>
+      <?php if ( $caricature_link ) : ?>
+        <a class="view-all" href="<?php echo esc_url( $caricature_link ); ?>"><?php echo esc_html( arr_field( 'caricature_link_text', 'See more cartoons' ) ); ?> <span aria-hidden="true">&rarr;</span></a>
+      <?php endif; ?>
+    </div>
+
+    <div class="caricature-grid" data-count="<?php echo esc_attr( count( $caricatures ) ); ?>">
+      <?php foreach ( $caricatures as $cartoon ) : ?>
+        <?php
+        $cartoon_alt = $cartoon['artist']
+          /* translators: %s: cartoonist's name. */
+          ? sprintf( __( 'Editorial cartoon by %s', 'arr-theme' ), $cartoon['artist'] )
+          : __( 'Editorial cartoon', 'arr-theme' );
+        ?>
+        <figure class="caricature">
+          <div class="caricature-media">
+            <img src="<?php echo esc_url( $cartoon['image'] ); ?>" alt="<?php echo esc_attr( $cartoon_alt ); ?>" loading="lazy" />
+          </div>
+          <figcaption class="caricature-body">
+            <?php if ( $cartoon['caption'] ) : ?>
+              <p><?php echo esc_html( $cartoon['caption'] ); ?></p>
+            <?php endif; ?>
+            <?php if ( $cartoon['artist'] ) : ?>
+              <p class="caricature-artist"><?php echo esc_html( $cartoon['artist'] ); ?></p>
+            <?php endif; ?>
+          </figcaption>
+        </figure>
+      <?php endforeach; ?>
+    </div>
   </div>
 </section>
 <?php endif; ?>

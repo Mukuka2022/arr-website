@@ -934,12 +934,29 @@
   text-align: center;
   margin-bottom: 18px;
 }
-/* Columns follow the number of adverts actually filled in, so one banner runs
-   wide rather than sitting in a third of the row with two empty gaps. */
-.ad-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
-.ad-grid[data-count="2"] { grid-template-columns: repeat(2, 1fr); }
-.ad-grid[data-count="3"] { grid-template-columns: repeat(3, 1fr); }
+
+/* The strip runs edge to edge rather than stopping at the 1200px container —
+   a marquee that starts and ends inside the text column looks like it is
+   stuck, where one running off both edges reads as continuous. */
+.ad-marquee {
+  overflow: hidden;
+  margin: 0 calc(50% - 50vw);
+  padding: 0 clamp(20px, 3vw, 48px);
+  /* Fades the adverts out at both edges so slides enter and leave the strip
+     instead of being clipped mid-image against a hard border. */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.ad-track { display: flex; align-items: stretch; }
+
+/* Gap comes from a margin on each slot rather than the flex `gap` property.
+   The animation shifts the track by exactly -50%, which only lands on the
+   start of the duplicate copy if the two copies are the same width down to
+   the pixel — and `gap` adds one extra space between them that would make
+   the loop drift by that much on every pass. */
 .ad-slot {
+  flex: 0 0 clamp(240px, 26vw, 320px);
+  margin-right: 20px;
   display: block;
   border: 1px solid var(--hairline);
   background: #fff;
@@ -947,65 +964,89 @@
   transition: border-color .15s ease;
 }
 a.ad-slot:hover { border-color: var(--gold); }
-.ad-slot img { width: 100%; height: auto; }
-/* A single wide banner shouldn't stretch a 800px image across 1200px and go
-   soft, so cap it and centre it. */
-.ad-grid[data-count="1"] .ad-slot { max-width: 970px; margin: 0 auto; }
+/* Fixed ratio: advertisers supply whatever size they like, and without this
+   one tall banner sets the height of the entire strip. */
+.ad-slot img { width: 100%; height: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 
-@media (max-width: 860px) {
-  .ad-grid[data-count="3"] { grid-template-columns: repeat(2, 1fr); }
+.ad-marquee.is-scrolling .ad-track {
+  width: max-content;
+  animation: arr-ad-scroll var(--ad-duration, 45s) linear infinite;
 }
+/* Pausing on hover and on keyboard focus is what makes the strip usable: a
+   reader who wants to look at an advert, or tab to it, can stop it moving. */
+.ad-marquee.is-scrolling:hover .ad-track,
+.ad-marquee.is-scrolling:focus-within .ad-track { animation-play-state: paused; }
+
+/* Fewer than three adverts: nothing to scroll past, so it sits still. */
+.ad-marquee:not(.is-scrolling) .ad-track { justify-content: center; flex-wrap: wrap; }
+.ad-marquee:not(.is-scrolling) .ad-slot { margin: 0 10px; }
+
+@keyframes arr-ad-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Motion is the whole point of this strip, so when it is switched off the
+   adverts must still all be reachable — the track becomes a normal
+   swipe/scroll region rather than a frozen row with half of it off-screen. */
+@media (prefers-reduced-motion: reduce) {
+  .ad-marquee { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+  .ad-marquee.is-scrolling .ad-track { animation: none; }
+}
+
 @media (max-width: 560px) {
   .ad-band { padding: 28px 0; }
-  .ad-grid[data-count="2"],
-  .ad-grid[data-count="3"] { grid-template-columns: 1fr; }
+  .ad-slot { margin-right: 14px; }
 }
 
 /* ===== Homepage — caricature ===== */
-/* Navy ground so the cartoon reads as a deliberate closing statement rather
+/* Navy ground so the cartoons read as a deliberate closing statement rather
    than another content card, and so the band meets the navy footer cleanly. */
 .caricature-band {
   background: var(--caricature-bg, var(--midnight));
   padding: 72px 0;
 }
-.caricature {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 48px;
-  align-items: center;
-  margin: 0;
-}
+.caricature-head { align-items: flex-end; margin-bottom: 30px; }
+.caricature-head h2 { color: var(--ivory); font-size: 28px; margin-top: 8px; }
+
+.caricature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 34px; }
+/* One cartoon on its own is a normal week. Rather than leaving half the row
+   empty, it takes the centre at the width it was drawn for. */
+.caricature-grid[data-count="1"] { grid-template-columns: minmax(0, 640px); justify-content: center; }
+
+.caricature { margin: 0; }
 /* Cartoons are usually drawn on white. Framing the image on white keeps the
    linework readable against the navy instead of leaving it floating. */
 .caricature-media {
   background: #fff;
-  padding: 14px;
+  padding: 12px;
   border: 1px solid rgba(200,155,60,0.35);
 }
-.caricature-media img { width: 100%; height: auto; }
-.caricature-body h2 { color: var(--ivory); font-size: 28px; margin-top: 10px; }
+/* Both cartoons share one ratio so the two captions start on the same line —
+   without it, two images of different proportions stagger the whole row. */
+.caricature-media img { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; }
 .caricature-body p {
   color: rgba(250,250,247,0.72);
-  font-size: 15.5px;
-  margin-top: 14px;
+  font-size: 14.5px;
+  margin-top: 16px;
 }
 .caricature-artist {
   font-size: 13px !important;
   letter-spacing: 0.04em;
   color: rgba(250,250,247,0.5) !important;
-  margin-top: 16px !important;
+  margin-top: 10px !important;
 }
-/* The artist credit is a name, not prose — small caps-ish treatment sets it
-   apart from the caption above it without needing a second colour. */
+/* The artist credit is a name, not prose — an em dash sets it apart from the
+   caption above it without needing a second colour. */
 .caricature-artist::before { content: "\2014\00a0"; }
-.caricature-body .view-all { display: inline-block; margin-top: 20px; }
 
 @media (max-width: 860px) {
-  .caricature { grid-template-columns: 1fr; gap: 28px; }
+  .caricature-grid { grid-template-columns: 1fr; gap: 40px; }
+  .caricature-grid[data-count="1"] { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
   .caricature-band { padding: 48px 0; }
-  .caricature-body h2 { font-size: 24px; }
+  .caricature-head h2 { font-size: 24px; }
 }
 
 /* ===== Single article — related articles ===== */

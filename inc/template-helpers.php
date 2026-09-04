@@ -195,7 +195,7 @@ function arr_related_posts( $post_id, $count = 3 ) {
  * leave a hole between adverts 1 and 3 — and so the template can hide the whole
  * section by checking one thing.
  */
-function arr_home_ads( $slots = 3 ) {
+function arr_home_ads( $slots = 6 ) {
 	$ads = array();
 
 	for ( $i = 1; $i <= $slots; $i++ ) {
@@ -212,6 +212,31 @@ function arr_home_ads( $slots = 3 ) {
 	}
 
 	return $ads;
+}
+
+/**
+ * The homepage caricatures that have an image uploaded.
+ *
+ * Two slots, either of which may be left empty — one cartoon on its own is a
+ * normal week, so slot 2 being blank must not leave a gap beside slot 1.
+ */
+function arr_caricatures( $slots = 2 ) {
+	$items = array();
+
+	for ( $i = 1; $i <= $slots; $i++ ) {
+		$image = arr_field( "caricature_{$i}_image", '' );
+		if ( ! $image ) {
+			continue;
+		}
+
+		$items[] = array(
+			'image'   => $image,
+			'caption' => arr_field( "caricature_{$i}_caption", '' ),
+			'artist'  => arr_field( "caricature_{$i}_artist", '' ),
+		);
+	}
+
+	return $items;
 }
 
 /**
