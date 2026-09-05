@@ -21,7 +21,7 @@ function arr_section_color_map() {
 		'hero_bg_color'           => '--hero-bg',
 		'cat_strip_bg_color'      => '--cat-strip-bg',
 		'cta_band_bg_color'       => '--cta-band-bg',
-		'ads_bg_color'            => '--ad-band-bg',
+		'ads_bg_color'            => '--reel-band-bg',
 		'caricature_bg_color'     => '--caricature-bg',
 		// About
 		'about_banner_bg_color'   => '--banner-bg',

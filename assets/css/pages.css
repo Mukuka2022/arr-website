@@ -913,17 +913,30 @@
 .single-article-body .wp-block-embed,
 .prose .wp-block-embed { margin: 32px 0; }
 
-/* ===== Homepage — advertising band ===== */
-/* Deliberately quieter than the editorial sections around it: a plain ivory
+/* ===== Homepage — advertising band ("reel") ===== */
+/* The class names here say "reel", not "ad". That is deliberate and must not
+   be tidied back: ad blockers hide any element whose class begins with "ad-",
+   so .ad-band and .ad-slot were stripped from the page before rendering for
+   roughly a third of desktop visitors — advertising the publication had been
+   paid for, invisible to the people it was sold against.
+
+   What is NOT hidden is that this is advertising: the strip still carries a
+   visible "Advertisement" label, and each paid link keeps rel="sponsored" so
+   search engines are told it is paid. These are the publication's own directly
+   sold banners — no ad network, no tracking, no third-party script. Renaming a
+   CSS class so a first-party banner reaches the reader is a different thing
+   from disguising advertising as editorial, which the label exists to prevent.
+
+   Deliberately quieter than the editorial sections around it: a plain ivory
    ground, a thin rule above, no shadows. Advertising sits inside the page
    without competing with the journalism for attention. */
-.ad-band {
-  background: var(--ad-band-bg, var(--ivory));
+.reel-band {
+  background: var(--reel-band-bg, var(--ivory));
   padding: 40px 0;
   border-top: 1px solid var(--hairline);
   border-bottom: 1px solid var(--hairline);
 }
-.ad-label {
+.reel-label {
   display: block;
   font-family: var(--sans);
   font-size: 10.5px;
@@ -938,7 +951,7 @@
 /* The strip runs edge to edge rather than stopping at the 1200px container —
    a marquee that starts and ends inside the text column looks like it is
    stuck, where one running off both edges reads as continuous. */
-.ad-marquee {
+.reel-viewport {
   overflow: hidden;
   margin: 0 calc(50% - 50vw);
   padding: 0 clamp(20px, 3vw, 48px);
@@ -947,14 +960,14 @@
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
-.ad-track { display: flex; align-items: stretch; }
+.reel-track { display: flex; align-items: stretch; }
 
 /* Gap comes from a margin on each slot rather than the flex `gap` property.
    The animation shifts the track by exactly -50%, which only lands on the
    start of the duplicate copy if the two copies are the same width down to
    the pixel — and `gap` adds one extra space between them that would make
    the loop drift by that much on every pass. */
-.ad-slot {
+.reel-item {
   flex: 0 0 clamp(240px, 26vw, 320px);
   margin-right: 20px;
   display: block;
@@ -963,25 +976,25 @@
   overflow: hidden;
   transition: border-color .15s ease;
 }
-a.ad-slot:hover { border-color: var(--gold); }
+a.reel-item:hover { border-color: var(--gold); }
 /* Fixed ratio: advertisers supply whatever size they like, and without this
    one tall banner sets the height of the entire strip. */
-.ad-slot img { width: 100%; height: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.reel-item img { width: 100%; height: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 
-.ad-marquee.is-scrolling .ad-track {
+.reel-viewport.is-scrolling .reel-track {
   width: max-content;
-  animation: arr-ad-scroll var(--ad-duration, 45s) linear infinite;
+  animation: arr-reel-scroll var(--reel-duration, 45s) linear infinite;
 }
 /* Pausing on hover and on keyboard focus is what makes the strip usable: a
    reader who wants to look at an advert, or tab to it, can stop it moving. */
-.ad-marquee.is-scrolling:hover .ad-track,
-.ad-marquee.is-scrolling:focus-within .ad-track { animation-play-state: paused; }
+.reel-viewport.is-scrolling:hover .reel-track,
+.reel-viewport.is-scrolling:focus-within .reel-track { animation-play-state: paused; }
 
 /* Fewer than three adverts: nothing to scroll past, so it sits still. */
-.ad-marquee:not(.is-scrolling) .ad-track { justify-content: center; flex-wrap: wrap; }
-.ad-marquee:not(.is-scrolling) .ad-slot { margin: 0 10px; }
+.reel-viewport:not(.is-scrolling) .reel-track { justify-content: center; flex-wrap: wrap; }
+.reel-viewport:not(.is-scrolling) .reel-item { margin: 0 10px; }
 
-@keyframes arr-ad-scroll {
+@keyframes arr-reel-scroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
@@ -990,13 +1003,13 @@ a.ad-slot:hover { border-color: var(--gold); }
    adverts must still all be reachable — the track becomes a normal
    swipe/scroll region rather than a frozen row with half of it off-screen. */
 @media (prefers-reduced-motion: reduce) {
-  .ad-marquee { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
-  .ad-marquee.is-scrolling .ad-track { animation: none; }
+  .reel-viewport { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+  .reel-viewport.is-scrolling .reel-track { animation: none; }
 }
 
 @media (max-width: 560px) {
-  .ad-band { padding: 28px 0; }
-  .ad-slot { margin-right: 14px; }
+  .reel-band { padding: 28px 0; }
+  .reel-item { margin-right: 14px; }
 }
 
 /* ===== Homepage — caricature ===== */

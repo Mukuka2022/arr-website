@@ -138,16 +138,21 @@ $cat_icon_svg = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="current
  * The label above the adverts is not decoration: readers have to be able to
  * tell paid placement from editorial, which is why it sits outside the
  * per-advert loop and shows whenever the section does.
+ *
+ * The CSS classes say "reel" rather than "ad" because ad blockers hide any
+ * element whose class starts with "ad-" — see the note in pages.css. The
+ * visible "Advertisement" label and rel="sponsored" both stay: what changed is
+ * the class name, not the disclosure.
  */
 $ads_code = arr_field( 'ads_code', '' );
 $ads      = $ads_code ? array() : arr_home_ads();
 ?>
 <?php if ( $ads_code || $ads ) : ?>
-<section class="ad-band">
+<section class="reel-band">
   <div class="wrap">
     <?php $ads_label = arr_field( 'ads_label', 'Advertisement' ); ?>
     <?php if ( $ads_label ) : ?>
-      <span class="ad-label"><?php echo esc_html( $ads_label ); ?></span>
+      <span class="reel-label"><?php echo esc_html( $ads_label ); ?></span>
     <?php endif; ?>
 
     <?php if ( $ads_code ) : ?>
@@ -171,8 +176,8 @@ $ads      = $ads_code ? array() : arr_home_ads();
        * twitch, not as movement. */
       $ad_scroll = count( $ads ) > 2;
       ?>
-      <div class="ad-marquee<?php echo $ad_scroll ? ' is-scrolling' : ''; ?>">
-        <div class="ad-track" style="--ad-duration: <?php echo esc_attr( max( 30, count( $ads ) * 9 ) ); ?>s;">
+      <div class="reel-viewport<?php echo $ad_scroll ? ' is-scrolling' : ''; ?>">
+        <div class="reel-track" style="--reel-duration: <?php echo esc_attr( max( 30, count( $ads ) * 9 ) ); ?>s;">
           <?php for ( $pass = 1; $pass <= ( $ad_scroll ? 2 : 1 ); $pass++ ) : ?>
             <?php $is_clone = ( 2 === $pass ); ?>
             <?php
@@ -191,11 +196,11 @@ $ads      = $ads_code ? array() : arr_home_ads();
             ?>
             <?php foreach ( $ads as $ad ) : ?>
               <?php if ( $ad['link'] ) : ?>
-                <a class="ad-slot" href="<?php echo esc_url( $ad['link'] ); ?>" target="_blank" rel="noopener sponsored"<?php echo $is_clone ? ' aria-hidden="true" tabindex="-1"' : ''; ?>>
+                <a class="reel-item" href="<?php echo esc_url( $ad['link'] ); ?>" target="_blank" rel="noopener sponsored"<?php echo $is_clone ? ' aria-hidden="true" tabindex="-1"' : ''; ?>>
                   <img src="<?php echo esc_url( $ad['image'] ); ?>" alt="<?php echo $is_clone ? '' : esc_attr( $ad['alt'] ); ?>" decoding="async" fetchpriority="low" />
                 </a>
               <?php else : ?>
-                <div class="ad-slot"<?php echo $is_clone ? ' aria-hidden="true"' : ''; ?>>
+                <div class="reel-item"<?php echo $is_clone ? ' aria-hidden="true"' : ''; ?>>
                   <img src="<?php echo esc_url( $ad['image'] ); ?>" alt="<?php echo $is_clone ? '' : esc_attr( $ad['alt'] ); ?>" decoding="async" fetchpriority="low" />
                 </div>
               <?php endif; ?>
