@@ -175,14 +175,28 @@ $ads      = $ads_code ? array() : arr_home_ads();
         <div class="ad-track" style="--ad-duration: <?php echo esc_attr( max( 30, count( $ads ) * 9 ) ); ?>s;">
           <?php for ( $pass = 1; $pass <= ( $ad_scroll ? 2 : 1 ); $pass++ ) : ?>
             <?php $is_clone = ( 2 === $pass ); ?>
+            <?php
+            /* Not lazy-loaded, deliberately. The browser never started loading
+             * these at all inside the masked, transformed, overflow-hidden
+             * strip — the intersection logic that drives lazy loading cannot
+             * see them — so every advert stayed blank on the live site while
+             * the network showed the files fetching fine.
+             *
+             * It is also the wrong tool here regardless: this band sits just
+             * below the category strip, near the top of the page, and a strip
+             * that scrolls brings every advert into view in turn. fetchpriority
+             * low keeps them behind the hero and the articles in the queue,
+             * which is the actual goal — advertising should never load ahead of
+             * the journalism. */
+            ?>
             <?php foreach ( $ads as $ad ) : ?>
               <?php if ( $ad['link'] ) : ?>
                 <a class="ad-slot" href="<?php echo esc_url( $ad['link'] ); ?>" target="_blank" rel="noopener sponsored"<?php echo $is_clone ? ' aria-hidden="true" tabindex="-1"' : ''; ?>>
-                  <img src="<?php echo esc_url( $ad['image'] ); ?>" alt="<?php echo $is_clone ? '' : esc_attr( $ad['alt'] ); ?>" loading="lazy" />
+                  <img src="<?php echo esc_url( $ad['image'] ); ?>" alt="<?php echo $is_clone ? '' : esc_attr( $ad['alt'] ); ?>" decoding="async" fetchpriority="low" />
                 </a>
               <?php else : ?>
                 <div class="ad-slot"<?php echo $is_clone ? ' aria-hidden="true"' : ''; ?>>
-                  <img src="<?php echo esc_url( $ad['image'] ); ?>" alt="<?php echo $is_clone ? '' : esc_attr( $ad['alt'] ); ?>" loading="lazy" />
+                  <img src="<?php echo esc_url( $ad['image'] ); ?>" alt="<?php echo $is_clone ? '' : esc_attr( $ad['alt'] ); ?>" decoding="async" fetchpriority="low" />
                 </div>
               <?php endif; ?>
             <?php endforeach; ?>
