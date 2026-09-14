@@ -90,7 +90,10 @@ function arr_fallback_menu() {
 		home_url( '/ideas/' )    => __( 'Ideas', 'arr-theme' ),
 		home_url( '/brief/' )    => __( 'ARR Brief', 'arr-theme' ),
 		home_url( '/authors/' )  => __( 'Authors', 'arr-theme' ),
-		home_url( '/about/' )    => __( 'About', 'arr-theme' ),
+		home_url( '/about/' )     => __( 'About', 'arr-theme' ),
+		home_url( '/subscribe/' ) => __( 'Newsletter', 'arr-theme' ),
+		home_url( '/advertise/' ) => __( 'Advertise', 'arr-theme' ),
+		home_url( '/contact/' )   => __( 'Contact', 'arr-theme' ),
 	);
 
 	// Matches wp_nav_menu's markup, so one set of styles covers both and the
@@ -119,7 +122,7 @@ function arr_footer_menu_1_fallback() {
 
 function arr_footer_menu_2_fallback() {
 	arr_footer_link( 'articles', 'Latest Articles' );
-	arr_footer_link( 'subscribe', 'Subscribe' );
+	arr_footer_link( 'subscribe', 'Newsletter' );
 }
 
 function arr_footer_menu_3_fallback() {

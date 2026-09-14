@@ -69,6 +69,18 @@ function arr_menu_structure() {
 				array( 'label' => __( 'Editorial', 'arr-theme' ),  'template' => 'template-editorial.php' ),
 			),
 		),
+		array(
+			'label'    => __( 'Newsletter', 'arr-theme' ),
+			'template' => 'template-subscribe.php',
+		),
+		array(
+			'label'    => __( 'Advertise', 'arr-theme' ),
+			'template' => 'template-advertise.php',
+		),
+		array(
+			'label'    => __( 'Contact', 'arr-theme' ),
+			'template' => 'template-contact.php',
+		),
 	);
 }
 

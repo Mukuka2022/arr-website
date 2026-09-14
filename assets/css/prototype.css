@@ -205,6 +205,24 @@ nav.primary-nav .nav-list > li:nth-last-child(-n+2) .sub-menu { left: auto; righ
 
 .icon-btn { background: none; border: none; padding: 0; cursor: pointer; }
 
+/* Nine top-level items need about 870px of the bar at full size, which the
+   brand and the Contribute button leave room for only above ~1250px. Rather
+   than dropping to the hamburger on every laptop, the row tightens through the
+   middle widths — smaller type, less gap, narrower inset — which buys back
+   roughly 130px and keeps the whole menu visible down to the mobile
+   breakpoint. Measured, not guessed: at 1100px the untightened row overran the
+   bar by 21px and collided with the button. */
+@media (max-width: 1250px) {
+  nav.primary-nav .nav-list { gap: 15px; }
+  nav.primary-nav a { font-size: 12px; letter-spacing: 0.01em; }
+  .site-header .wrap {
+    padding-left: clamp(14px, 1.5vw, 24px);
+    padding-right: clamp(14px, 1.5vw, 24px);
+  }
+  .header-actions { gap: 12px; }
+  .header-actions .btn-primary { padding: 11px 16px; font-size: 13px; }
+}
+
 @media (max-width: 940px) {
   .site-header > .wrap { position: relative; }
   nav.primary-nav { display: none; }
