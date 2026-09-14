@@ -14,6 +14,39 @@ $hero_button_link = arr_field( 'hero_button_link', home_url( '/articles/' ) );
 $hero_image       = arr_field( 'hero_image', '' );
 
 if ( ! $hero_image && has_post_thumbnail() ) $hero_image = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+
+/* ---------- Editor's Pick ----------
+ *
+ * Choosing an article overrides the hand-written hero rather than filling in
+ * behind it. It has to work that way round: the headline and summary fields
+ * carry ACF default values, so the approved copy is physically stored on the
+ * page the first time it is saved — treat the article as a mere fallback and
+ * that stored copy wins for ever, and picking an article appears to do
+ * nothing at all.
+ *
+ * So the rule is the simple one, and the field says so: pick an article and
+ * its title, summary, image and link are used. Clear the picker and the
+ * written fields come back, untouched all along.
+ */
+$hero_post_id = function_exists( 'get_field' ) ? get_field( 'hero_post' ) : 0;
+$hero_post    = $hero_post_id ? get_post( $hero_post_id ) : null;
+
+if ( $hero_post && 'publish' === $hero_post->post_status ) {
+	$hero_headline    = get_the_title( $hero_post );
+	$hero_button_link = get_permalink( $hero_post );
+
+	$picked_dek = get_the_excerpt( $hero_post );
+	if ( $picked_dek ) {
+		$hero_dek = $picked_dek;
+	}
+
+	// The article's own image only replaces the hero image when it has one, so
+	// choosing a piece with no featured image does not strip the hero bare.
+	$picked_image = get_the_post_thumbnail_url( $hero_post, 'large' );
+	if ( $picked_image ) {
+		$hero_image = $picked_image;
+	}
+}
 ?>
 
 <section class="hero">

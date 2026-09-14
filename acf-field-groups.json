@@ -18,6 +18,22 @@
                 }
             },
             {
+                "key": "field_arr_hero_post",
+                "label": "Editor's Pick — choose the article",
+                "name": "hero_post",
+                "type": "post_object",
+                "instructions": "Pick the article to feature in the hero. Its title, summary, image and link replace the fields below, so there is nothing to retype and nothing that can fall out of step with the article. Clear this to go back to writing the hero by hand.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "post_type": [ "post" ],
+                "taxonomy": [],
+                "return_format": "id",
+                "multiple": 0,
+                "allow_null": 1,
+                "ui": 1
+            },
+            {
                 "key": "field_arr_hero_eyebrow",
                 "label": "Eyebrow label",
                 "name": "hero_eyebrow",
