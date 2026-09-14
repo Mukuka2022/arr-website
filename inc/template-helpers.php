@@ -187,8 +187,18 @@ function arr_page_url( $slug ) {
  * @return WP_Term[]
  */
 function arr_pillar_categories( $number = 6, $hide_empty = true ) {
-	$notes   = get_category_by_slug( ARR_NOTES_CATEGORY );
-	$exclude = $notes ? array( $notes->term_id ) : array();
+	$exclude = array();
+
+	// Editor's Notes, Ideas and ARR Brief all live in the category tree but
+	// none of them is a subject area: the first is a publishing mechanism, the
+	// other two are groupings with their own sections and their own menus.
+	// Listing them beside the pillars would misrepresent what the pillars are.
+	foreach ( array( ARR_NOTES_CATEGORY, ARR_IDEAS_CATEGORY, ARR_BRIEF_CATEGORY ) as $slug ) {
+		$term = get_category_by_slug( $slug );
+		if ( $term ) {
+			$exclude[] = $term->term_id;
+		}
+	}
 
 	// WordPress's default catch-all category. Excluded by ID rather than by the
 	// name "Uncategorized", so it stays excluded if the client renames it —
@@ -204,10 +214,36 @@ function arr_pillar_categories( $number = 6, $hide_empty = true ) {
 		'number'     => $number,
 		'orderby'    => 'name',
 		'exclude'    => $exclude,
+		// Top level only. Without this the eleven Ideas strands and the seven
+		// Brief formats would flood the homepage strip and the Analysis page.
+		'parent'     => 0,
 		// The strip and the filter pills hide empty categories, because a
 		// subject with nothing to read behind it is a dead end there. The
 		// Categories page passes false: it is a statement of what the
 		// publication covers, and a new subject belongs on it from day one.
+		'hide_empty' => $hide_empty,
+	) );
+}
+
+/**
+ * The child categories of a grouping, by the parent's slug.
+ *
+ * Used by the Ideas and ARR Brief pages and by the menu builder. Empty children
+ * are included: the strands are a statement of what the section covers, and a
+ * strand with nothing in it yet is still part of that statement.
+ *
+ * @return WP_Term[]
+ */
+function arr_child_categories( $parent_slug, $hide_empty = false ) {
+	$parent = get_category_by_slug( $parent_slug );
+
+	if ( ! $parent ) {
+		return array();
+	}
+
+	return get_categories( array(
+		'parent'     => $parent->term_id,
+		'orderby'    => 'term_order',
 		'hide_empty' => $hide_empty,
 	) );
 }

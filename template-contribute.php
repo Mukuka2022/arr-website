@@ -17,10 +17,37 @@ $pillars = get_categories( array( 'hide_empty' => false, 'number' => 12 ) );
 <div class="page-banner">
   <div class="wrap">
     <span class="eyebrow"><?php echo esc_html( arr_field( 'contribute_eyebrow', 'Write for ARR' ) ); ?></span>
-    <h1><?php echo esc_html( arr_field( 'contribute_title', 'Become a Contributor' ) ); ?></h1>
+    <h1><?php echo esc_html( arr_field( 'contribute_title', 'Write for ARR' ) ); ?></h1>
     <p><?php echo esc_html( arr_field( 'contribute_subtitle', 'ARR publishes rigorous, evidence-based writing on the questions shaping Africa. If that is the work you want to do, tell us about it.' ) ); ?></p>
   </div>
 </div>
+
+<?php
+/* Who can contribute — listed before the form on purpose. The question a
+   prospective contributor asks first is "do they mean me?", and a list this
+   broad answers it faster than any amount of encouragement in the form intro.
+   Editable as one field per line rather than eleven fields, since the list is
+   read as a set and will be edited as one. */
+$who_can = arr_lines_to_list( arr_field( 'contribute_who_list', "Academics\nResearchers\nPolicymakers\nEntrepreneurs\nTechnologists\nSecurity professionals\nEconomists\nStudents\nWriters\nJournalists\nAfrican thinkers" ) );
+?>
+<?php if ( $who_can ) : ?>
+<section class="who-section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2><?php echo esc_html( arr_field( 'contribute_who_heading', 'Who can contribute?' ) ); ?></h2>
+    </div>
+    <ul class="who-list">
+      <?php foreach ( $who_can as $who ) : ?>
+        <li><?php echo esc_html( $who ); ?></li>
+      <?php endforeach; ?>
+    </ul>
+    <?php $who_note = arr_field( 'contribute_who_note', 'If you can argue a case with evidence, we want to read it — a title is not a requirement.' ); ?>
+    <?php if ( $who_note ) : ?>
+      <p class="who-note"><?php echo esc_html( $who_note ); ?></p>
+    <?php endif; ?>
+  </div>
+</section>
+<?php endif; ?>
 
 <section class="contribute-section">
   <div class="wrap">

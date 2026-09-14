@@ -76,6 +76,7 @@ $pillar_defaults = array(
   'Science, Education &amp; Knowledge',
   'Africa and the World',
   'History, Culture &amp; Civilisation',
+  'Personal Development',
 );
 $value_defaults = array(
   array( 'Truth', 'The foundation of public trust, pursued with disciplined research and honesty.' ),

@@ -76,6 +76,30 @@ foreach ( $placement_defaults as $i => $default ) {
 </section>
 <?php endif; ?>
 
+<?php
+/* Partnership and support are separate propositions from buying a placement,
+   and each attracts a different kind of organisation — so they get their own
+   blocks rather than being folded into the rates. Both route to the same
+   enquiry form below; the "Interested in" field is what tells the desk which
+   conversation this is. */
+?>
+<section class="ways-section">
+  <div class="wrap">
+    <div class="ways-grid">
+      <div class="way-card">
+        <h2><?php echo esc_html( arr_field( 'partner_heading', 'Partner with ARR' ) ); ?></h2>
+        <p><?php echo esc_html( arr_field( 'partner_text', 'Research partnerships, events, sponsored reports, institutional collaborations and knowledge partnerships.' ) ); ?></p>
+        <a class="view-all" href="#advertise-form"><?php echo esc_html( arr_field( 'partner_link_text', 'Start a conversation' ) ); ?> <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="way-card">
+        <h2><?php echo esc_html( arr_field( 'support_heading', 'Support ARR' ) ); ?></h2>
+        <p><?php echo esc_html( arr_field( 'support_text', 'For readers or institutions wanting to support the publication. Independent journalism is expensive to do properly, and support keeps it free to read.' ) ); ?></p>
+        <a class="view-all" href="#advertise-form"><?php echo esc_html( arr_field( 'support_link_text', 'Talk to us about supporting ARR' ) ); ?> <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="contribute-section">
   <div class="wrap">
     <div class="contribute-grid">
@@ -135,6 +159,8 @@ foreach ( $placement_defaults as $i => $default ) {
                 <?php foreach ( $placements as $placement ) : ?>
                   <option value="<?php echo esc_attr( $placement['name'] ); ?>"><?php echo esc_html( $placement['name'] ); ?></option>
                 <?php endforeach; ?>
+                <option value="Partnership or collaboration"><?php esc_html_e( 'Partnership or collaboration', 'arr-theme' ); ?></option>
+                <option value="Supporting ARR"><?php esc_html_e( 'Supporting ARR', 'arr-theme' ); ?></option>
                 <option value="Something else"><?php esc_html_e( 'Something else', 'arr-theme' ); ?></option>
               </select>
             </p>

@@ -2169,6 +2169,30 @@
                 "placeholder": ""
             },
             {
+                "key": "field_arr_pillar_8_title",
+                "label": "Pillar 8 — title",
+                "name": "pillar_8_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "Personal Development",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_pillar_8_number",
+                "label": "Pillar 8 — number",
+                "name": "pillar_8_number",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "08",
+                "placeholder": ""
+            },
+            {
                 "key": "field_arr_pillars_bg_color",
                 "label": "Pillars background colour",
                 "name": "pillars_bg_color",
@@ -3863,7 +3887,7 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "Breaking",
+                "default_value": "Our Analysis",
                 "placeholder": ""
             },
             {
@@ -4490,7 +4514,7 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": { "width": "50", "class": "", "id": "" },
-                "default_value": "Browse",
+                "default_value": "Our Analysis",
                 "placeholder": ""
             },
             {
@@ -4502,7 +4526,7 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": { "width": "50", "class": "", "id": "" },
-                "default_value": "Categories",
+                "default_value": "Analysis",
                 "placeholder": ""
             },
             {
@@ -4514,7 +4538,7 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": { "width": "", "class": "", "id": "" },
-                "default_value": "Every subject the African Renaissance Review covers, from governance and technology to faith, history and sport.",
+                "default_value": "Evidence-based analysis across the themes that shape Africa — governance, technology, economics, faith, science, history and more.",
                 "placeholder": "",
                 "rows": 2,
                 "new_lines": ""

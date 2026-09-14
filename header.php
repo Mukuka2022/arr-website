@@ -29,11 +29,17 @@
 
     <nav class="primary-nav">
       <?php
+      /* The list markup is kept rather than stripped to bare links. The old
+         items_wrap of '%3$s' threw away the <ul> and, with it, the nesting that
+         makes a submenu a submenu — so a dropdown could not exist at all, no
+         matter what was configured in Appearance → Menus. depth 2 is the limit
+         on purpose: a third level has nowhere to open into in this header. */
       if ( has_nav_menu( 'primary' ) ) {
         wp_nav_menu( array(
           'theme_location' => 'primary',
           'container'      => false,
-          'items_wrap'     => '%3$s',
+          'menu_class'     => 'nav-list',
+          'depth'          => 2,
         ) );
       } else {
         arr_fallback_menu();

@@ -28,7 +28,7 @@ $breaking_lead = $breaking ? array_shift( $breaking ) : null;
 <div class="breaking-bar">
   <div class="breaking-bar-inner">
     <div class="breaking-live">
-      <span class="breaking-badge"><?php echo esc_html( arr_field( 'articles_breaking_label', 'Breaking' ) ); ?></span>
+      <span class="breaking-badge"><?php echo esc_html( arr_field( 'articles_breaking_label', 'Our Analysis' ) ); ?></span>
       <?php if ( $breaking ) : ?>
         <div class="breaking-ticker" data-slider>
           <div class="breaking-ticker-window">
@@ -54,7 +54,7 @@ $breaking_lead = $breaking ? array_shift( $breaking ) : null;
       <span class="breaking-lead-copy">
         <?php $arr_lead_cats = get_the_category( $breaking_lead->ID ); ?>
         <span class="breaking-lead-cat">
-          <?php echo esc_html( $arr_lead_cats ? $arr_lead_cats[0]->name : arr_field( 'articles_breaking_label', 'Breaking' ) ); ?>
+          <?php echo esc_html( $arr_lead_cats ? $arr_lead_cats[0]->name : arr_field( 'articles_breaking_label', 'Our Analysis' ) ); ?>
         </span>
         <span class="breaking-lead-title"><?php echo esc_html( get_the_title( $breaking_lead ) ); ?></span>
         <span class="breaking-lead-time">

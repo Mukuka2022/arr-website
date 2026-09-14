@@ -177,3 +177,51 @@ document.addEventListener('DOMContentLoaded', function () {
     reset();
   });
 });
+
+/**
+ * Mobile submenu disclosures.
+ *
+ * The parent item in a dropdown is usually a real page (Analysis, Ideas, About
+ * all have landing pages), so tapping its label must still navigate there. That
+ * rules out turning the link itself into the toggle — a pattern that leaves a
+ * section of the site unreachable on a phone. A separate button is added beside
+ * it instead, so the link goes to the page and the button opens the children.
+ *
+ * The button is created in JS rather than printed by PHP because it is
+ * meaningless without JS: with scripting off the CSS leaves every submenu open,
+ * which still works, and a dead toggle button would not.
+ */
+document.addEventListener('DOMContentLoaded', function () {
+  var parents = document.querySelectorAll('.primary-nav .menu-item-has-children');
+  if (!parents.length) return;
+
+  Array.prototype.forEach.call(parents, function (item, index) {
+    var link = item.querySelector(':scope > a');
+    var sub = item.querySelector(':scope > .sub-menu');
+    if (!link || !sub) return;
+
+    if (!sub.id) sub.id = 'arr-submenu-' + index;
+
+    var row = document.createElement('div');
+    row.className = 'submenu-row';
+
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'submenu-toggle';
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-controls', sub.id);
+    button.setAttribute(
+      'aria-label',
+      (link.textContent || '').trim() + ' submenu'
+    );
+
+    item.insertBefore(row, link);
+    row.appendChild(link);
+    row.appendChild(button);
+
+    button.addEventListener('click', function () {
+      var open = item.classList.toggle('is-open');
+      button.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+});

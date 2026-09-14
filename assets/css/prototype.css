@@ -109,10 +109,23 @@ p { line-height: 1.65; margin: 0; }
 .brand-text .arr { font-family: var(--serif); font-weight: 700; font-size: 20px; color: var(--ivory); letter-spacing: 0.02em; }
 .brand-text .tag { font-family: var(--sans); font-size: 9.5px; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; margin-top: 2px; }
 
-nav.primary-nav {
+nav.primary-nav { display: flex; align-items: center; }
+nav.primary-nav .nav-list {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 26px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* The row is 76px tall and the dropdown opens from its bottom edge, so each
+   item fills the full height — otherwise the pointer crosses a dead gap on the
+   way down and the menu closes before it is reached. */
+nav.primary-nav .nav-list > li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 76px;
 }
 nav.primary-nav a {
   font-size: 13.5px;
@@ -120,8 +133,66 @@ nav.primary-nav a {
   letter-spacing: 0.03em;
   color: rgba(250,250,247,0.85);
   text-transform: uppercase;
+  white-space: nowrap;
 }
-nav.primary-nav a:hover, nav.primary-nav a.active { color: var(--gold); }
+nav.primary-nav a:hover,
+nav.primary-nav a.active,
+nav.primary-nav .current-menu-item > a,
+nav.primary-nav .current-menu-parent > a { color: var(--gold); }
+
+/* ---------- Dropdowns ---------- */
+.menu-item-has-children > a::after {
+  content: "";
+  display: inline-block;
+  width: 5px; height: 5px;
+  margin-left: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+}
+nav.primary-nav .sub-menu {
+  position: absolute;
+  top: 76px;
+  left: -18px;
+  min-width: 250px;
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+  background: var(--midnight-light);
+  border: 1px solid rgba(200,155,60,0.28);
+  border-top: 2px solid var(--gold);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+  z-index: 300;
+  /* Hidden with opacity rather than display:none so the fade works and so the
+     items stay in the accessibility tree for assistive technology to announce
+     as a collapsed submenu. visibility keeps them unfocusable while closed. */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity .16s ease, transform .16s ease, visibility .16s;
+}
+/* focus-within is what makes this work for keyboard users: tabbing into a
+   child opens the parent, with no JavaScript involved. */
+nav.primary-nav .menu-item-has-children:hover > .sub-menu,
+nav.primary-nav .menu-item-has-children:focus-within > .sub-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+nav.primary-nav .sub-menu li { display: block; }
+nav.primary-nav .sub-menu a {
+  display: block;
+  padding: 9px 20px;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: rgba(250,250,247,0.8);
+  white-space: normal;
+}
+nav.primary-nav .sub-menu a:hover { background: rgba(200,155,60,0.12); color: var(--gold); }
+
+/* A dropdown near the right edge would otherwise run off the page. */
+nav.primary-nav .nav-list > li:nth-last-child(-n+2) .sub-menu { left: auto; right: -18px; }
 
 .header-actions { display: flex; align-items: center; gap: 18px; }
 .icon-btn {
@@ -155,6 +226,73 @@ nav.primary-nav a:hover, nav.primary-nav a.active { color: var(--gold); }
     z-index: 200;
   }
   nav.primary-nav.mobile-open a { padding: 10px 0; width: 100%; }
+
+  /* ---------- Mobile dropdowns ---------- */
+  nav.primary-nav .nav-list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+  }
+  /* The 76px row height and absolute positioning are desktop constructions —
+     on a phone the submenu is an inline disclosure, not an overlay. */
+  nav.primary-nav .nav-list > li {
+    display: block;
+    height: auto;
+    border-bottom: 1px solid rgba(250,250,247,0.08);
+  }
+  nav.primary-nav .nav-list > li:last-child { border-bottom: none; }
+
+  nav.primary-nav .sub-menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    min-width: 0;
+    margin: 0 0 10px;
+    padding: 4px 0 4px 14px;
+    background: transparent;
+    border: none;
+    border-left: 1px solid rgba(200,155,60,0.35);
+    box-shadow: none;
+    transition: none;
+    /* Closed by default: 26 items expanded at once buries the rest of the menu
+       below the fold. The toggle button is added by main.js. */
+    display: none;
+  }
+  nav.primary-nav .menu-item-has-children.is-open > .sub-menu { display: block; }
+  nav.primary-nav .nav-list > li:nth-last-child(-n+2) .sub-menu { right: auto; }
+
+  /* The caret moves onto the toggle button, which is the thing that opens it. */
+  nav.primary-nav .menu-item-has-children > a::after { display: none; }
+
+  .submenu-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .submenu-row > a { flex: 1; }
+  .submenu-toggle {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: rgba(250,250,247,0.7);
+  }
+  .submenu-toggle::after {
+    content: "";
+    width: 7px; height: 7px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform .15s ease;
+  }
+  .menu-item-has-children.is-open > .submenu-row .submenu-toggle::after {
+    transform: translateY(1px) rotate(-135deg);
+  }
+  .submenu-toggle:hover { color: var(--gold); }
 }
 
 /* ---------- Header search panel ---------- */

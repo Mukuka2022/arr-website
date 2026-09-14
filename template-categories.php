@@ -23,9 +23,9 @@ $categories = arr_pillar_categories( 0, false );
 
 <div class="page-banner">
   <div class="wrap">
-    <span class="eyebrow"><?php echo esc_html( arr_field( 'categories_eyebrow', 'Browse' ) ); ?></span>
-    <h1><?php echo esc_html( arr_field( 'categories_title', 'Categories' ) ); ?></h1>
-    <p><?php echo esc_html( arr_field( 'categories_subtitle', 'Every subject the African Renaissance Review covers, from governance and technology to faith, history and sport.' ) ); ?></p>
+    <span class="eyebrow"><?php echo esc_html( arr_field( 'categories_eyebrow', 'Our Analysis' ) ); ?></span>
+    <h1><?php echo esc_html( arr_field( 'categories_title', 'Analysis' ) ); ?></h1>
+    <p><?php echo esc_html( arr_field( 'categories_subtitle', 'Evidence-based analysis across the themes that shape Africa — governance, technology, economics, faith, science, history and more.' ) ); ?></p>
   </div>
 </div>
 
