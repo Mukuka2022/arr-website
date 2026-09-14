@@ -141,15 +141,31 @@ nav.primary-nav .current-menu-item > a,
 nav.primary-nav .current-menu-parent > a { color: var(--gold); }
 
 /* ---------- Dropdowns ---------- */
-.menu-item-has-children > a::after {
+/* A filled triangle rather than a chevron drawn from two rotated borders. At
+   12px in the tightened row those two hairlines sat almost flat and read as a
+   dash, not as an arrow; a solid caret keeps its shape at any size. */
+/* Both selectors are needed. main.js wraps the parent link in .submenu-row at
+   every width, not just on a phone, so a rule matching only a direct child of
+   the <li> silently stops applying the moment the script runs. */
+.menu-item-has-children > a::after,
+.menu-item-has-children > .submenu-row > a::after {
   content: "";
   display: inline-block;
-  width: 5px; height: 5px;
+  width: 0;
+  height: 0;
   margin-left: 7px;
-  border-right: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: translateY(-2px) rotate(45deg);
+  vertical-align: middle;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid currentColor;
+  transform: translateY(1px);
 }
+
+/* The toggle button is a phone control. It is created by JS at every width, so
+   it has to be hidden explicitly here — the mobile block below turns it back
+   on. Without this it renders as an unstyled stub beside each parent item,
+   which is what the flat dash in the desktop row was. */
+.submenu-toggle { display: none; }
 nav.primary-nav .sub-menu {
   position: absolute;
   top: 76px;
@@ -281,8 +297,11 @@ nav.primary-nav .nav-list > li:nth-last-child(-n+2) .sub-menu { left: auto; righ
   nav.primary-nav .menu-item-has-children.is-open > .sub-menu { display: block; }
   nav.primary-nav .nav-list > li:nth-last-child(-n+2) .sub-menu { right: auto; }
 
-  /* The caret moves onto the toggle button, which is the thing that opens it. */
-  nav.primary-nav .menu-item-has-children > a::after { display: none; }
+  /* The caret moves onto the toggle button, which is the thing that opens it.
+     Both selectors again, for the same reason as above — otherwise the label
+     keeps its own arrow and each parent item shows two. */
+  nav.primary-nav .menu-item-has-children > a::after,
+  nav.primary-nav .menu-item-has-children > .submenu-row > a::after { display: none; }
 
   .submenu-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
   .submenu-row > a { flex: 1; }
@@ -299,16 +318,18 @@ nav.primary-nav .nav-list > li:nth-last-child(-n+2) .sub-menu { left: auto; righ
     cursor: pointer;
     color: rgba(250,250,247,0.7);
   }
+  /* Same filled caret as the desktop row, so the two read as one control. */
   .submenu-toggle::after {
     content: "";
-    width: 7px; height: 7px;
-    border-right: 1.5px solid currentColor;
-    border-bottom: 1.5px solid currentColor;
-    transform: translateY(-2px) rotate(45deg);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid currentColor;
     transition: transform .15s ease;
   }
   .menu-item-has-children.is-open > .submenu-row .submenu-toggle::after {
-    transform: translateY(1px) rotate(-135deg);
+    transform: rotate(180deg);
   }
   .submenu-toggle:hover { color: var(--gold); }
 }
