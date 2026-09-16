@@ -436,25 +436,19 @@ nav.primary-nav .nav-list > li:nth-last-child(-n+2) .sub-menu { left: auto; righ
 .page-banner .eyebrow { color: var(--gold); }
 .page-banner h1 { color: var(--ivory); font-size: 42px; margin-top: 10px; }
 .page-banner p { color: rgba(250,250,247,0.75); max-width: 640px; margin-top: 14px; font-size: 16.5px; }
-/* Article standfirst: set in the serif, larger and brighter than the byline,
-   so the eye goes headline → what the piece argues → who wrote it. With both
-   in the same style the summary and the byline read as one grey block. */
-.page-banner .single-dek {
-  font-family: var(--serif);
-  font-size: 20px;
-  line-height: 1.45;
-  color: rgba(250,250,247,0.88);
-  max-width: 720px;
-  margin-top: 16px;
-}
+/* Article standfirst: deliberately NOT restyled. It takes the same font, size
+   and colour as the subtitle on every other page banner above, so an article
+   reads as part of the same site rather than as a separate template. It was
+   briefly set in the serif at 20px, which made articles the one page whose
+   subtitle looked different.
+
+   The byline is what gets restyled instead — smaller and dimmer — which is
+   enough to keep the summary and the byline from reading as one grey block. */
 .page-banner .single-meta {
   font-size: 13.5px;
   letter-spacing: 0.02em;
   color: rgba(250,250,247,0.55);
   margin-top: 18px;
-}
-@media (max-width: 560px) {
-  .page-banner .single-dek { font-size: 17px; }
 }
 
 /* ---------- Footer ---------- */
