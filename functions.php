@@ -145,6 +145,17 @@ function arr_footer_menu_column( $number ) {
 }
 
 /**
+ * Drop WordPress's "Category:" / "Tag:" / "Author:" prefix from archive titles.
+ *
+ * The archive banner already names the kind of page in its gold eyebrow, so the
+ * prefix said it twice — "CATEGORY" above "Category: Africa and the World".
+ * Removed through the prefix filter rather than by swapping the_archive_title()
+ * for single_cat_title(), so tag, author and date archives are covered by the
+ * same one line and keep their correct titles.
+ */
+add_filter( 'get_the_archive_title_prefix', '__return_empty_string' );
+
+/**
  * Simple reading-time estimate (~200 words/min) for the current post in the loop.
  */
 function arr_reading_time() {
