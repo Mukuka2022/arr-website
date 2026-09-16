@@ -8,7 +8,17 @@
       <span class="eyebrow"><?php echo esc_html( $cats[0]->name ); ?></span>
     <?php endif; ?>
     <h1><?php the_title(); ?></h1>
-    <p>By <?php the_author(); ?> · <?php echo get_the_date(); ?> · <?php echo esc_html( arr_reading_time() ); ?> min read</p>
+    <?php
+    /* Only a hand-written excerpt is shown. has_excerpt() rather than
+       get_the_excerpt(), because when the excerpt box is empty WordPress
+       manufactures one from the opening of the article — and printing that
+       here would show the reader the same sentences twice, once in the banner
+       and again as the first paragraph immediately below it. */
+    if ( has_excerpt() ) :
+    ?>
+      <p class="single-dek"><?php echo esc_html( get_the_excerpt() ); ?></p>
+    <?php endif; ?>
+    <p class="single-meta">By <?php the_author(); ?> · <?php echo get_the_date(); ?> · <?php echo esc_html( arr_reading_time() ); ?> min read</p>
   </div>
 </div>
 
