@@ -3865,10 +3865,10 @@
             },
             {
                 "key": "field_arr_articles_breaking_show",
-                "label": "Show breaking news bar",
+                "label": "Show the Our Analysis bar",
                 "name": "articles_breaking_show",
                 "type": "true_false",
-                "instructions": "Shows a highlighted strip above the banner linking to the most recent article(s).",
+                "instructions": "Shows the rotating strip of recent articles above the banner. Its label is set once for every page under Appearance → Customize → ARR Theme Settings → Header.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -3881,30 +3881,6 @@
                 "ui": 1,
                 "ui_on_text": "",
                 "ui_off_text": ""
-            },
-            {
-                "key": "field_arr_articles_breaking_label",
-                "label": "Breaking news badge text",
-                "name": "articles_breaking_label",
-                "type": "text",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": [
-                    [
-                        {
-                            "field": "field_arr_articles_breaking_show",
-                            "operator": "==",
-                            "value": "1"
-                        }
-                    ]
-                ],
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "Our Analysis",
-                "placeholder": ""
             },
             {
                 "key": "field_arr_articles_all_pill_label",

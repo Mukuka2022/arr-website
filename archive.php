@@ -1,5 +1,17 @@
 <?php get_header(); ?>
 
+<?php
+// Category archives are where every dropdown item in the menu leads, so the
+// bar belongs here too — limited to this category and anything beneath it,
+// so "Ideas" shows its strands' writing and "Philosophy" shows only its own.
+// Tag, author and date archives are not sections and do not get it.
+if ( is_category() ) {
+	$arr_cat_id  = get_queried_object_id();
+	$arr_cat_ids = array_merge( array( $arr_cat_id ), get_term_children( $arr_cat_id, 'category' ) );
+	get_template_part( 'parts/analysis-bar', null, array( 'category_ids' => $arr_cat_ids ) );
+}
+?>
+
 <div class="page-banner">
   <div class="wrap">
     <span class="eyebrow"><?php echo esc_html( get_theme_mod( 'arr_archive_eyebrow', 'Category' ) ); ?></span>
@@ -12,7 +24,7 @@
   <div class="wrap">
     <div class="filter-row" id="filters">
       <a href="<?php echo esc_url( home_url( '/articles/' ) ); ?>" class="filter-pill"><?php echo esc_html( get_theme_mod( 'arr_archive_all_pill', 'All' ) ); ?></a>
-      <?php foreach ( get_categories( array( 'number' => 8 ) ) as $cat ) : ?>
+      <?php foreach ( arr_pillar_categories( 8 ) as $cat ) : ?>
         <a href="<?php echo esc_url( get_category_link( $cat ) ); ?>" class="filter-pill<?php echo is_category( $cat->term_id ) ? ' active' : ''; ?>"><?php echo esc_html( $cat->name ); ?></a>
       <?php endforeach; ?>
     </div>

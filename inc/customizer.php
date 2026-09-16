@@ -213,6 +213,17 @@ function arr_customize_register( $wp_customize ) {
 
 	/* ---------- Articles ---------- */
 
+	$wp_customize->add_setting( 'arr_analysis_bar_label', array(
+		'default'           => __( 'Our Analysis', 'arr-theme' ),
+		'sanitize_callback' => 'arr_sanitize_text',
+	) );
+	$wp_customize->add_control( 'arr_analysis_bar_label', array(
+		'label'       => __( 'Label on the rotating articles bar', 'arr-theme' ),
+		'description' => __( 'The gold tag at the top of the Articles, Analysis, Ideas, ARR Brief and category pages. One setting for all of them.', 'arr-theme' ),
+		'section'     => 'arr_header_settings',
+		'type'        => 'text',
+	) );
+
 	$wp_customize->add_setting( 'arr_related_heading', array(
 		'default'           => __( 'Related Articles', 'arr-theme' ),
 		'sanitize_callback' => 'arr_sanitize_text',

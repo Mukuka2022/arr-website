@@ -29,6 +29,8 @@ $editions = $brief_ids ? new WP_Query( array(
 $signup_form = arr_field( 'brief_form_shortcode', '[mailpoet_form id="1"]' );
 ?>
 
+<?php get_template_part( 'parts/analysis-bar', null, array( 'category_ids' => $brief_ids ) ); ?>
+
 <div class="page-banner">
   <div class="wrap">
     <span class="eyebrow"><?php echo esc_html( arr_field( 'brief_eyebrow', 'Short-form intelligence' ) ); ?></span>

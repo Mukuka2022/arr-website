@@ -29,6 +29,8 @@ $latest = $strand_ids ? new WP_Query( array(
 ) ) : null;
 ?>
 
+<?php get_template_part( 'parts/analysis-bar', null, array( 'category_ids' => $strand_ids ) ); ?>
+
 <div class="page-banner">
   <div class="wrap">
     <span class="eyebrow"><?php echo esc_html( arr_field( 'ideas_eyebrow', 'The Life of the Mind' ) ); ?></span>

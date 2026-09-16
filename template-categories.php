@@ -21,6 +21,8 @@ get_header();
 $categories = arr_pillar_categories( 0, false );
 ?>
 
+<?php get_template_part( 'parts/analysis-bar', null, array( 'category_ids' => wp_list_pluck( $categories, 'term_id' ) ) ); ?>
+
 <div class="page-banner">
   <div class="wrap">
     <span class="eyebrow"><?php echo esc_html( arr_field( 'categories_eyebrow', 'Our Analysis' ) ); ?></span>
