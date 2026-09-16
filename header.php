@@ -8,6 +8,36 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
+<?php
+/* Top bar: the publication's positioning line, with social links.
+   Deliberately outside the sticky header, so it scrolls away and the main
+   navigation stays pinned. Inside it, the bar would ride along for the whole
+   page and permanently take a strip of every screen for a line the reader
+   only needs to see once. */
+$arr_topbar_text   = get_theme_mod( 'arr_topbar_text', 'A Zambian. An African Renaissance. A Global Conversation.' );
+$arr_topbar_social = get_theme_mod( 'arr_topbar_show_social', true ) ? arr_social_links() : array();
+?>
+<?php if ( get_theme_mod( 'arr_topbar_show', true ) && ( $arr_topbar_text || $arr_topbar_social ) ) : ?>
+<div class="topbar">
+  <div class="topbar-inner">
+    <?php if ( $arr_topbar_text ) : ?>
+      <p class="topbar-text"><?php echo esc_html( $arr_topbar_text ); ?></p>
+    <?php endif; ?>
+    <?php if ( $arr_topbar_social ) : ?>
+      <ul class="topbar-social" aria-label="<?php esc_attr_e( 'Follow ARR', 'arr-theme' ); ?>">
+        <?php foreach ( $arr_topbar_social as $link ) : ?>
+          <li>
+            <a href="<?php echo esc_url( $link['url'] ); ?>"
+               aria-label="<?php echo esc_attr( $link['label'] ); ?>"
+               title="<?php echo esc_attr( $link['label'] ); ?>"<?php echo $link['external'] ? ' target="_blank" rel="noopener"' : ''; ?>><?php echo esc_html( $link['glyph'] ); ?></a>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+    <?php endif; ?>
+  </div>
+</div>
+<?php endif; ?>
+
 <header class="site-header">
   <div class="wrap">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand">

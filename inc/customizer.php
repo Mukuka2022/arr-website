@@ -213,6 +213,38 @@ function arr_customize_register( $wp_customize ) {
 
 	/* ---------- Articles ---------- */
 
+	$wp_customize->add_setting( 'arr_topbar_show', array(
+		'default'           => true,
+		'sanitize_callback' => 'wp_validate_boolean',
+	) );
+	$wp_customize->add_control( 'arr_topbar_show', array(
+		'label'   => __( 'Show the top bar above the navigation', 'arr-theme' ),
+		'section' => 'arr_header_settings',
+		'type'    => 'checkbox',
+	) );
+
+	$wp_customize->add_setting( 'arr_topbar_text', array(
+		'default'           => 'A Zambian. An African Renaissance. A Global Conversation.',
+		'sanitize_callback' => 'arr_sanitize_text',
+	) );
+	$wp_customize->add_control( 'arr_topbar_text', array(
+		'label'       => __( 'Top bar line', 'arr-theme' ),
+		'description' => __( 'The positioning line on the left of the top bar. Leave blank to show only the social links.', 'arr-theme' ),
+		'section'     => 'arr_header_settings',
+		'type'        => 'text',
+	) );
+
+	$wp_customize->add_setting( 'arr_topbar_show_social', array(
+		'default'           => true,
+		'sanitize_callback' => 'wp_validate_boolean',
+	) );
+	$wp_customize->add_control( 'arr_topbar_show_social', array(
+		'label'       => __( 'Show social links in the top bar', 'arr-theme' ),
+		'description' => __( 'Uses the same links as the footer, set under Social Media Links.', 'arr-theme' ),
+		'section'     => 'arr_header_settings',
+		'type'        => 'checkbox',
+	) );
+
 	$wp_customize->add_setting( 'arr_analysis_bar_label', array(
 		'default'           => __( 'Our Analysis', 'arr-theme' ),
 		'sanitize_callback' => 'arr_sanitize_text',
