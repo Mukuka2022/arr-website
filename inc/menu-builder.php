@@ -2,7 +2,7 @@
 /**
  * One-click builder for the primary navigation.
  *
- * The approved menu is six top-level items with twenty-odd children beneath
+ * The approved menu is eight top-level items with thirty-odd children beneath
  * them, and every child has to point at the right category archive or page.
  * Assembling that by hand in Appearance → Menus is twenty minutes of dragging
  * with several easy ways to get it subtly wrong — and it has to be redone on
@@ -43,10 +43,25 @@ function arr_menu_structure() {
 			'template' => 'template-categories.php',
 			'children' => 'pillars',
 		),
+		// Perspectives has no landing page of its own: its category archive
+		// already lists everything filed under Opinion, Commentary and Letters,
+		// with the Our Analysis bar above it. A separate page would only
+		// duplicate that listing.
+		array(
+			'label'    => __( 'Perspectives', 'arr-theme' ),
+			'category' => ARR_PERSPECTIVES_CATEGORY,
+			'children' => ARR_PERSPECTIVES_CATEGORY,
+		),
 		array(
 			'label'    => __( 'Ideas', 'arr-theme' ),
 			'template' => 'template-ideas.php',
 			'children' => ARR_IDEAS_CATEGORY,
+		),
+		// Also listed under Analysis — it is one of the pillars. Given its own
+		// place in the top row because it is the publication's widest lens.
+		array(
+			'label'    => __( 'Africa & the World', 'arr-theme' ),
+			'category' => 'africa-and-the-world',
 		),
 		array(
 			'label'    => __( 'ARR Brief', 'arr-theme' ),
@@ -61,25 +76,20 @@ function arr_menu_structure() {
 				array( 'label' => __( 'Become a Contributor', 'arr-theme' ), 'template' => 'template-contribute.php' ),
 			),
 		),
+		// Advertise and Contact live under About rather than in the top row.
+		// Eleven top-level items overran the header on every laptop width
+		// (by 84px at 1440, 156px at 1366); folding these two in and moving
+		// Newsletter to the footer brings the row to eight, which fits.
+		// Newsletter is reached from the footer — see arr_footer_menu_2_fallback().
 		array(
 			'label'    => __( 'About', 'arr-theme' ),
 			'page'     => 'about',
 			'children' => array(
 				array( 'label' => __( 'Who We Are', 'arr-theme' ), 'page'     => 'about' ),
 				array( 'label' => __( 'Editorial', 'arr-theme' ),  'template' => 'template-editorial.php' ),
+				array( 'label' => __( 'Advertise', 'arr-theme' ),  'template' => 'template-advertise.php' ),
+				array( 'label' => __( 'Contact', 'arr-theme' ),    'template' => 'template-contact.php' ),
 			),
-		),
-		array(
-			'label'    => __( 'Newsletter', 'arr-theme' ),
-			'template' => 'template-subscribe.php',
-		),
-		array(
-			'label'    => __( 'Advertise', 'arr-theme' ),
-			'template' => 'template-advertise.php',
-		),
-		array(
-			'label'    => __( 'Contact', 'arr-theme' ),
-			'template' => 'template-contact.php',
 		),
 	);
 }
@@ -96,6 +106,22 @@ function arr_menu_item_args( $entry ) {
 			'menu-item-title' => $entry['label'],
 			'menu-item-url'   => $entry['url'],
 			'menu-item-type'  => 'custom',
+		);
+	}
+
+	// A category archive, found by slug. Linked as a taxonomy item rather than
+	// a typed URL, so renaming the category or moving the site to its real
+	// domain keeps the link correct without anyone editing the menu.
+	if ( isset( $entry['category'] ) ) {
+		$term = get_category_by_slug( $entry['category'] );
+		if ( ! $term ) {
+			return null;
+		}
+		return array(
+			'menu-item-title'     => $entry['label'],
+			'menu-item-object'    => 'category',
+			'menu-item-object-id' => $term->term_id,
+			'menu-item-type'      => 'taxonomy',
 		);
 	}
 
@@ -250,7 +276,7 @@ function arr_render_menu_builder_page() {
 
 	echo '<div class="wrap"><h1>' . esc_html__( 'ARR Navigation', 'arr-theme' ) . '</h1>';
 
-	echo '<p>' . esc_html__( 'Builds the approved navigation in one step: Home, Analysis, Ideas, ARR Brief, Authors and About, with their dropdowns filled in from your categories and pages.', 'arr-theme' ) . '</p>';
+	echo '<p>' . esc_html__( 'Builds the approved navigation in one step, with every dropdown filled in from your categories and pages.', 'arr-theme' ) . '</p>';
 
 	echo '<p><strong>' . esc_html__( 'This replaces everything currently in the primary menu.', 'arr-theme' ) . '</strong> '
 		. esc_html__( 'Any items you have added or reordered by hand will be lost. Afterwards it is an ordinary menu again — edit it in Appearance → Menus, and nothing here will touch it unless you run this a second time.', 'arr-theme' ) . '</p>';

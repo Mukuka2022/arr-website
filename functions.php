@@ -85,15 +85,14 @@ add_action( 'wp_enqueue_scripts', 'arr_theme_assets' );
  */
 function arr_fallback_menu() {
 	$items = array(
-		home_url( '/' )          => __( 'Home', 'arr-theme' ),
-		home_url( '/analysis/' ) => __( 'Analysis', 'arr-theme' ),
-		home_url( '/ideas/' )    => __( 'Ideas', 'arr-theme' ),
-		home_url( '/brief/' )    => __( 'ARR Brief', 'arr-theme' ),
-		home_url( '/authors/' )  => __( 'Authors', 'arr-theme' ),
-		home_url( '/about/' )     => __( 'About', 'arr-theme' ),
-		home_url( '/subscribe/' ) => __( 'Newsletter', 'arr-theme' ),
-		home_url( '/advertise/' ) => __( 'Advertise', 'arr-theme' ),
-		home_url( '/contact/' )   => __( 'Contact', 'arr-theme' ),
+		home_url( '/' )                              => __( 'Home', 'arr-theme' ),
+		home_url( '/analysis/' )                     => __( 'Analysis', 'arr-theme' ),
+		home_url( '/category/perspectives/' )        => __( 'Perspectives', 'arr-theme' ),
+		home_url( '/ideas/' )                        => __( 'Ideas', 'arr-theme' ),
+		home_url( '/category/africa-and-the-world/' ) => __( 'Africa & the World', 'arr-theme' ),
+		home_url( '/brief/' )                        => __( 'ARR Brief', 'arr-theme' ),
+		home_url( '/authors/' )                      => __( 'Authors', 'arr-theme' ),
+		home_url( '/about/' )                        => __( 'About', 'arr-theme' ),
 	);
 
 	// Matches wp_nav_menu's markup, so one set of styles covers both and the
@@ -169,11 +168,12 @@ function arr_reading_time() {
  * value is compared against this on load, so the terms are created exactly
  * once per change and never re-created afterwards.
  */
-const ARR_CATEGORY_SET_VERSION = 3;
+const ARR_CATEGORY_SET_VERSION = 4;
 
-/** Slugs of the two grouping categories, which hold children but no articles. */
+/** Slugs of the grouping categories, which hold children but no articles. */
 const ARR_IDEAS_CATEGORY = 'ideas';
 const ARR_BRIEF_CATEGORY = 'arr-brief';
+const ARR_PERSPECTIVES_CATEGORY = 'perspectives';
 
 /**
  * The categories the site ships with, as parent => children.
@@ -220,6 +220,12 @@ function arr_default_categories() {
 			'African Futures',
 		),
 
+		'Perspectives' => array(
+			'Opinion',
+			'Commentary',
+			'Letters & Responses',
+		),
+
 		'ARR Brief' => array(
 			'The ARR Brief',
 			'This Week in Africa',
@@ -261,6 +267,8 @@ function arr_register_default_categories() {
 		$slug = '';
 		if ( 'Ideas' === $name ) {
 			$slug = ARR_IDEAS_CATEGORY;
+		} elseif ( 'Perspectives' === $name ) {
+			$slug = ARR_PERSPECTIVES_CATEGORY;
 		} elseif ( 'ARR Brief' === $name ) {
 			$slug = ARR_BRIEF_CATEGORY;
 		}

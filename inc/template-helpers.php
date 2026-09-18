@@ -193,7 +193,7 @@ function arr_pillar_categories( $number = 6, $hide_empty = true ) {
 	// none of them is a subject area: the first is a publishing mechanism, the
 	// other two are groupings with their own sections and their own menus.
 	// Listing them beside the pillars would misrepresent what the pillars are.
-	foreach ( array( ARR_NOTES_CATEGORY, ARR_IDEAS_CATEGORY, ARR_BRIEF_CATEGORY ) as $slug ) {
+	foreach ( array( ARR_NOTES_CATEGORY, ARR_IDEAS_CATEGORY, ARR_BRIEF_CATEGORY, ARR_PERSPECTIVES_CATEGORY ) as $slug ) {
 		$term = get_category_by_slug( $slug );
 		if ( $term ) {
 			$exclude[] = $term->term_id;
