@@ -105,30 +105,76 @@ function arr_fallback_menu() {
 }
 
 /**
- * Footer column fallbacks, shown until the client assigns their own menus to
- * the three Footer Column locations.
+ * The footer's three link columns: Read, About ARR, Work With Us.
  *
- * Every entry resolves to a page that actually exists; arr_footer_link() skips
- * anything missing. The original set carried four href="#" placeholders
- * (Careers, Podcasts, FAQs, Privacy Policy) and pointed Our Team, Authors and
- * Submissions at pages that were not theirs. Add the links back here — or,
- * better, as a real menu under Appearance → Menus — once those pages exist.
+ * These are the fallbacks for the Footer Column 1–3 menu locations, and they
+ * are what the site shows unless the client assigns a menu there in
+ * Appearance → Menus (the live site has none, so this is the footer).
+ *
+ * Pages are found by template, categories by slug — never by page slug. Page
+ * slugs on the live site do not match the obvious ones (the Analysis page's is
+ * http-arr-acf-local-analysis, the Brief's is the-arr-brief), and a slug
+ * lookup that misses renders nothing, so a link would silently vanish rather
+ * than appear broken. Anything that genuinely does not exist yet is skipped.
+ *
+ * Legal links are not in here: they sit in the bottom bar, where readers look
+ * for them, rather than competing with the editorial sections for a column.
+ *
+ * @return array[] column number => list of [ label, url ]
  */
-function arr_footer_menu_1_fallback() {
-	arr_footer_link( 'about', 'About Us' );
-	arr_footer_link( 'authors', 'Our Team' );
+function arr_footer_columns() {
+	$page = 'arr_page_url_by_template';
+	$cat  = function ( $slug ) {
+		$term = get_category_by_slug( $slug );
+		return $term ? get_category_link( $term ) : '';
+	};
+
+	$advertise = arr_page_url_by_template( 'template-advertise.php' );
+
+	return array(
+		1 => array(
+			array( __( 'Latest Articles', 'arr-theme' ),    $page( 'template-articles.php' ) ),
+			array( __( 'Analysis', 'arr-theme' ),           $page( 'template-categories.php' ) ),
+			array( __( 'Perspectives', 'arr-theme' ),       $cat( ARR_PERSPECTIVES_CATEGORY ) ),
+			array( __( 'Ideas', 'arr-theme' ),              $page( 'template-ideas.php' ) ),
+			array( __( 'Africa & the World', 'arr-theme' ), $cat( 'africa-and-the-world' ) ),
+			array( __( 'The ARR Brief', 'arr-theme' ),      $page( 'template-brief.php' ) ),
+			array( __( 'Caricatures', 'arr-theme' ),        $page( 'template-caricatures.php' ) ),
+			array( __( "Editor's Notes", 'arr-theme' ),     $page( 'template-editors-notes.php' ) ),
+		),
+		2 => array(
+			array( __( 'Who We Are', 'arr-theme' ),          $page( 'template-about.php' ) ),
+			array( __( 'Editorial Standards', 'arr-theme' ), $page( 'template-editorial.php' ) ),
+			array( __( 'Authors', 'arr-theme' ),             $page( 'template-authors.php' ) ),
+			array( __( 'Write for ARR', 'arr-theme' ),       $page( 'template-contribute.php' ) ),
+			array( __( 'Contact Us', 'arr-theme' ),          $page( 'template-contact.php' ) ),
+		),
+		3 => array(
+			array( __( 'Newsletter', 'arr-theme' ),       $page( 'template-subscribe.php' ) ),
+			array( __( 'Advertise', 'arr-theme' ),        $advertise ),
+			array( __( 'Partner with ARR', 'arr-theme' ), $advertise ? $advertise . '#partner' : '' ),
+			array( __( 'Support ARR', 'arr-theme' ),      $advertise ? $advertise . '#support' : '' ),
+		),
+	);
 }
 
-function arr_footer_menu_2_fallback() {
-	arr_footer_link( 'articles', 'Latest Articles' );
-	arr_footer_link( 'subscribe', 'Newsletter' );
+/**
+ * Echo one footer column's fallback links, skipping any whose page is missing.
+ */
+function arr_footer_fallback_column( $number ) {
+	$columns = arr_footer_columns();
+
+	foreach ( isset( $columns[ $number ] ) ? $columns[ $number ] : array() as $item ) {
+		list( $label, $url ) = $item;
+		if ( $url ) {
+			printf( '<a href="%s">%s</a>', esc_url( $url ), esc_html( $label ) );
+		}
+	}
 }
 
-function arr_footer_menu_3_fallback() {
-	arr_footer_link( 'contact', 'Contact Us' );
-	arr_footer_link( 'privacy-policy', 'Privacy Policy' );
-	arr_footer_link( 'terms-conditions', 'Terms & Conditions' );
-}
+function arr_footer_menu_1_fallback() { arr_footer_fallback_column( 1 ); }
+function arr_footer_menu_2_fallback() { arr_footer_fallback_column( 2 ); }
+function arr_footer_menu_3_fallback() { arr_footer_fallback_column( 3 ); }
 
 /**
  * Renders one footer link column from its menu location.

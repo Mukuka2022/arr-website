@@ -1758,3 +1758,8 @@ a.caricature-media { display: block; }
   .single-article-body blockquote,
   .single-article-body .wp-block-quote { padding-left: 18px; }
 }
+
+/* Footer links jump to #partner and #support. The header is sticky, so without
+   an offset the section heading lands underneath it and the reader arrives on
+   the paragraph below the thing they clicked. */
+.way-card { scroll-margin-top: 100px; }

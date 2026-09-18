@@ -343,10 +343,25 @@ function arr_customize_register( $wp_customize ) {
 		'type'        => 'text',
 	) );
 
+	$wp_customize->add_setting( 'arr_footer_signup_show', array(
+		'default'           => true,
+		'sanitize_callback' => 'wp_validate_boolean',
+	) );
+	$wp_customize->add_control( 'arr_footer_signup_show', array(
+		'label'   => __( 'Show the newsletter sign-up at the top of the footer', 'arr-theme' ),
+		'section' => 'arr_footer_settings',
+		'type'    => 'checkbox',
+	) );
+
+	// These headings replaced the old col1/col2/col3 settings when the columns
+	// changed meaning; see footer.php for why they carry new names.
 	foreach ( array(
-		'arr_footer_col1_heading' => array( 'default' => 'Company',   'label' => __( 'Column 1 heading', 'arr-theme' ) ),
-		'arr_footer_col2_heading' => array( 'default' => 'Resources', 'label' => __( 'Column 2 heading', 'arr-theme' ) ),
-		'arr_footer_col3_heading' => array( 'default' => 'Support',   'label' => __( 'Column 3 heading', 'arr-theme' ) ),
+		'arr_footer_signup_eyebrow' => array( 'default' => __( 'The ARR Brief', 'arr-theme' ),         'label' => __( 'Sign-up — small heading', 'arr-theme' ) ),
+		'arr_footer_signup_heading' => array( 'default' => __( 'Ideas worth your inbox', 'arr-theme' ), 'label' => __( 'Sign-up — heading', 'arr-theme' ) ),
+		'arr_footer_signup_text'    => array( 'default' => __( "Africa's ideas, developments and strategic questions — every two weeks. Free, and nothing you didn't ask for.", 'arr-theme' ), 'label' => __( 'Sign-up — text', 'arr-theme' ) ),
+		'arr_footer_read_heading'   => array( 'default' => __( 'Read', 'arr-theme' ),          'label' => __( 'Column 1 heading', 'arr-theme' ) ),
+		'arr_footer_about_heading'  => array( 'default' => __( 'About ARR', 'arr-theme' ),     'label' => __( 'Column 2 heading', 'arr-theme' ) ),
+		'arr_footer_work_heading'   => array( 'default' => __( 'Work With Us', 'arr-theme' ),  'label' => __( 'Column 3 heading', 'arr-theme' ) ),
 	) as $id => $meta ) {
 		$wp_customize->add_setting( $id, array(
 			'default'           => $meta['default'],

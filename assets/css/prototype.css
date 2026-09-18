@@ -452,7 +452,54 @@ nav.primary-nav .nav-list > li:nth-last-child(-n+2) .sub-menu { left: auto; righ
 }
 
 /* ---------- Footer ---------- */
-footer.site-footer { background: var(--footer-bg, var(--midnight)); color: rgba(250,250,247,0.65); padding-top: 60px; }
+/* No top padding on the footer itself: the sign-up band sits flush at the top,
+   and the link grid below carries its own. With the band switched off the grid
+   still has its spacing, so neither arrangement leaves a gap or a collision. */
+footer.site-footer { background: var(--footer-bg, var(--midnight)); color: rgba(250,250,247,0.65); padding-top: 0; }
+
+/* ---------- Footer sign-up ---------- */
+/* A shade darker than the footer, so it reads as its own band rather than as
+   the first row of the link grid. */
+.footer-signup {
+  background: rgba(0,0,0,0.18);
+  border-bottom: 1px solid rgba(250,250,247,0.08);
+}
+.footer-signup-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  padding-top: 44px;
+  padding-bottom: 44px;
+}
+.footer-signup-copy h3 { color: var(--ivory); font-size: 24px; margin-top: 8px; }
+.footer-signup-copy p { font-size: 14.5px; color: rgba(250,250,247,0.62); margin-top: 10px; max-width: 460px; }
+/* MailPoet brings its own field markup; these put it on the band's footing,
+   matching the Brief page so the same form looks the same in both places. */
+.footer-signup-form form { margin: 0; }
+.footer-signup-form input[type="email"],
+.footer-signup-form input[type="text"] {
+  width: 100% !important;
+  padding: 13px 15px !important;
+  border: 1px solid rgba(250,250,247,0.22) !important;
+  border-radius: 3px !important;
+  background: rgba(250,250,247,0.07) !important;
+  color: var(--ivory) !important;
+  font-family: var(--sans);
+  font-size: 14.5px;
+}
+.footer-signup-form input::placeholder { color: rgba(250,250,247,0.45); }
+.footer-signup-form input[type="submit"] {
+  background: var(--gold) !important;
+  color: var(--midnight) !important;
+  border: none !important;
+  padding: 13px 26px !important;
+  border-radius: 3px !important;
+  font-family: var(--sans);
+  font-weight: 600;
+  cursor: pointer;
+}
+.footer-signup-form input[type="submit"]:hover { background: var(--gold-light) !important; }
 /* The homepage ends on the CTA band, which is the same navy as the footer — so
    without a rule the two merge into one indistinguishable block. Every other
    page ends on a light section, where the colour change already separates
@@ -464,31 +511,60 @@ footer.site-footer { background: var(--footer-bg, var(--midnight)); color: rgba(
 body.home footer.site-footer { border-top: 1.5px solid var(--gold); }
 .footer-top {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
   gap: 40px;
+  padding-top: 56px;
   padding-bottom: 48px;
   border-bottom: 1px solid rgba(250,250,247,0.12);
 }
 .footer-brand .brand img { height: var(--footer-logo-height, 38px); width: auto; }
 .footer-brand .brand-text .arr { color: var(--ivory); }
-.footer-brand p { margin-top: 14px; font-size: 13.5px; max-width: 260px; color: rgba(250,250,247,0.55); }
-.footer-col h4 { color: var(--ivory); font-family: var(--sans); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
-.footer-col a { display: block; font-size: 13.5px; padding: 5px 0; color: rgba(250,250,247,0.6); }
-.footer-col a:hover { color: var(--gold); }
-.footer-bottom {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 22px 0; font-size: 12.5px; color: rgba(250,250,247,0.4);
+.footer-brand p { margin-top: 14px; font-size: 13.5px; max-width: 280px; color: rgba(250,250,247,0.55); }
+.footer-brand .social-row { margin-top: 22px; }
+.footer-col h4 {
+  color: var(--ivory);
+  font-family: var(--sans);
+  font-size: 12.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(200,155,60,0.35);
 }
+.footer-col a { display: block; font-size: 13.5px; padding: 5px 0; color: rgba(250,250,247,0.6); transition: color .15s ease; }
+.footer-col a:hover { color: var(--gold); }
+/* Vertical padding only, written longhand. The shorthand "padding: 22px 0"
+   also set the sides to 0, overriding the inset .wrap gives every other row —
+   so below about 1260px, where the centred container stops leaving a margin,
+   the copyright line ran flush against the edge of the screen while the
+   columns above it stayed indented. */
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center; gap: 20px;
+  padding-top: 22px; padding-bottom: 22px;
+  font-size: 12.5px; color: rgba(250,250,247,0.4);
+}
+.back-to-top {
+  flex-shrink: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: rgba(250,250,247,0.55);
+}
+.back-to-top:hover { color: var(--gold); }
 .social-row { display: flex; gap: 14px; }
 .social-row a { width: 30px; height: 30px; border: 1px solid rgba(250,250,247,0.2); border-radius: 50%; display:flex; align-items:center; justify-content:center; color: rgba(250,250,247,0.7); }
 .social-row a:hover { border-color: var(--gold); color: var(--gold); }
 
-@media (max-width: 800px) {
-  .footer-top { grid-template-columns: 1fr 1fr; }
+/* Brand takes the full first row and the three link columns share the second,
+   rather than a 2x2 that would strand the third column on a row of its own. */
+@media (max-width: 900px) {
+  .footer-signup-inner { grid-template-columns: 1fr; gap: 22px; }
+  .footer-top { grid-template-columns: repeat(3, 1fr); }
+  .footer-brand { grid-column: 1 / -1; }
 }
 
 @media (max-width: 560px) {
-  .footer-top { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px 24px; }
   .footer-bottom { flex-direction: column; gap: 14px; text-align: center; }
   .page-banner h1 { font-size: 30px; }
 }
@@ -545,6 +621,16 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-
   background: rgba(250,250,247,0.2);
 }
 .staff-link:hover { color: var(--gold); }
+/* The dividers sit to the left of each link, which is right on one line but
+   wrong once the row wraps: each new line then starts with a stray rule. The
+   row first wraps well above phone width (it did at 752px), so the dividers go
+   at every width where wrapping is possible, and the gap between items does
+   the separating instead. Above 900px the whole bar fits on one line. */
+@media (max-width: 900px) {
+  .footer-legal { gap: 8px 18px; }
+  .staff-link { padding-left: 0; }
+  .staff-link::before { display: none; }
+}
 @media (max-width: 560px) {
   .footer-legal { justify-content: center; }
 }

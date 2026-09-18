@@ -86,12 +86,12 @@ foreach ( $placement_defaults as $i => $default ) {
 <section class="ways-section">
   <div class="wrap">
     <div class="ways-grid">
-      <div class="way-card">
+      <div class="way-card" id="partner">
         <h2><?php echo esc_html( arr_field( 'partner_heading', 'Partner with ARR' ) ); ?></h2>
         <p><?php echo esc_html( arr_field( 'partner_text', 'Research partnerships, events, sponsored reports, institutional collaborations and knowledge partnerships.' ) ); ?></p>
         <a class="view-all" href="#advertise-form"><?php echo esc_html( arr_field( 'partner_link_text', 'Start a conversation' ) ); ?> <span aria-hidden="true">&rarr;</span></a>
       </div>
-      <div class="way-card">
+      <div class="way-card" id="support">
         <h2><?php echo esc_html( arr_field( 'support_heading', 'Support ARR' ) ); ?></h2>
         <p><?php echo esc_html( arr_field( 'support_text', 'For readers or institutions wanting to support the publication. Independent journalism is expensive to do properly, and support keeps it free to read.' ) ); ?></p>
         <a class="view-all" href="#advertise-form"><?php echo esc_html( arr_field( 'support_link_text', 'Talk to us about supporting ARR' ) ); ?> <span aria-hidden="true">&rarr;</span></a>
