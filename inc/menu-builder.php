@@ -69,10 +69,10 @@ function arr_menu_structure() {
 			'children' => ARR_BRIEF_CATEGORY,
 		),
 		array(
-			'label'    => __( 'Authors', 'arr-theme' ),
+			'label'    => __( 'Contributors', 'arr-theme' ),
 			'template' => 'template-authors.php',
 			'children' => array(
-				array( 'label' => __( 'All Authors', 'arr-theme' ),          'template' => 'template-authors.php' ),
+				array( 'label' => __( 'All Contributors', 'arr-theme' ),     'template' => 'template-authors.php' ),
 				array( 'label' => __( 'Become a Contributor', 'arr-theme' ), 'template' => 'template-contribute.php' ),
 			),
 		),

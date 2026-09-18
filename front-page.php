@@ -253,7 +253,7 @@ $trend_eye_svg ='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stro
   <div class="trio">
     <div>
       <div class="section-head">
-        <h2><?php echo esc_html( arr_field( 'authors_heading', 'Featured Authors' ) ); ?></h2>
+        <h2><?php echo esc_html( arr_field( 'contributors_heading', 'Featured Contributors' ) ); ?></h2>
         <a href="<?php echo esc_url( arr_field( 'authors_view_all_link', home_url( '/authors/' ) ) ); ?>" class="view-all"><?php echo esc_html( arr_field( 'authors_view_all_text', 'View All' ) ); ?> &rarr;</a>
       </div>
       <?php
@@ -278,7 +278,7 @@ $trend_eye_svg ='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stro
           <div class="slider-dots"></div>
         </div>
       <?php else : ?>
-        <p style="color:var(--muted);font-size:13px;"><?php echo esc_html( arr_field( 'authors_empty_text', "Author cards appear here once posts are published — set each author's bio under Users → Edit Profile." ) ); ?></p>
+        <p style="color:var(--muted);font-size:13px;"><?php echo esc_html( arr_field( 'contributors_empty_text', "Contributor cards appear here once articles are published — set each contributor's bio under Users → Edit Profile." ) ); ?></p>
       <?php endif; ?>
     </div>
 

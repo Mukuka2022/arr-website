@@ -20,6 +20,7 @@ require get_template_directory() . '/inc/mail.php';
 require get_template_directory() . '/inc/smtp.php';
 require get_template_directory() . '/inc/caricatures.php';
 require get_template_directory() . '/inc/menu-builder.php';
+require get_template_directory() . '/inc/contributors.php';
 
 function arr_theme_setup() {
 	add_theme_support( 'title-tag' );
@@ -91,7 +92,7 @@ function arr_fallback_menu() {
 		home_url( '/ideas/' )                        => __( 'Ideas', 'arr-theme' ),
 		home_url( '/category/africa-and-the-world/' ) => __( 'Africa & the World', 'arr-theme' ),
 		home_url( '/brief/' )                        => __( 'ARR Brief', 'arr-theme' ),
-		home_url( '/authors/' )                      => __( 'Authors', 'arr-theme' ),
+		home_url( '/authors/' )                      => __( 'Contributors', 'arr-theme' ),
 		home_url( '/about/' )                        => __( 'About', 'arr-theme' ),
 	);
 
@@ -145,7 +146,7 @@ function arr_footer_columns() {
 		2 => array(
 			array( __( 'Who We Are', 'arr-theme' ),          $page( 'template-about.php' ) ),
 			array( __( 'Editorial Standards', 'arr-theme' ), $page( 'template-editorial.php' ) ),
-			array( __( 'Authors', 'arr-theme' ),             $page( 'template-authors.php' ) ),
+			array( __( 'Contributors', 'arr-theme' ),        $page( 'template-authors.php' ) ),
 			array( __( 'Write for ARR', 'arr-theme' ),       $page( 'template-contribute.php' ) ),
 			array( __( 'Contact Us', 'arr-theme' ),          $page( 'template-contact.php' ) ),
 		),

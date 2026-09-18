@@ -26,7 +26,7 @@ $field_id = 'arr-search-field-' . $arr_search_form_index;
     class="search-field"
     name="s"
     value="<?php echo esc_attr( get_search_query() ); ?>"
-    placeholder="<?php esc_attr_e( 'Search articles, authors, topics…', 'arr-theme' ); ?>"
+    placeholder="<?php esc_attr_e( 'Search articles, contributors, topics…', 'arr-theme' ); ?>"
   />
   <button type="submit" class="search-submit"><?php esc_html_e( 'Search', 'arr-theme' ); ?></button>
 </form>

@@ -17,9 +17,9 @@ $authors = get_users( array(
 
 <div class="page-banner">
   <div class="wrap">
-    <span class="eyebrow"><?php echo esc_html( arr_field( 'authors_eyebrow', 'Contributors' ) ); ?></span>
-    <h1><?php echo esc_html( arr_field( 'authors_title', 'Meet Our Authors' ) ); ?></h1>
-    <p><?php echo esc_html( arr_field( 'authors_subtitle', "The economists, policymakers, and scholars whose analysis shapes ARR's seven editorial pillars." ) ); ?></p>
+    <span class="eyebrow"><?php echo esc_html( arr_field( 'contributors_eyebrow', 'Who Writes for ARR' ) ); ?></span>
+    <h1><?php echo esc_html( arr_field( 'contributors_title', 'Our Contributors' ) ); ?></h1>
+    <p><?php echo esc_html( arr_field( 'contributors_subtitle', "The economists, policymakers, scholars and thinkers whose analysis shapes ARR's editorial pillars." ) ); ?></p>
   </div>
 </div>
 
@@ -34,7 +34,7 @@ $authors = get_users( array(
         </a>
       <?php endforeach; ?>
       <?php if ( empty( $authors ) ) : ?>
-        <p style="color:var(--muted);font-size:13px;"><?php echo esc_html( arr_field( 'authors_empty_text', "Authors appear here automatically once they've published at least one article." ) ); ?></p>
+        <p style="color:var(--muted);font-size:13px;"><?php echo esc_html( arr_field( 'contributors_page_empty_text', "Contributors appear here automatically once they've published at least one article." ) ); ?></p>
       <?php endif; ?>
     </div>
   </div>

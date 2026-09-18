@@ -140,7 +140,7 @@ $value_defaults = array(
 
 <section class="about-team">
   <div class="wrap">
-    <div class="section-head"><h2><?php echo esc_html( arr_field( 'team_heading', 'Featured Authors' ) ); ?></h2><a href="<?php echo esc_url( arr_field( 'team_view_all_link', home_url( '/articles/' ) ) ); ?>" class="view-all"><?php echo esc_html( arr_field( 'team_view_all_text', 'View All Articles' ) ); ?> &rarr;</a></div>
+    <div class="section-head"><h2><?php echo esc_html( arr_field( 'about_contributors_heading', 'Featured Contributors' ) ); ?></h2><a href="<?php echo esc_url( arr_field( 'team_view_all_link', home_url( '/articles/' ) ) ); ?>" class="view-all"><?php echo esc_html( arr_field( 'team_view_all_text', 'View All Articles' ) ); ?> &rarr;</a></div>
     <div class="team-grid">
       <?php
       $authors = get_users( array( 'capability' => array( 'edit_posts' ), 'number' => 8, 'has_published_posts' => array( 'post' ) ) );
@@ -153,7 +153,7 @@ $value_defaults = array(
         </div>
       <?php endforeach; ?>
       <?php if ( empty( $authors ) ) : ?>
-        <p style="color:var(--muted);font-size:13px;"><?php echo esc_html( arr_field( 'team_empty_text', "Authors appear here automatically once they've published at least one article." ) ); ?></p>
+        <p style="color:var(--muted);font-size:13px;"><?php echo esc_html( arr_field( 'about_contributors_empty_text', "Contributors appear here automatically once they've published at least one article." ) ); ?></p>
       <?php endif; ?>
     </div>
   </div>

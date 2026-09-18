@@ -665,8 +665,8 @@
             },
             {
                 "key": "field_arr_authors_heading",
-                "label": "Authors heading",
-                "name": "authors_heading",
+                "label": "Contributors heading",
+                "name": "contributors_heading",
                 "type": "text",
                 "instructions": "",
                 "required": 0,
@@ -676,7 +676,7 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "Featured Authors",
+                "default_value": "Featured Contributors",
                 "placeholder": ""
             },
             {
@@ -713,8 +713,8 @@
             },
             {
                 "key": "field_arr_authors_empty_text",
-                "label": "Authors empty-state message",
-                "name": "authors_empty_text",
+                "label": "Contributors empty-state message",
+                "name": "contributors_empty_text",
                 "type": "textarea",
                 "instructions": "",
                 "required": 0,
@@ -724,7 +724,7 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "Author cards appear here once posts are published — set each author's bio under Users → Edit Profile.",
+                "default_value": "Contributor cards appear here once articles are published — set each contributor's bio under Users → Edit Profile.",
                 "placeholder": "",
                 "rows": 3,
                 "new_lines": ""
@@ -2509,7 +2509,7 @@
             {
                 "key": "field_arr_team_heading",
                 "label": "Section heading",
-                "name": "team_heading",
+                "name": "about_contributors_heading",
                 "type": "text",
                 "instructions": "",
                 "required": 0,
@@ -2519,7 +2519,7 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "Featured Authors",
+                "default_value": "Featured Contributors",
                 "placeholder": ""
             },
             {
@@ -2557,7 +2557,7 @@
             {
                 "key": "field_arr_team_empty_text",
                 "label": "Empty-state message",
-                "name": "team_empty_text",
+                "name": "about_contributors_empty_text",
                 "type": "textarea",
                 "instructions": "",
                 "required": 0,
@@ -2567,7 +2567,7 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "Authors appear here automatically once they've published at least one article.",
+                "default_value": "Contributors appear here automatically once they've published at least one article.",
                 "placeholder": "",
                 "rows": 3,
                 "new_lines": ""
@@ -4817,7 +4817,7 @@
             {
                 "key": "field_arr_authors_eyebrow",
                 "label": "Eyebrow label",
-                "name": "authors_eyebrow",
+                "name": "contributors_eyebrow",
                 "type": "text",
                 "instructions": "",
                 "required": 0,
@@ -4827,13 +4827,13 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "Contributors",
+                "default_value": "Who Writes for ARR",
                 "placeholder": ""
             },
             {
                 "key": "field_arr_authors_title",
                 "label": "Page title",
-                "name": "authors_title",
+                "name": "contributors_title",
                 "type": "text",
                 "instructions": "",
                 "required": 0,
@@ -4843,13 +4843,13 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "Meet Our Authors",
+                "default_value": "Our Contributors",
                 "placeholder": ""
             },
             {
                 "key": "field_arr_authors_subtitle",
                 "label": "Subtitle",
-                "name": "authors_subtitle",
+                "name": "contributors_subtitle",
                 "type": "textarea",
                 "instructions": "",
                 "required": 0,
@@ -4859,7 +4859,7 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "The economists, policymakers, and scholars whose analysis shapes ARR's seven editorial pillars.",
+                "default_value": "The economists, policymakers, scholars and thinkers whose analysis shapes ARR's editorial pillars.",
                 "placeholder": "",
                 "rows": 3,
                 "new_lines": ""
@@ -4867,7 +4867,7 @@
             {
                 "key": "field_arr_authors_empty_text",
                 "label": "Empty-state message",
-                "name": "authors_empty_text",
+                "name": "contributors_page_empty_text",
                 "type": "textarea",
                 "instructions": "",
                 "required": 0,
@@ -4877,7 +4877,7 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "Authors appear here automatically once they've published at least one article.",
+                "default_value": "Contributors appear here automatically once they've published at least one article.",
                 "placeholder": "",
                 "rows": 3,
                 "new_lines": ""
