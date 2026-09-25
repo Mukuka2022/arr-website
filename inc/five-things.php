@@ -94,6 +94,43 @@ function arr_five_things_points( $post_id = null ) {
 }
 
 /**
+ * Send the category archive to the page.
+ *
+ * Adding the page gave the format three addresses: the page, and the category
+ * archive at both /category/5-things-to-know/ and the nested
+ * /category/arr-brief/5-things-to-know/. All three carried the same heading
+ * and the same editions, the menu pointed at one and the homepage at another,
+ * and search engines would have treated it as duplicated content.
+ *
+ * The page wins because it is strictly the better version: the same list of
+ * editions, with the five questions above it. Nothing is lost by redirecting.
+ *
+ * Conditional on the page existing, so deleting the page restores the plain
+ * archive rather than leaving the category unreachable. Note that browsers
+ * cache a 301, so a reader who followed it once may need to clear their cache
+ * to see the archive again if this is ever reversed.
+ */
+function arr_redirect_five_category() {
+	if ( ! is_category() ) {
+		return;
+	}
+
+	$term = get_queried_object();
+	if ( ! $term || ARR_FIVE_CATEGORY !== $term->slug ) {
+		return;
+	}
+
+	$page = arr_page_url_by_template( 'template-five-things.php' );
+	if ( ! $page ) {
+		return;
+	}
+
+	wp_safe_redirect( $page, 301 );
+	exit;
+}
+add_action( 'template_redirect', 'arr_redirect_five_category' );
+
+/**
  * The most recent published editions.
  *
  * @return WP_Post[]
