@@ -247,6 +247,44 @@ $ads      = $ads_code ? array() : arr_home_ads();
 <?php endif; ?>
 
 <?php
+/* ---------- 5 Things to Know ----------
+ *
+ * The framework rather than the latest edition, by choice: this block explains
+ * what the format is and sends the reader to it. The five questions never
+ * change, so the cards are built from the same definition the editions
+ * themselves use — the homepage cannot end up advertising a set of questions
+ * the articles no longer ask.
+ *
+ * Hidden until the page exists, like every other cross-link on this homepage.
+ */
+$five_page = arr_page_url_by_template( 'template-five-things.php' );
+?>
+<?php if ( $five_page ) : ?>
+<section class="five-band">
+  <div class="wrap">
+    <div class="five-head">
+      <span class="eyebrow"><?php echo esc_html( arr_field( 'five_eyebrow', 'A more informed Africa' ) ); ?></span>
+      <h2><?php echo esc_html( arr_field( 'five_heading', '5 Things to Know' ) ); ?></h2>
+      <p><?php echo esc_html( arr_field( 'five_tagline', 'Five facts. One subject. A bigger picture.' ) ); ?></p>
+    </div>
+
+    <ol class="five-grid">
+      <?php foreach ( arr_five_things_framework() as $step ) : ?>
+        <li class="five-card">
+          <span class="five-number"><?php echo esc_html( $step['number'] ); ?></span>
+          <h3><?php echo esc_html( $step['title'] ); ?></h3>
+          <p><?php echo esc_html( $step['question'] ); ?></p>
+        </li>
+      <?php endforeach; ?>
+    </ol>
+
+    <div class="five-foot">
+      <a class="btn btn-primary" href="<?php echo esc_url( $five_page ); ?>"><?php echo esc_html( arr_field( 'five_link_text', 'Read the latest' ) ); ?> <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+<?php
 $trend_eye_svg ='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>';
 ?>
 <section>
@@ -355,44 +393,6 @@ $trend_eye_svg ='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stro
 $podcast_image = arr_field( 'podcast_image', '' );
 $reports_image = arr_field( 'reports_image', '' );
 ?>
-<?php
-/* ---------- 5 Things to Know ----------
- *
- * The framework rather than the latest edition, by choice: this block explains
- * what the format is and sends the reader to it. The five questions never
- * change, so the cards are built from the same definition the editions
- * themselves use — the homepage cannot end up advertising a set of questions
- * the articles no longer ask.
- *
- * Hidden until the page exists, like every other cross-link on this homepage.
- */
-$five_page = arr_page_url_by_template( 'template-five-things.php' );
-?>
-<?php if ( $five_page ) : ?>
-<section class="five-band">
-  <div class="wrap">
-    <div class="five-head">
-      <span class="eyebrow"><?php echo esc_html( arr_field( 'five_eyebrow', 'A more informed Africa' ) ); ?></span>
-      <h2><?php echo esc_html( arr_field( 'five_heading', '5 Things to Know' ) ); ?></h2>
-      <p><?php echo esc_html( arr_field( 'five_tagline', 'Five facts. One subject. A bigger picture.' ) ); ?></p>
-    </div>
-
-    <ol class="five-grid">
-      <?php foreach ( arr_five_things_framework() as $step ) : ?>
-        <li class="five-card">
-          <span class="five-number"><?php echo esc_html( $step['number'] ); ?></span>
-          <h3><?php echo esc_html( $step['title'] ); ?></h3>
-          <p><?php echo esc_html( $step['question'] ); ?></p>
-        </li>
-      <?php endforeach; ?>
-    </ol>
-
-    <div class="five-foot">
-      <a class="btn btn-primary" href="<?php echo esc_url( $five_page ); ?>"><?php echo esc_html( arr_field( 'five_link_text', 'Read the latest' ) ); ?> <span aria-hidden="true">&rarr;</span></a>
-    </div>
-  </div>
-</section>
-<?php endif; ?>
 
 <section class="cta-band">
   <div class="cta-grid">
