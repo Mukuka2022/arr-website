@@ -1763,3 +1763,120 @@ a.caricature-media { display: block; }
    an offset the section heading lands underneath it and the reader arrives on
    the paragraph below the thing they clicked. */
 .way-card { scroll-margin-top: 100px; }
+
+/* ===== 5 Things to Know ===== */
+/* Navy ground with gold numerals, following the brand artwork. The cards are
+   an ordered list, not divs: the sequence is the format, and a screen reader
+   should hear "1 of 5" rather than five unrelated headings. */
+.five-band { background: var(--five-bg, var(--midnight)); padding: 72px 0; }
+.five-head { max-width: 720px; margin-bottom: 34px; }
+.five-head h2 { color: var(--ivory); font-size: 32px; margin-top: 10px; }
+.five-head p {
+  color: var(--gold-light);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 17px;
+  margin-top: 10px;
+}
+
+.five-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+}
+.five-card {
+  background: rgba(250,250,247,0.05);
+  border: 1px solid rgba(200,155,60,0.28);
+  border-top: 3px solid var(--gold);
+  padding: 24px 20px 26px;
+  display: flex;
+  flex-direction: column;
+}
+.five-number {
+  font-family: var(--serif);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--gold);
+}
+.five-card h3 {
+  color: var(--ivory);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.25;
+  margin-top: 14px;
+  text-wrap: balance;
+}
+/* A gold rule under the title, as in the artwork — it separates the label
+   from the question without another colour or weight. */
+.five-card h3::after {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--gold);
+  margin-top: 12px;
+}
+.five-card p { color: rgba(250,250,247,0.72); font-size: 14px; margin-top: 12px; }
+.five-foot { margin-top: 32px; }
+
+/* ---- On an edition, the cards carry the answers ---- */
+/* Five columns of prose would be unreadable, so an edition stacks them: the
+   number and heading on the left, the answer given room on the right. */
+.five-grid-article { grid-template-columns: 1fr; gap: 16px; margin: 0 0 36px; }
+.five-card-filled {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  /* The answer spans all three rows, so without explicit row sizing the rows
+     stretch to share its height and the number floats away from its own
+     title. Rows 1 and 2 hug their content; row 3 absorbs the slack. */
+  grid-template-rows: auto auto 1fr;
+  gap: 4px 28px;
+  align-items: start;
+  background: #fff;
+  border: 1px solid var(--hairline);
+  border-top: 3px solid var(--gold);
+  padding: 24px 26px;
+}
+.five-card-filled .five-number { grid-row: 1; grid-column: 1; color: var(--gold); font-size: 30px; }
+.five-card-filled h3 { grid-row: 2; grid-column: 1; color: var(--midnight); margin-top: 6px; }
+.five-card-filled h3::after { display: none; }
+.five-card-filled .five-question {
+  grid-row: 3;
+  grid-column: 1;
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 6px;
+}
+.five-card-filled .five-answer {
+  grid-row: 1 / -1;
+  grid-column: 2;
+  color: var(--charcoal);
+  font-size: 16px;
+  line-height: 1.7;
+  margin-top: 0;
+}
+
+.five-band-page { padding-bottom: 72px; }
+.five-band-page .section-head h2 { color: var(--ivory); }
+
+@media (max-width: 1100px) {
+  .five-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 720px) {
+  .five-grid { grid-template-columns: repeat(2, 1fr); }
+  .five-head h2 { font-size: 26px; }
+  /* The two-column answer layout has no room left; label above, answer below. */
+  .five-card-filled { grid-template-columns: 1fr; gap: 4px; }
+  .five-card-filled .five-number,
+  .five-card-filled h3,
+  .five-card-filled .five-question,
+  .five-card-filled .five-answer { grid-row: auto; grid-column: 1; }
+  .five-card-filled .five-answer { margin-top: 12px; }
+}
+@media (max-width: 460px) {
+  .five-grid { grid-template-columns: 1fr; }
+}

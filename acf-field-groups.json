@@ -1418,6 +1418,67 @@
                 "placeholder": ""
             },
             {
+                "key": "field_arr_five_eyebrow",
+                "label": "5 Things to Know — small heading",
+                "name": "five_eyebrow",
+                "type": "text",
+                "instructions": "The block on the homepage that explains the format. It appears once the 5 Things to Know page exists.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "A more informed Africa",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_five_heading",
+                "label": "5 Things to Know — heading",
+                "name": "five_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "5 Things to Know",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_five_tagline",
+                "label": "5 Things to Know — tagline",
+                "name": "five_tagline",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "Five facts. One subject. A bigger picture.",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_five_link_text",
+                "label": "5 Things to Know — button text",
+                "name": "five_link_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "Read the latest",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_five_bg_color",
+                "label": "5 Things to Know background colour",
+                "name": "five_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            },
+            {
                 "key": "field_arr_caricature_bg_color",
                 "label": "Caricature background colour",
                 "name": "caricature_bg_color",
@@ -4371,6 +4432,209 @@
         "hide_on_screen": "",
         "active": true,
         "description": "Copy and rates for the Advertise page. Set your own prices before publishing — the defaults are examples. Where enquiries are emailed is set under Appearance → Customize → ARR Theme Settings → Header."
+    },
+    {
+        "key": "group_arr_five_things",
+        "title": "5 Things to Know — the five answers",
+        "fields": [
+            {
+                "key": "field_arr_five_1_answer",
+                "label": "01 · The Essential Fact — What is happening?",
+                "name": "five_1_answer",
+                "type": "textarea",
+                "instructions": "State the fact plainly, in two or three sentences. No build-up.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_five_2_answer",
+                "label": "02 · The Context — How did we get here?",
+                "name": "five_2_answer",
+                "type": "textarea",
+                "instructions": "The background a reader needs to make sense of the fact above.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_five_3_answer",
+                "label": "03 · Why It Matters — Why should Africa care?",
+                "name": "five_3_answer",
+                "type": "textarea",
+                "instructions": "The consequence for African readers specifically.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_five_4_answer",
+                "label": "04 · The Bigger Picture — What does it mean for Africa and the world?",
+                "name": "five_4_answer",
+                "type": "textarea",
+                "instructions": "Where this sits in the wider pattern.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_five_5_answer",
+                "label": "05 · What to Watch — What happens next?",
+                "name": "five_5_answer",
+                "type": "textarea",
+                "instructions": "What a reader should keep an eye on, and roughly when.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "",
+                "placeholder": "",
+                "rows": 3,
+                "new_lines": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_category",
+                    "operator": "==",
+                    "value": "category:5-things-to-know"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Shown once a post is filed under 5 Things to Know. Fill in all five; the headings and questions are fixed by the format. Leave them all empty and the post renders as an ordinary article."
+    },
+    {
+        "key": "group_arr_five_page",
+        "title": "5 Things to Know Page Content",
+        "fields": [
+            {
+                "key": "field_arr_five_page_eyebrow",
+                "label": "Eyebrow label",
+                "name": "five_page_eyebrow",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "A more informed Africa",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_five_page_title",
+                "label": "Page title",
+                "name": "five_page_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "5 Things to Know",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_five_page_subtitle",
+                "label": "Page subtitle",
+                "name": "five_page_subtitle",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "Five facts. One subject. A bigger picture. Africa in focus, in the time it takes to drink a coffee.",
+                "placeholder": "",
+                "rows": 2,
+                "new_lines": ""
+            },
+            {
+                "key": "field_arr_five_page_framework_heading",
+                "label": "Framework section heading",
+                "name": "five_page_framework_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "Every edition answers the same five questions",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_five_page_editions_heading",
+                "label": "Editions section heading",
+                "name": "five_page_editions_heading",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "50", "class": "", "id": "" },
+                "default_value": "Recent editions",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_five_page_empty_text",
+                "label": "Empty-state text",
+                "name": "five_page_empty_text",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "No editions published yet. Write a post, tick the “5 Things to Know” category, and fill in the five answers — it will appear here.",
+                "placeholder": ""
+            },
+            {
+                "key": "field_arr_five_page_banner_bg_color",
+                "label": "Banner background colour",
+                "name": "five_page_banner_bg_color",
+                "type": "color_picker",
+                "instructions": "Leave blank to use the site's brand colour.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": { "width": "", "class": "", "id": "" },
+                "default_value": "",
+                "enable_opacity": 0,
+                "return_format": "string"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "template-five-things.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Copy for the 5 Things to Know page. The five questions themselves are fixed by the format and set in the theme."
     },
     {
         "key": "group_arr_caricature_item",

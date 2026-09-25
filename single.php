@@ -27,6 +27,27 @@
     <?php if ( has_post_thumbnail() ) : ?>
       <div style="margin-bottom:36px;"><?php the_post_thumbnail( 'large' ); ?></div>
     <?php endif; ?>
+    <?php
+    /* A "5 Things to Know" edition is laid out as the five cards rather than
+       as flowing prose, so it reads the way the format promises. An edition
+       with the answers left empty falls through to the ordinary article
+       layout — better a normal article than five empty headings. The editor's
+       own writing still renders below, for anything beyond the five points. */
+    $five_points = arr_is_five_things() ? arr_five_things_points() : array();
+    ?>
+    <?php if ( $five_points ) : ?>
+      <ol class="five-grid five-grid-article">
+        <?php foreach ( $five_points as $point ) : ?>
+          <li class="five-card five-card-filled">
+            <span class="five-number"><?php echo esc_html( $point['number'] ); ?></span>
+            <h3><?php echo esc_html( $point['title'] ); ?></h3>
+            <p class="five-question"><?php echo esc_html( $point['question'] ); ?></p>
+            <p class="five-answer"><?php echo esc_html( $point['answer'] ); ?></p>
+          </li>
+        <?php endforeach; ?>
+      </ol>
+    <?php endif; ?>
+
     <div class="single-article-body" style="font-size:17px;line-height:1.75;color:var(--charcoal);">
       <?php the_content(); ?>
     </div>

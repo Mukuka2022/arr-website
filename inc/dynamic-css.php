@@ -23,6 +23,7 @@ function arr_section_color_map() {
 		'cta_band_bg_color'       => '--cta-band-bg',
 		'ads_bg_color'            => '--reel-band-bg',
 		'caricature_bg_color'     => '--caricature-bg',
+		'five_bg_color'           => '--five-bg',
 		// About
 		'about_banner_bg_color'   => '--banner-bg',
 		'about_intro_bg_color'    => '--about-intro-bg',
@@ -46,6 +47,8 @@ function arr_section_color_map() {
 		'categories_banner_bg_color' => '--banner-bg',
 		// Caricatures
 		'caricatures_banner_bg_color' => '--banner-bg',
+		// 5 Things to Know
+		'five_page_banner_bg_color' => '--banner-bg',
 		// Advertise
 		'advertise_banner_bg_color' => '--banner-bg',
 		// Contribute
