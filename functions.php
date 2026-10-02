@@ -22,6 +22,7 @@ require get_template_directory() . '/inc/caricatures.php';
 require get_template_directory() . '/inc/menu-builder.php';
 require get_template_directory() . '/inc/contributors.php';
 require get_template_directory() . '/inc/five-things.php';
+require get_template_directory() . '/inc/seo.php';
 
 function arr_theme_setup() {
 	add_theme_support( 'title-tag' );
