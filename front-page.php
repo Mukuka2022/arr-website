@@ -307,7 +307,7 @@ $trend_eye_svg ='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stro
                   <div class="author">
                     <img src="https://picsum.photos/seed/author<?php echo esc_attr( $author->ID ); ?>/300/300" alt="" />
                     <h5><?php echo esc_html( $author->display_name ); ?></h5>
-                    <p><?php echo esc_html( get_the_author_meta( 'description', $author->ID ) ?: 'Contributor' ); ?></p>
+                    <p><?php echo esc_html( wp_trim_words( get_the_author_meta( 'description', $author->ID ), 14, '…' ) ?: 'Contributor' ); ?></p>
                   </div>
                 <?php endforeach; ?>
               </div>
