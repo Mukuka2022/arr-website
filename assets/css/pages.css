@@ -325,11 +325,11 @@
   .story-step h4 { font-size: 18px; margin-bottom: 8px; }
   .story-step p { color: var(--muted); font-size: 14.5px; }
 
-  .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; align-items: start; }
   .team-card { text-align: center; }
-  .team-card img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; margin-bottom: 14px; }
+  .team-card img { width: 100%; max-width: 180px; aspect-ratio: 1; object-fit: cover; border-radius: 50%; margin: 0 auto 14px; display: block; }
   .team-card h5 { font-family: var(--serif); font-size: 16px; }
-  .team-card p { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+  .team-card p { font-size: 12.5px; color: var(--muted); margin-top: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   @media (max-width: 900px) { .team-grid { grid-template-columns: repeat(2,1fr); } }
   @media (max-width: 480px) { .team-grid { grid-template-columns: 1fr; } }
 

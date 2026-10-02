@@ -30,7 +30,7 @@ $authors = get_users( array(
         <a class="team-card" href="<?php echo esc_url( get_author_posts_url( $author->ID ) ); ?>" style="text-decoration:none;color:inherit;">
           <?php echo get_avatar( $author->ID, 300 ); ?>
           <h5><?php echo esc_html( $author->display_name ); ?></h5>
-          <p><?php echo esc_html( get_the_author_meta( 'description', $author->ID ) ?: 'Contributor' ); ?></p>
+          <p><?php echo esc_html( wp_trim_words( get_the_author_meta( 'description', $author->ID ), 18, '…' ) ?: 'Contributor' ); ?></p>
         </a>
       <?php endforeach; ?>
       <?php if ( empty( $authors ) ) : ?>
