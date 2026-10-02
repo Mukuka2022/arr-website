@@ -86,3 +86,52 @@ function arr_remove_version_query( $src ) {
 }
 add_filter( 'style_loader_src', 'arr_remove_version_query', 9999 );
 add_filter( 'script_loader_src', 'arr_remove_version_query', 9999 );
+
+/**
+ * Switch off XML-RPC.
+ *
+ * This is the one that matters. xmlrpc.php answers unauthenticated POSTs and
+ * offers system.multicall, which packs many method calls into a single HTTP
+ * request. An attacker can therefore try hundreds of username and password
+ * pairs in one request — which walks straight past any protection that counts
+ * failed logins per request, because it only ever sees one.
+ *
+ * Hiding wp-login.php does nothing about this. Scanners find xmlrpc.php by
+ * asking for it, not by following links, and the endpoint accepts credentials
+ * whatever the login page is called.
+ *
+ * Nothing on this site uses XML-RPC: there is no Jetpack, and publishing is
+ * done through wp-admin. The cost of turning it off is the WordPress mobile
+ * app and trackbacks, neither of which is in use here.
+ */
+add_filter( 'xmlrpc_enabled', '__return_false' );
+
+/**
+ * Drop the amplification method and pingbacks outright.
+ *
+ * xmlrpc_enabled above closes the authenticated methods, but leaving
+ * system.multicall registered keeps the batching machinery in place. Removing
+ * the methods is the belt to that braces.
+ */
+function arr_strip_xmlrpc_methods( $methods ) {
+	unset(
+		$methods['system.multicall'],
+		$methods['pingback.ping'],
+		$methods['pingback.extensions.getPingbacks']
+	);
+
+	return $methods;
+}
+add_filter( 'xmlrpc_methods', 'arr_strip_xmlrpc_methods' );
+
+/**
+ * Stop advertising the endpoint in response headers.
+ *
+ * Cosmetic next to the above, but there is no reason to publish a pointer to
+ * a service the site does not use.
+ */
+function arr_remove_pingback_header( $headers ) {
+	unset( $headers['X-Pingback'] );
+	return $headers;
+}
+add_filter( 'wp_headers', 'arr_remove_pingback_header' );
