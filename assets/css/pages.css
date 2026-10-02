@@ -95,11 +95,16 @@
   .trio .section-head { margin-bottom: 22px; }
   .trio .section-head h2 { font-family: var(--sans); font-size: 15px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--midnight); }
 
+  /* Scoped to .author-grid on purpose. WordPress puts "author" in the body
+     class on author archives (body.archive.author.author-septimius), so a bare
+     .author selector matches the whole document there: .author img sized every
+     image on a contributor's page to 100%, and .author p shrank and clamped
+     every paragraph on it, including their biography. */
   .author-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; align-items: start; }
-  .author { text-align: left; }
-  .author img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 50%; margin-bottom: 10px; }
-  .author h5 { font-family: var(--serif); font-size: 14px; color: var(--midnight); margin: 0; }
-  .author p { font-size: 11.5px; color: var(--muted); margin-top: 3px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .author-grid .author { text-align: left; }
+  .author-grid .author img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 50%; margin-bottom: 10px; }
+  .author-grid .author h5 { font-family: var(--serif); font-size: 14px; color: var(--midnight); margin: 0; }
+  .author-grid .author p { font-size: 11.5px; color: var(--muted); margin-top: 3px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
   .author-slider, .longread-slider { position: relative; overflow: hidden; }
   .slider-track { display: flex; transition: transform 0.5s ease; }
